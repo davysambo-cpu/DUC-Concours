@@ -518,6 +518,8 @@ async function mettreAJourDashboard() {
 
     const questionsToutes = await db.questions.toArray();
     const listeMatieres = [...new Set(questionsToutes.map(q => q.matiere))];
+    
+    // Remplir le select d'entraînement libre
     const selectMatiere = document.getElementById('select-matiere-libre');
     if (listeMatieres.length > 0) {
       selectMatiere.innerHTML = '<option value="toutes">Toutes les matières</option>';
@@ -526,6 +528,18 @@ async function mettreAJourDashboard() {
         opt.value = m;
         opt.textContent = m.charAt(0).toUpperCase() + m.slice(1);
         selectMatiere.appendChild(opt);
+      });
+    }
+    
+    // Remplir le select de concours unidisciplinaire
+    const selectMatiereUni = document.getElementById('select-matiere-unidisciplinaire');
+    if (listeMatieres.length > 0) {
+      selectMatiereUni.innerHTML = '<option value="">Choisir une matière...</option>';
+      listeMatieres.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m;
+        opt.textContent = m.charAt(0).toUpperCase() + m.slice(1);
+        selectMatiereUni.appendChild(opt);
       });
     }
   } catch (e) {
@@ -971,8 +985,8 @@ document.getElementById('btn-mode-standard').addEventListener('click', () => {
 });
 
 document.getElementById('btn-mode-unidisciplinaire').addEventListener('click', () => {
-  const matiere = document.getElementById('select-matiere-libre').value;
-  if (!matiere || matiere === 'toutes') {
+  const matiere = document.getElementById('select-matiere-unidisciplinaire').value;
+  if (!matiere) {
     alert("Sélectionnez une matière avant de lancer le concours unidisciplinaire.");
     return;
   }
