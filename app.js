@@ -396,13 +396,20 @@ function afficherEcran(nomEcran) {
   } else if (nomEcran === 'bilan') {
     elBilan.classList.add('actif');
   } else if (nomEcran === 'admin') {
-    if (!utilisateurEstAdmin) {
+    // Permettre l'accès admin via le bouton switch temporaire
+    // ou si l'utilisateur est vraiment admin
+    if (!utilisateurEstAdmin && !window.modeAdminSwitch) {
       console.error("Accès administrateur refusé.");
       afficherEcran('dashboard');
       return;
     }
     elAdmin.classList.add('actif');
-    chargerEspaceAdmin();
+    // Utiliser la nouvelle fonction du dashboard admin si disponible
+    if (typeof initialiserDashboardAdmin === 'function') {
+      initialiserDashboardAdmin();
+    } else {
+      chargerEspaceAdmin();
+    }
   }
   window.scrollTo(0, 0);
 }

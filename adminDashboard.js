@@ -413,6 +413,7 @@ function initialiserSwitchMode() {
   if (btnSwitch) {
     btnSwitch.addEventListener('click', async () => {
       modeAdmin = !modeAdmin;
+      window.modeAdminSwitch = modeAdmin; // Marquer globalement pour app.js
 
       if (modeAdmin) {
         switchText.textContent = '🎓 Mode Étudiant';
