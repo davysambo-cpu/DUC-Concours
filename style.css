@@ -846,6 +846,36 @@ body {
   border-color: #a9cec4;
 }
 
+#ecran-dashboard.ecran.actif {
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 20px;
+  align-content: start;
+}
+#ecran-dashboard > .banniere-bienvenue,
+#ecran-dashboard > .grille-stats,
+#ecran-dashboard > #alerte-reprise,
+#ecran-dashboard > .titre-section,
+#ecran-dashboard > .grille-actions-principales {
+  grid-column: 1 / -1;
+}
+#ecran-dashboard > .grille-stats {
+  grid-template-columns: repeat(2, minmax(150px, 210px));
+  margin: 14px 0 0;
+}
+#ecran-dashboard > .carte-entrainement {
+  grid-column: 1 / span 7;
+  align-self: start;
+}
+#ecran-dashboard > .carte-support-whatsapp {
+  grid-column: 8 / -1;
+  align-self: start;
+  min-height: 100%;
+}
+#ecran-dashboard > .titre-section {
+  margin-top: 22px;
+}
+
 .carte-action:focus-visible,
 .btn:focus-visible,
 .btn-connexion-header:focus-visible,
@@ -853,46 +883,8 @@ body {
 select:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(99, 102, 241, 0.35);
+  outline: 3px solid rgba(42, 137, 125, 0.35);
   outline-offset: 2px;
-}
-
-@media (min-width: 721px) {
-  #ecran-dashboard.ecran.actif {
-    display: grid !important;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 20px;
-    align-content: start;
-  }
-  #ecran-dashboard > .banniere-bienvenue,
-  #ecran-dashboard > .grille-stats,
-  #ecran-dashboard > #alerte-reprise,
-  #ecran-dashboard > .titre-section,
-  #ecran-dashboard > .grille-actions-principales {
-    grid-column: 1 / -1;
-  }
-  #ecran-dashboard > .grille-stats {
-    grid-template-columns: repeat(2, minmax(150px, 210px));
-    margin: 14px 0 0;
-  }
-  #ecran-dashboard > .carte-entrainement {
-    grid-column: 1 / span 7;
-    align-self: start;
-  }
-  #ecran-dashboard > .carte-support-whatsapp {
-    grid-column: 8 / -1;
-    align-self: start;
-    min-height: 100%;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-  }
-  #ecran-dashboard > .carte-support-whatsapp .btn-whatsapp {
-    width: 100% !important;
-    margin-top: 12px !important;
-  }
-  #ecran-dashboard > .titre-section {
-    margin-top: 22px;
-  }
 }
 
 @media (max-width: 720px) {
@@ -916,14 +908,6 @@ textarea:focus-visible {
   #ecran-dashboard > .carte-entrainement,
   #ecran-dashboard > .carte-support-whatsapp {
     margin-bottom: 16px;
-  }
-  #ecran-dashboard > .carte-support-whatsapp {
-    flex-direction: row !important;
-    align-items: center !important;
-  }
-  #ecran-dashboard > .carte-support-whatsapp .btn-whatsapp {
-    width: auto !important;
-    margin-top: 0 !important;
   }
   .banniere-bienvenue {
     padding: 24px 20px;
