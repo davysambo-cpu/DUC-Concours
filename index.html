@@ -2,36 +2,59 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DUC CONCOURS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUC Concours | Préparation aux concours</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4f46e5">
-  <link rel="stylesheet" href="style.css?v=19">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css?v=20">
 
   <style>
     /* DESIGN WHATSAPP */
     .carte-support-whatsapp {
       margin-top: 24px !important;
       background: #ffffff !important;
-      border: 1.5px solid #86efac !important;
-      border-radius: 16px !important;
-      padding: 16px !important;
+      border: 1px solid #dce5e2 !important;
+      border-radius: 10px !important;
+      padding: 20px !important;
       display: flex !important;
       flex-direction: column !important;
-      align-items: center !important;
-      text-align: center !important;
-      gap: 10px !important;
-      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.1) !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      gap: 14px !important;
+      box-shadow: 0 2px 10px rgba(24, 44, 43, 0.045) !important;
     }
     .whatsapp-texte h3 {
       font-size: 0.95rem !important;
       font-weight: 800 !important;
-      color: #166534 !important;
+      color: #1c2c2b !important;
       margin: 0 !important;
     }
     .whatsapp-texte p {
       font-size: 0.82rem !important;
-      color: #4b5563 !important;
+      color: #637371 !important;
       margin: 4px 0 10px 0 !important;
       line-height: 1.4 !important;
     }
@@ -45,11 +68,11 @@
       text-decoration: none !important;
       font-weight: 700 !important;
       font-size: 0.9rem !important;
-      padding: 10px 20px !important;
-      border-radius: 9999px !important;
-      width: 100% !important;
-      max-width: 260px !important;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35) !important;
+      padding: 10px 16px !important;
+      border-radius: 8px !important;
+      width: auto !important;
+      max-width: 100% !important;
+      box-shadow: none !important;
     }
 
     /* MODALE DE CONNEXION CENTRÉE (GARANTIE VISIBLE) */
@@ -59,8 +82,8 @@
       left: 0 !important;
       width: 100vw !important;
       height: 100vh !important;
-      background: rgba(15, 23, 42, 0.75) !important;
-      backdrop-filter: blur(8px) !important;
+      background: rgba(15, 23, 42, 0.6) !important;
+      backdrop-filter: blur(12px) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
@@ -74,13 +97,13 @@
     .modal-boite {
       background: #ffffff !important;
       width: 100% !important;
-      max-width: 400px !important;
-      border-radius: 20px !important;
-      padding: 26px 22px !important;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35) !important;
+      max-width: 420px !important;
+      border-radius: 24px !important;
+      padding: 32px 28px !important;
+      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25) !important;
       text-align: center !important;
       box-sizing: border-box !important;
-      animation: popModal 0.25s ease !important;
+      animation: popModal 0.3s ease !important;
     }
     @keyframes popModal {
       from { transform: scale(0.9); opacity: 0; }
@@ -115,15 +138,17 @@
     }
     .modal-boite input {
       width: 100% !important;
-      padding: 12px 14px !important;
-      border-radius: 10px !important;
+      padding: 14px 16px !important;
+      border-radius: 12px !important;
       border: 1.5px solid #cbd5e1 !important;
       font-size: 0.95rem !important;
       outline: none !important;
       box-sizing: border-box !important;
+      transition: all 0.3s ease !important;
     }
     .modal-boite input:focus {
       border-color: #4f46e5 !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
     }
     .auth-bascule {
       margin-top: 14px !important;
@@ -137,30 +162,30 @@
       cursor: pointer !important;
     }
     .btn-connexion-header {
-      background: linear-gradient(135deg, #eef2ff, #e0e7ff);
-      color: #3730a3;
-      border: 1px solid #a5b4fc;
-      padding: 7px 13px;
-      border-radius: 999px;
+      background: #e0e7ff;
+      color: #4338ca;
+      border: 1px solid #c7d2fe;
+      padding: 8px 16px;
+      border-radius: 12px;
       font-size: 0.8rem;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.14);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 2px 4px rgba(99, 102, 241, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
     .btn-connexion-header:hover {
-      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+      background: #c7d2fe;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
     }
     #btn-ouvrir-admin {
-      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-      color: #047857;
-      border-color: #86efac;
+      background: #e0e7ff;
+      color: #4338ca;
+      border-color: #c7d2fe;
     }
     #btn-ouvrir-admin:hover {
-      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+      background: #c7d2fe;
+      box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
     }
     #menu-actions-contenu {
       display: none !important;
@@ -182,17 +207,17 @@
       <span class="logo-texte">DUC CONCOURS</span>
     </div>
     <div class="actions-entete">
-      <div id="badge-reseau" class="badge-statut statut-vert">
+      <div id="badge-reseau" class="badge-statut statut-vert transition-all duration-300">
         <span class="point-statut"></span>
         <span id="texte-statut">En ligne</span>
       </div>
-      <button id="btn-ouvrir-connexion" class="btn-connexion-header">Connexion 👤</button>
+      <button id="btn-ouvrir-connexion" class="btn-connexion-header transition-all duration-300 hover:-translate-y-1">Connexion 👤</button>
       <div id="menu-actions" class="menu-actions cache">
-        <button id="btn-menu-actions" class="btn-menu-actions" aria-label="Ouvrir le menu" aria-expanded="false">⋮</button>
+        <button id="btn-menu-actions" class="btn-menu-actions transition-all duration-300" aria-label="Ouvrir le menu" aria-expanded="false">⋮</button>
         <div id="menu-actions-contenu" class="menu-actions-contenu">
-          <button id="btn-ouvrir-admin" class="menu-action cache">🛠️ Administration</button>
-          <button id="btn-signaler-menu" class="menu-action menu-action-signalement" disabled>🚩 Signaler une erreur</button>
-          <button id="btn-deconnexion" class="menu-action menu-action-danger" title="Se déconnecter">🚪 Déconnexion</button>
+          <button id="btn-ouvrir-admin" class="menu-action cache transition-all duration-300">🛠️ Administration</button>
+          <button id="btn-signaler-menu" class="menu-action menu-action-signalement disabled transition-all duration-300" disabled>🚩 Signaler une erreur</button>
+          <button id="btn-deconnexion" class="menu-action menu-action-danger transition-all duration-300" title="Se déconnecter">🚪 Déconnexion</button>
         </div>
       </div>
     </div>
@@ -208,11 +233,11 @@
       </div>
 
       <div class="grille-stats">
-        <div class="carte-stat">
+        <div class="carte-stat transition-all duration-300 hover:-translate-y-1">
           <span class="stat-chiffre" id="stat-quiz-termines">0</span>
           <span class="stat-libelle">Quiz terminés</span>
         </div>
-        <div class="carte-stat">
+        <div class="carte-stat transition-all duration-300 hover:-translate-y-1">
           <span class="stat-chiffre" id="stat-taux-reussite">-- %</span>
           <span class="stat-libelle">Taux de réussite</span>
         </div>
@@ -225,7 +250,7 @@
 
       <h2 class="titre-section">Concours Blancs (Conditions Réelles)</h2>
       <div class="grille-actions-principales">
-        <button id="btn-mode-standard" class="carte-action carte-action-primaire">
+        <button id="btn-mode-standard" class="carte-action carte-action-primaire transition-all duration-300 hover:-translate-y-1">
           <div class="carte-action-icone">⏱️</div>
           <div class="carte-action-info">
             <h3>Concours Standard (Mixte)</h3>
@@ -233,7 +258,7 @@
           </div>
         </button>
 
-        <button id="btn-mode-unidisciplinaire" class="carte-action carte-action-secondaire">
+        <button id="btn-mode-unidisciplinaire" class="carte-action carte-action-secondaire transition-all duration-300 hover:-translate-y-1">
           <div class="carte-action-icone">🎯</div>
           <div class="carte-action-info">
             <h3>Concours Unidisciplinaire</h3>
@@ -243,7 +268,7 @@
       </div>
 
       <h2 class="titre-section">Entraînement Libre</h2>
-      <div class="carte-entrainement">
+      <div class="carte-entrainement transition-all duration-300 hover:-translate-y-1">
         <div class="form-groupe">
           <label for="select-matiere-libre">Matière :</label>
           <select id="select-matiere-libre">
@@ -265,19 +290,19 @@
           <label for="check-leitner">🧠 <strong>Priorité aux questions à réviser</strong> (Répétition espacée)</label>
         </div>
 
-        <button id="btn-lancer-entrainement" class="btn btn-primaire">Démarrer l'entraînement</button>
+        <button id="btn-lancer-entrainement" class="btn btn-primaire transition-all duration-300 hover:-translate-y-1">Démarrer l'entraînement</button>
       </div>
 
       <!-- CARTE SUPPORT WHATSAPP -->
-      <div class="carte-support-whatsapp">
+      <div class="carte-support-whatsapp transition-all duration-300 hover:-translate-y-1">
         <div class="whatsapp-texte">
           <h3>Une question ? Besoin d'aide ? 💬</h3>
           <p>Contactez l'administration de DUC CONCOURS directement sur WhatsApp.</p>
         </div>
-        <a href="https://wa.me/22600000000?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question." 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="btn-whatsapp">
+        <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question."
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn-whatsapp transition-all duration-300 hover:-translate-y-1">
           Écrire sur WhatsApp
         </a>
       </div>
@@ -290,28 +315,28 @@
         <p>Suivi des comptes, résultats et signalements.</p>
       </div>
       <div class="grille-stats">
-        <div class="carte-stat">
+        <div class="carte-stat transition-all duration-300 hover:-translate-y-1">
           <span class="stat-chiffre" id="admin-stat-etudiants">--</span>
           <span class="stat-libelle">Étudiants autorisés</span>
         </div>
-        <div class="carte-stat">
+        <div class="carte-stat transition-all duration-300 hover:-translate-y-1">
           <span class="stat-chiffre" id="admin-stat-signalements">--</span>
           <span class="stat-libelle">Signalements ouverts</span>
         </div>
-        <div class="carte-stat">
+        <div class="carte-stat transition-all duration-300 hover:-translate-y-1">
           <span class="stat-chiffre" id="admin-stat-sessions">--</span>
           <span class="stat-libelle">Sessions synchronisées</span>
         </div>
       </div>
-      <div class="carte-entrainement">
+      <div class="carte-entrainement transition-all duration-300 hover:-translate-y-1">
         <h2 class="titre-section">Étudiants</h2>
         <div id="admin-liste-etudiants"></div>
       </div>
-      <div class="carte-entrainement">
+      <div class="carte-entrainement transition-all duration-300 hover:-translate-y-1">
         <h2 class="titre-section">Signalements récents</h2>
         <div id="admin-liste-signalements"></div>
       </div>
-      <button id="btn-retour-dashboard-admin" class="btn btn-primaire">Retour au Dashboard</button>
+      <button id="btn-retour-dashboard-admin" class="btn btn-primaire transition-all duration-300 hover:-translate-y-1">Retour au Dashboard</button>
     </section>
 
     <!-- ÉCRAN 2 & 3 : QUIZ -->
@@ -327,10 +352,10 @@
         <div id="barre-progression-remplissage" class="barre-progression-remplissage"></div>
       </div>
 
-      <div class="carte-question">
+      <div class="carte-question transition-all duration-300 hover:-translate-y-1">
         <div class="question-en-tete">
-          <span id="badge-matiere" class="badge-matiere">Matière</span>
-          <span id="badge-type-reponse" class="badge-type">Choix unique</span>
+          <span id="badge-matiere" class="badge-matiere transition-all duration-300">Matière</span>
+          <span id="badge-type-reponse" class="badge-type transition-all duration-300">Choix unique</span>
         </div>
 
         <h2 id="texte-question" class="texte-question">Chargement...</h2>
@@ -342,7 +367,7 @@
         </div>
 
         <div class="actions-quiz">
-          <button id="btn-action-quiz" class="btn btn-primaire" disabled>Valider la réponse</button>
+          <button id="btn-action-quiz" class="btn btn-primaire transition-all duration-300 hover:-translate-y-1" disabled>Valider la réponse</button>
         </div>
       </div>
     </section>
@@ -407,7 +432,7 @@
 
   <!-- FENÊTRE POPUP DE SIGNALEMENT -->
   <div id="modal-signalement" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="signalement-titre">
-    <div class="modal-boite modal-signalement-boite">
+    <div class="modal-boite modal-signalement-boite transition-all duration-300">
       <div class="auth-logo">🚩 DUC CONCOURS</div>
       <h2 id="signalement-titre">Signaler une erreur</h2>
       <p>Indiquez brièvement ce qui vous semble incorrect. Le commentaire est facultatif.</p>
@@ -415,11 +440,11 @@
         <div class="form-groupe">
           <label for="signalement-commentaire">Votre commentaire :</label>
           <textarea id="signalement-commentaire" rows="4" maxlength="1000"
-            placeholder="Ex. La bonne réponse semble être la proposition B."></textarea>
+            placeholder="Ex. La bonne réponse semble être la proposition B." class="transition-all duration-300"></textarea>
         </div>
         <div class="actions-modal">
-          <button type="button" id="btn-annuler-signalement" class="btn btn-secondaire">Annuler</button>
-          <button type="submit" id="btn-envoyer-signalement" class="btn btn-primaire">Envoyer le signalement</button>
+          <button type="button" id="btn-annuler-signalement" class="btn btn-secondaire transition-all duration-300 hover:-translate-y-1">Annuler</button>
+          <button type="submit" id="btn-envoyer-signalement" class="btn btn-primaire transition-all duration-300 hover:-translate-y-1">Envoyer le signalement</button>
         </div>
       </form>
     </div>
