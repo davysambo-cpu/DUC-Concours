@@ -533,7 +533,7 @@ async function mettreAJourDashboard() {
     
     // Remplir le select de concours unidisciplinaire
     const selectMatiereUni = document.getElementById('select-matiere-unidisciplinaire');
-    if (listeMatieres.length > 0) {
+    if (selectMatiereUni && listeMatieres.length > 0) {
       selectMatiereUni.innerHTML = '<option value="">Choisir une matière...</option>';
       listeMatieres.forEach(m => {
         const opt = document.createElement('option');
@@ -541,6 +541,16 @@ async function mettreAJourDashboard() {
         opt.textContent = m.charAt(0).toUpperCase() + m.slice(1);
         selectMatiereUni.appendChild(opt);
       });
+      console.log('Matières unidisciplinaire peuplées :', listeMatieres);
+      // Empêcher le select de déclencher le clic sur le bouton parent
+      selectMatiereUni.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+      selectMatiereUni.addEventListener('change', (e) => {
+        e.stopPropagation();
+      });
+    } else {
+      console.warn('Select unidisciplinaire non trouvé ou aucune matière disponible');
     }
   } catch (e) {
     console.error("Erreur Dashboard :", e);
@@ -985,9 +995,11 @@ document.getElementById('btn-mode-standard').addEventListener('click', () => {
 });
 
 document.getElementById('btn-mode-unidisciplinaire').addEventListener('click', () => {
-  const matiere = document.getElementById('select-matiere-unidisciplinaire').value;
+  const selectMatiereUni = document.getElementById('select-matiere-unidisciplinaire');
+  const matiere = selectMatiereUni ? selectMatiereUni.value : null;
+  console.log('Matière sélectionnée unidisciplinaire :', matiere);
   if (!matiere) {
-    alert("Sélectionnez une matière avant de lancer le concours unidisciplinaire.");
+    alert("Sélectionnez une matière dans le menu déroulant avant de lancer le concours unidisciplinaire.");
     return;
   }
   demarrerQuiz({ mode: 'unidisciplinaire', matiere, quantite: 40, dureeMinutes: 40, estEntrainement: false, utiliserLeitner: false });
