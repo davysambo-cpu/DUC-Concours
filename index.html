@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DUC Concours | Préparation aux concours</title>
+  <title>PREPA_CONCOURS | Préparation aux concours</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4f46e5">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -35,26 +35,26 @@
     /* DESIGN WHATSAPP */
     .carte-support-whatsapp {
       margin-top: 24px !important;
-      background: #ffffff !important;
-      border: 1px solid #dce5e2 !important;
-      border-radius: 10px !important;
-      padding: 20px !important;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+      border: 1px solid #86efac !important;
+      border-radius: 20px !important;
+      padding: 20px 24px !important;
       display: flex !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       text-align: left !important;
       gap: 14px !important;
-      box-shadow: 0 2px 10px rgba(24, 44, 43, 0.045) !important;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15) !important;
     }
     .whatsapp-texte h3 {
-      font-size: 0.95rem !important;
+      font-size: 1rem !important;
       font-weight: 800 !important;
-      color: #1c2c2b !important;
+      color: #15803d !important;
       margin: 0 !important;
     }
     .whatsapp-texte p {
-      font-size: 0.82rem !important;
-      color: #637371 !important;
+      font-size: 0.85rem !important;
+      color: #166534 !important;
       margin: 4px 0 10px 0 !important;
       line-height: 1.4 !important;
     }
@@ -63,16 +63,21 @@
       align-items: center !important;
       justify-content: center !important;
       gap: 8px !important;
-      background: #25d366 !important;
+      background: linear-gradient(135deg, #25d366 0%, #20ba5a 100%) !important;
       color: #ffffff !important;
       text-decoration: none !important;
       font-weight: 700 !important;
       font-size: 0.9rem !important;
-      padding: 10px 16px !important;
-      border-radius: 8px !important;
+      padding: 12px 20px !important;
+      border-radius: 9999px !important;
       width: auto !important;
       max-width: 100% !important;
-      box-shadow: none !important;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35) !important;
+      transition: all 0.3s ease !important;
+    }
+    .btn-whatsapp:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45) !important;
     }
 
     /* MODALE DE CONNEXION CENTRÉE (GARANTIE VISIBLE) */
@@ -203,8 +208,8 @@
   <!-- BARRE SUPÉRIEURE -->
   <header class="app-header">
     <div class="logo">
-      <span class="logo-icone">🦅</span>
-      <span class="logo-texte">DUC CONCOURS</span>
+      <span class="logo-icone">📚</span>
+      <span class="logo-texte">PREPA_CONCOURS</span>
     </div>
     <div class="actions-entete">
       <div id="badge-reseau" class="badge-statut statut-vert transition-all duration-300">
@@ -228,7 +233,7 @@
     <!-- ÉCRAN 1 : DASHBOARD -->
     <section id="ecran-dashboard" class="ecran actif">
       <div class="banniere-bienvenue">
-        <h1>Bienvenue sur DUC CONCOURS ! 👋</h1>
+        <h1>Bienvenue sur PREPA_CONCOURS ! 👋</h1>
         <p>Votre passeport d'entraînement hors-ligne vers la réussite.</p>
       </div>
 
@@ -297,7 +302,7 @@
       <div class="carte-support-whatsapp transition-all duration-300 hover:-translate-y-1">
         <div class="whatsapp-texte">
           <h3>Une question ? Besoin d'aide ? 💬</h3>
-          <p>Contactez l'administration de DUC CONCOURS directement sur WhatsApp.</p>
+          <p>Contactez l'administration de PREPA_CONCOURS directement sur WhatsApp.</p>
         </div>
         <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question."
            target="_blank"
@@ -393,7 +398,7 @@
   <!-- FENÊTRE POPUP DE CONNEXION / INSCRIPTION -->
   <div id="modal-auth" class="modal-fond cache">
     <div class="modal-boite">
-      <div class="auth-logo">🦅 DUC CONCOURS</div>
+      <div class="auth-logo">📚 PREPA_CONCOURS</div>
       <h2 id="auth-titre">Connexion Candidat</h2>
       <p id="auth-sous-titre">Connectez-vous pour synchroniser vos scores avec le Cloud.</p>
 
@@ -433,7 +438,7 @@
   <!-- FENÊTRE POPUP DE SIGNALEMENT -->
   <div id="modal-signalement" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="signalement-titre">
     <div class="modal-boite modal-signalement-boite transition-all duration-300">
-      <div class="auth-logo">🚩 DUC CONCOURS</div>
+      <div class="auth-logo">🚩 PREPA_CONCOURS</div>
       <h2 id="signalement-titre">Signaler une erreur</h2>
       <p>Indiquez brièvement ce qui vous semble incorrect. Le commentaire est facultatif.</p>
       <form id="form-signalement">
@@ -478,7 +483,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then(() => console.log('🚀 PWA DUC CONCOURS : Enregistrée !'))
+          .then(() => console.log('🚀 PWA PREPA_CONCOURS : Enregistrée !'))
           .catch((err) => console.log('Échec SW :', err));
       });
     }
