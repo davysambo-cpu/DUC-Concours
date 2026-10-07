@@ -407,93 +407,12 @@ function afficherEcran(nomEcran) {
   window.scrollTo(0, 0);
 }
 
+// NOTE: L'ancienne fonction chargerEspaceAdmin() a été remplacée par adminDashboard.js
+// Cette fonction est conservée pour compatibilité mais n'est plus utilisée
 async function chargerEspaceAdmin() {
-  if (!supabase || !utilisateurEstAdmin) return;
-
-  const [profils, sessions, signalements] = await Promise.all([
-    supabase.from('profiles').select('id, email, nom_complet, est_autorise, date_inscription').order('date_inscription', { ascending: false }),
-    supabase.from('exam_sessions').select('user_id, score_total, total_questions, date_passage'),
-    supabase.from('question_reports').select('id, question_id, commentaire, statut, date_signalement').order('date_signalement', { ascending: false }).limit(50)
-  ]);
-  const erreur = profils.error || sessions.error || signalements.error;
-  if (erreur) {
-    console.error("Erreur de chargement de l'espace admin :", erreur);
-    const conteneur = document.getElementById('admin-liste-signalements');
-    conteneur.textContent = `Impossible de charger les données administrateur : ${erreur.message || 'erreur inconnue'}`;
-    return;
-  }
-
-  document.getElementById('admin-stat-etudiants').textContent =
-    profils.data.filter(profil => profil.est_autorise).length;
-  document.getElementById('admin-stat-signalements').textContent =
-    signalements.data.filter(report => report.statut === 'nouveau').length;
-  document.getElementById('admin-stat-sessions').textContent = sessions.data.length;
-
-  const conteneurEtudiants = document.getElementById('admin-liste-etudiants');
-  conteneurEtudiants.textContent = '';
-  const sessionsParUtilisateur = new Map();
-  sessions.data.forEach(session => {
-    const liste = sessionsParUtilisateur.get(session.user_id) || [];
-    liste.push(session);
-    sessionsParUtilisateur.set(session.user_id, liste);
-  });
-
-  profils.data.filter(profil => profil.est_autorise).forEach(profil => {
-    const sessionsUtilisateur = sessionsParUtilisateur.get(profil.id) || [];
-    const moyenne = sessionsUtilisateur.length === 0
-      ? 'Aucun résultat'
-      : `${Math.round(sessionsUtilisateur.reduce((total, session) =>
-        total + (session.score_total / session.total_questions) * 100, 0) / sessionsUtilisateur.length)} % de moyenne`;
-    const carte = document.createElement('div');
-    carte.className = 'item-correction';
-    const nom = document.createElement('strong');
-    nom.textContent = profil.nom_complet || profil.email;
-    const details = document.createElement('p');
-    details.textContent = `${profil.email} — ${sessionsUtilisateur.length} session(s) — ${moyenne}`;
-    carte.append(nom, details);
-    conteneurEtudiants.appendChild(carte);
-  });
-  if (conteneurEtudiants.childElementCount === 0) {
-    conteneurEtudiants.textContent = 'Aucun étudiant autorisé.';
-  }
-
-  const conteneur = document.getElementById('admin-liste-signalements');
-  conteneur.textContent = '';
-  if (signalements.data.length === 0) {
-    conteneur.textContent = 'Aucun signalement.';
-    return;
-  }
-
-  signalements.data.forEach(report => {
-    const carte = document.createElement('div');
-    carte.className = 'item-correction';
-    const titre = document.createElement('strong');
-    titre.textContent = `${report.question_id} — ${report.statut}`;
-    const commentaire = document.createElement('p');
-    commentaire.textContent = report.commentaire || 'Aucun commentaire.';
-    const bouton = document.createElement('button');
-    bouton.className = 'btn btn-primaire';
-    bouton.textContent = report.statut === 'nouveau' ? 'Marquer corrigé' : 'Déjà traité';
-    bouton.disabled = report.statut !== 'nouveau';
-    bouton.addEventListener('click', async () => {
-      bouton.disabled = true;
-      const { error } = await supabase
-        .from('question_reports')
-        .update({ statut: 'corrige' })
-        .eq('id', report.id);
-      if (error) {
-        bouton.disabled = false;
-        console.error("Erreur de mise à jour du signalement :", error);
-        alert("Impossible de mettre à jour ce signalement.");
-        return;
-      }
-      report.statut = 'corrige';
-      titre.textContent = `${report.question_id} — corrige`;
-      bouton.textContent = 'Déjà traité';
-    });
-    carte.append(titre, commentaire, bouton);
-    conteneur.appendChild(carte);
-  });
+  // Le nouveau dashboard admin est géré par adminDashboard.js
+  // Cette fonction est désactivée temporairement
+  console.log("⚠️ chargerEspaceAdmin() désactivé - Utilisez adminDashboard.js");
 }
 
 async function mettreAJourDashboard() {
