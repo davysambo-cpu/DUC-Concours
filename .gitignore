@@ -10,3 +10,4 @@ donnees_brutes/
 donnees_validees/
 nouvelles_questions.json
 .vercel
+.env*
