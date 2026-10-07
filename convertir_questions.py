@@ -7,6 +7,7 @@ Script de conversion des questions du fichier JSON vers le format de la platefor
 import json
 import base64
 import sys
+import ftfy
 from datetime import datetime
 
 # Configurer l'encodage stdout pour Windows
@@ -50,9 +51,11 @@ CATEGORIE_TO_MATIERE = {
     "Physique - Électricité": "physique",
     "Physique - Electricite": "physique",
     "Physique - Elec": "physique",
+    "Physique - Élec": "physique",
     "Physique - Mécanique": "physique",
     "Physique - Mecanique": "physique",
     "Physique - Meca": "physique",
+    "Physique - Méca": "physique",
     "Physique - Ondes": "physique",
     "Physique - Optique": "physique",
     "Physique - Optique Physique": "physique",
@@ -85,6 +88,7 @@ CATEGORIE_TO_MATIERE = {
     "Chimie - Électrochimie": "chimie",
     "Chimie - Electrochimie": "chimie",
     "Chimie - Electro": "chimie",
+    "Chimie - Électro": "chimie",
     "Chimie - Cinétique": "chimie",
     "Chimie - Cinetique": "chimie",
     "Chimie - Atomistique": "chimie",
@@ -200,9 +204,11 @@ CATEGORIE_TO_CATEGORIE = {
     "Physique - Électricité": "electricite",
     "Physique - Electricite": "electricite",
     "Physique - Elec": "electricite",
+    "Physique - Élec": "electricite",
     "Physique - Mécanique": "mecanique",
     "Physique - Mecanique": "mecanique",
     "Physique - Meca": "mecanique",
+    "Physique - Méca": "mecanique",
     "Physique - Ondes": "ondes",
     "Physique - Optique": "optique",
     "Physique - Optique Physique": "optique",
@@ -235,6 +241,7 @@ CATEGORIE_TO_CATEGORIE = {
     "Chimie - Électrochimie": "electrochimie",
     "Chimie - Electrochimie": "electrochimie",
     "Chimie - Electro": "electrochimie",
+    "Chimie - Électro": "electrochimie",
     "Chimie - Cinétique": "cinetique",
     "Chimie - Cinetique": "cinetique",
     "Chimie - Atomistique": "atomistique",
@@ -331,30 +338,30 @@ def generer_id(index, categorie):
     return f"NEW_{matiere_abbr[:3].upper()}_{index:04d}"
 
 def corriger_encodage(texte):
-    """Corrige les problèmes d'encodage UTF-8"""
+    """Corrige l'encodage avec ftfy"""
     if texte is None:
         return ""
-    # Normaliser les caractères (remplacer les accents par leur version sans accent)
-    import unicodedata
-    texte = str(texte)
-    texte = unicodedata.normalize('NFKD', texte)
-    texte = ''.join([c for c in texte if not unicodedata.combining(c)])
-    return texte
+    return ftfy.fix_text(texte)
 
 def convertir_question(q_data, index):
     """Convertit une question du format source vers le format de la plateforme"""
+    # Corriger l'encodage de la catégorie
     categorie = corriger_encodage(q_data.get('category', ''))
     matiere = CATEGORIE_TO_MATIERE.get(categorie, 'culture_generale')
     sous_categorie = CATEGORIE_TO_CATEGORIE.get(categorie, categorie.lower().replace(' ', '_').replace('-', '_'))
 
-    # Corriger l'encodage
+    # Corriger l'encodage de tous les champs texte
     question = corriger_encodage(q_data.get('question', ''))
     justification = corriger_encodage(q_data.get('justification', ''))
 
-    # Récupérer les options
+    # Récupérer les options et corriger leur encodage
     options_dict = q_data.get('options', {})
-    options = [options_dict.get('A', ''), options_dict.get('B', ''),
-               options_dict.get('C', ''), options_dict.get('D', '')]
+    options = [
+        corriger_encodage(options_dict.get('A', '')),
+        corriger_encodage(options_dict.get('B', '')),
+        corriger_encodage(options_dict.get('C', '')),
+        corriger_encodage(options_dict.get('D', ''))
+    ]
 
     # Récupérer la bonne réponse
     answer = q_data.get('answer', {})
@@ -383,10 +390,14 @@ def convertir_question(q_data, index):
     }
 
 def main():
-    # Lire le fichier source tel quel
-    print("Lecture du fichier source...")
-    with open(r'C:\Users\SAMBO\Downloads\questions_reponses_justifications.json', 'r', encoding='utf-8', errors='ignore') as f:
-        data_source = json.load(f)
+    # Lire le fichier source original et corriger avec ftfy
+    print("Lecture du fichier source original...")
+    with open(r'C:\Users\SAMBO\Downloads\questions_reponses_justifications.json', 'r', encoding='latin-1') as f:
+        content = f.read()
+    
+    # Corriger le contenu avec ftfy
+    content_corrige = ftfy.fix_text(content)
+    data_source = json.loads(content_corrige)
 
     questions_source = data_source.get('questions', [])
     print(f"Nombre de questions trouvées : {len(questions_source)}")
@@ -409,9 +420,17 @@ def main():
     for cat in sorted(categories_trouvees):
         print(f"  - {cat}")
 
-    # Écraser le fichier existant avec les nouvelles questions
-    print(f"\nRemplacement du fichier questions_prod.json")
-    questions_finales = questions_converted
+    # Lire les questions existantes et fusionner
+    print(f"\nLecture des questions existantes...")
+    try:
+        with open('questions_prod.json', 'r', encoding='utf-8') as f:
+            questions_existantes = json.load(f)
+        print(f"Questions existantes : {len(questions_existantes)}")
+        # Fusionner : garder les existantes + ajouter les nouvelles
+        questions_finales = questions_existantes + questions_converted
+    except FileNotFoundError:
+        print("Aucun fichier existant, création d'un nouveau fichier")
+        questions_finales = questions_converted
 
     # Écrire le fichier de sortie
     print(f"\nÉcriture du fichier questions_prod.json...")
