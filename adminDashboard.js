@@ -119,22 +119,22 @@ async function initialiserGraphiqueActivite() {
 
     // Créer le gradient pour la courbe
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, 'rgba(99, 102, 241, 0.3)');
-    gradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
+    gradient.addColorStop(0, 'rgba(29, 90, 79, 0.18)');
+    gradient.addColorStop(1, 'rgba(29, 90, 79, 0.0)');
 
     activityChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: heures,
         datasets: [{
-          label: 'Connexions',
+          label: 'Sessions d’examen',
           data: connexionsParHeure,
-          borderColor: '#4f46e5',
+          borderColor: '#1d5a4f',
           backgroundColor: gradient,
           borderWidth: 3,
           fill: true,
           tension: 0.4,
-          pointBackgroundColor: '#4f46e5',
+          pointBackgroundColor: '#1d5a4f',
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2,
           pointRadius: 4,
@@ -149,7 +149,7 @@ async function initialiserGraphiqueActivite() {
             display: false
           },
           tooltip: {
-            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            backgroundColor: 'rgba(25, 48, 41, 0.94)',
             titleColor: '#ffffff',
             bodyColor: '#ffffff',
             padding: 12,
@@ -163,7 +163,7 @@ async function initialiserGraphiqueActivite() {
               display: false
             },
             ticks: {
-              color: '#64748b',
+              color: '#718078',
               font: {
                 size: 11,
                 weight: 600
@@ -172,11 +172,11 @@ async function initialiserGraphiqueActivite() {
           },
           y: {
             grid: {
-              color: '#e2e8f0',
+              color: '#e2e9e3',
               drawBorder: false
             },
             ticks: {
-              color: '#64748b',
+              color: '#718078',
               font: {
                 size: 11,
                 weight: 600
@@ -194,32 +194,32 @@ async function initialiserGraphiqueActivite() {
 
   } catch (err) {
     console.error("Erreur chargement graphique:", err);
-    // Afficher des données fictives en cas d'erreur
+    // Afficher un graphique neutre si les données ne sont pas accessibles
     afficherGraphiqueFallback(ctx);
   }
 }
 
 function afficherGraphiqueFallback(ctx) {
   const heures = ['00h', '02h', '04h', '06h', '08h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'];
-  const connexions = [5, 3, 2, 8, 25, 45, 60, 55, 48, 62, 70, 35];
+  const connexions = new Array(12).fill(0);
 
   const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-  gradient.addColorStop(0, 'rgba(99, 102, 241, 0.3)');
-  gradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
+  gradient.addColorStop(0, 'rgba(29, 90, 79, 0.18)');
+  gradient.addColorStop(1, 'rgba(29, 90, 79, 0.0)');
 
   activityChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: heures,
       datasets: [{
-        label: 'Connexions',
+        label: 'Sessions d’examen',
         data: connexions,
-        borderColor: '#4f46e5',
+        borderColor: '#1d5a4f',
         backgroundColor: gradient,
         borderWidth: 3,
         fill: true,
         tension: 0.4,
-        pointBackgroundColor: '#4f46e5',
+        pointBackgroundColor: '#1d5a4f',
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2,
         pointRadius: 4,
@@ -231,8 +231,8 @@ function afficherGraphiqueFallback(ctx) {
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { grid: { display: false }, ticks: { color: '#64748b' } },
-        y: { grid: { color: '#e2e8f0' }, beginAtZero: true }
+        x: { grid: { display: false }, ticks: { color: '#718078' } },
+        y: { grid: { color: '#e2e9e3' }, beginAtZero: true }
       }
     }
   });
@@ -416,13 +416,13 @@ function initialiserSwitchMode() {
       window.modeAdminSwitch = modeAdmin; // Marquer globalement pour app.js
 
       if (modeAdmin) {
-        switchText.textContent = '🎓 Mode Étudiant';
-        btnSwitch.style.background = 'linear-gradient(135deg, #4f46e5 0%, #4338ca 100%)';
+        switchText.textContent = 'Mode étudiant';
+        btnSwitch.classList.add('mode-etudiant');
         afficherEcran('admin');
         await initialiserDashboardAdmin(); // Attendre le chargement des données
       } else {
-        switchText.textContent = '🔓 Mode Admin';
-        btnSwitch.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+        switchText.textContent = 'Mode admin · test';
+        btnSwitch.classList.remove('mode-etudiant');
         afficherEcran('dashboard');
       }
     });
