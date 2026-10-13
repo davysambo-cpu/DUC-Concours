@@ -244,7 +244,7 @@ async function verifierAutorisationCloud(user) {
   utilisateurEstAdmin = profil.role === 'admin';
   elBtnOuvrirAdmin.classList.toggle('cache', !utilisateurEstAdmin);
   const nom = profil.nom_complet || user.user_metadata?.nom_complet || "Candidat";
-  document.querySelector('.banniere-bienvenue h1').textContent = `Bienvenue, ${nom} ! 👋`;
+  document.querySelector('.banniere-bienvenue h1').textContent = `Bienvenue, ${nom}.`;
   return true;
 }
 
@@ -343,7 +343,7 @@ elFormAuth.addEventListener('submit', async (e) => {
     elMenuActions.classList.remove('cache');
     elBtnDeconnexion.classList.remove('cache');
     const prenom = utilisateurActuel.user_metadata?.nom_complet || "Candidat";
-    document.querySelector('.banniere-bienvenue h1').textContent = `Bienvenue, ${prenom} ! 👋`;
+    document.querySelector('.banniere-bienvenue h1').textContent = `Bienvenue, ${prenom}.`;
     synchroniserDonnees();
   } catch (err) {
     elModalAuth.classList.remove('cache');
@@ -432,7 +432,7 @@ async function mettreAJourDashboard() {
       const moyenne = sessions.reduce((acc, s) => acc + (s.score_total / s.total_questions), 0) / nbSessions;
       document.getElementById('stat-taux-reussite').textContent = `${Math.round(moyenne * 100)}%`;
     } else {
-      document.getElementById('stat-taux-reussite').textContent = '-- %';
+      document.getElementById('stat-taux-reussite').textContent = '— %';
     }
 
     const quizEnCours = await db.quiz_en_cours.get('session_active');
@@ -586,7 +586,7 @@ function lancerChrono() {
 
     if (sessionActuelle.tempsRestant <= 0) {
       clearInterval(sessionActuelle.timerInterval);
-      alert("⏱️ Temps écoulé !");
+      alert("Temps écoulé.");
       terminerSession();
     } else if (sessionActuelle.tempsRestant % 5 === 0) {
       sauvegarderProgressionLocale();
@@ -906,7 +906,7 @@ function genererFeuilleCorrection() {
 
     const explicationElement = document.createElement('div');
     explicationElement.style.cssText = 'font-size: 0.88rem; color: #475569; margin-top: 6px; background: #f8fafc; padding: 8px; border-radius: 6px;';
-    explicationElement.append(document.createTextNode('💡 '), Object.assign(document.createElement('em'), { textContent: explication }));
+    explicationElement.append(document.createTextNode('Explication : '), Object.assign(document.createElement('em'), { textContent: explication }));
 
     item.append(titre, resultat, explicationElement);
     conteneur.appendChild(item);

@@ -4,8 +4,8 @@
   "description": "Application d'entraînement hors-ligne aux concours - DUC CONCOURS",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f1f5f9",
-  "theme_color": "#4f46e5",
+  "background_color": "#f5f7f5",
+  "theme_color": "#19473f",
   "icons": [
     {
       "src": "icon.svg",
