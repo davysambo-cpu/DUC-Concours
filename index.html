@@ -1,427 +1,288 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DUC Concours | Préparation aux concours</title>
+  <meta name="theme-color" content="#183b32">
+  <meta name="description" content="Préparez les concours avec des entraînements ciblés, une progression suivie et des examens blancs.">
+  <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#19473f">
-  <link rel="stylesheet" href="style.css?v=21">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=24">
 </head>
-<body>
-
-  <!-- BARRE SUPÉRIEURE -->
+<body data-ecran="dashboard">
   <header class="app-header">
-    <div class="logo" aria-label="DUC Concours — préparation aux concours">
-      <span class="logo-icone" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 5.5c2.9-.9 5.5-.5 8 1.2v13c-2.5-1.7-5.1-2.1-8-1.2z"/>
-          <path d="M20 5.5c-2.9-.9-5.5-.5-8 1.2v13c2.5-1.7 5.1-2.1 8-1.2z"/>
-          <path d="M7 9h2.5M7 12h2.5m5 0H17m-2.5-3H17"/>
-        </svg>
-      </span>
-      <span class="logo-copy">
-        <span class="logo-texte">DUC Concours</span>
-        <span class="logo-caption">PRÉPARATION AUX CONCOURS</span>
-      </span>
-    </div>
-    <div class="actions-entete">
-      <!-- Commutateur conservé pour les essais de l'espace admin. -->
-      <button id="btn-switch-mode" class="btn-switch-mode" type="button">
-        <span id="switch-mode-text">Mode admin · test</span>
-      </button>
-      <div id="badge-reseau" class="badge-statut statut-vert" role="status" aria-live="polite">
-        <span class="point-statut" aria-hidden="true"></span>
-        <span id="texte-statut">En ligne</span>
-      </div>
-      <button id="btn-ouvrir-connexion" class="btn-connexion-header" type="button">Connexion</button>
-      <div id="menu-actions" class="menu-actions cache">
-        <button id="btn-menu-actions" class="btn-menu-actions" type="button" aria-label="Ouvrir le menu" aria-expanded="false">⋮</button>
-        <div id="menu-actions-contenu" class="menu-actions-contenu">
-          <button id="btn-ouvrir-admin" class="menu-action cache" type="button">Administration</button>
-          <button id="btn-signaler-menu" class="menu-action menu-action-signalement disabled" type="button" disabled>Signaler une erreur</button>
-          <button id="btn-deconnexion" class="menu-action menu-action-danger" type="button" title="Se déconnecter">Déconnexion</button>
+    <div class="header-inner">
+      <a class="logo" href="#top" aria-label="DUC Concours, accueil">
+        <span class="logo-icone" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 10.5c5.6-1.6 10.6-.8 15 2.4v24c-4.4-3.2-9.4-4-15-2.4v-24Z" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+            <path d="M39 10.5c-5.6-1.6-10.6-.8-15 2.4v24c4.4-3.2 9.4-4 15-2.4v-24Z" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+            <path d="M15 18h4m-4 5h4m10-5h4m-4 5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="logo-copy">
+          <span class="logo-texte">DUC <strong>Concours</strong></span>
+          <span class="logo-caption">INSTITUT DE PRÉPARATION</span>
+        </span>
+      </a>
+
+      <nav class="nav-principale" aria-label="Navigation principale">
+        <a class="nav-link" href="#section-formats">Préparer</a>
+        <a class="nav-link" href="#section-progression">Ma progression</a>
+      </nav>
+
+      <div class="actions-entete">
+        <div id="badge-reseau" class="badge-statut statut-vert" role="status" aria-live="polite">
+          <span class="point-statut" aria-hidden="true"></span>
+          <span id="texte-statut">En ligne</span>
+        </div>
+        <button id="btn-ouvrir-connexion" class="btn-connexion-header" type="button">Connexion</button>
+        <div id="menu-actions" class="menu-actions cache">
+          <button id="btn-menu-actions" class="btn-menu-actions" type="button" aria-label="Ouvrir le menu du compte" aria-expanded="false">
+            <span class="avatar-compte" aria-hidden="true">DC</span>
+            <span class="menu-chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div id="menu-actions-contenu" class="menu-actions-contenu">
+            <button id="btn-ouvrir-admin" class="menu-action cache" type="button">Administration</button>
+            <button id="btn-signaler-menu" class="menu-action menu-action-signalement" type="button" disabled>Signaler la question</button>
+            <button id="btn-deconnexion" class="menu-action menu-action-danger" type="button">Se déconnecter</button>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <main class="app-main">
-
-    <!-- TABLEAU DE BORD CANDIDAT -->
-    <section id="ecran-dashboard" class="ecran actif">
+  <main id="top" class="app-main">
+    <section id="ecran-dashboard" class="ecran actif" aria-labelledby="titre-accueil">
       <div class="banniere-bienvenue">
         <div class="hero-copy">
-          <span class="hero-eyebrow">Votre espace de préparation</span>
-          <h1>Préparez votre concours avec méthode.</h1>
-          <p>Des entraînements ciblés, une progression suivie et la liberté de réviser à votre rythme.</p>
-        </div>
-        <div class="hero-embleme" aria-hidden="true">
-          <div class="hero-embleme-mark">DUC</div>
-          <span class="hero-embleme-rule"></span>
-          <span class="hero-embleme-caption">RIGUEUR · CONSTANCE · RÉUSSITE</span>
-        </div>
-      </div>
-
-      <div class="dashboard-section-heading">
-        <div>
-          <span class="section-kicker">Votre progression</span>
-          <h2 class="titre-section">Chaque session vous rapproche du but.</h2>
-        </div>
-        <p class="section-description">Gardez le rythme : vos résultats se construisent question après question.</p>
-      </div>
-      <div class="grille-stats">
-        <div class="carte-stat">
-          <span class="stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4.5h8M8 8h8M7 3h10a2 2 0 0 1 2 2v14l-7-3-7 3V5a2 2 0 0 1 2-2z"/><path d="m9 12 2 2 4-4"/></svg>
-          </span>
-          <span class="stat-contenu">
-            <span class="stat-chiffre" id="stat-quiz-termines">0</span>
-            <span class="stat-libelle">Quiz terminés</span>
-          </span>
-        </div>
-        <div class="carte-stat">
-          <span class="stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17.5 9 12l3.5 3.5L20 7"/><path d="M14.5 7H20v5.5"/></svg>
-          </span>
-          <span class="stat-contenu">
-            <span class="stat-chiffre" id="stat-taux-reussite">— %</span>
-            <span class="stat-libelle">Taux de réussite</span>
-          </span>
-        </div>
-      </div>
-
-      <div id="alerte-reprise" class="alerte-reprise cache">
-        <p>Vous avez un examen interrompu en cours.</p>
-        <button id="btn-reprendre-quiz" class="btn-avertissement" type="button">Reprendre mon examen</button>
-      </div>
-
-      <div class="section-heading">
-        <div>
-          <span class="section-kicker">Simulations d'épreuve</span>
-          <h2 class="titre-section">Concours blancs</h2>
-        </div>
-        <p class="section-description">Entraînez-vous dans des conditions proches de l'examen.</p>
-      </div>
-      <div class="grille-actions-principales">
-        <button id="btn-mode-standard" class="carte-action carte-action-primaire" type="button">
-          <span class="carte-action-heading">
-            <span class="carte-action-icone" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/><path d="M8.5 2.8 6.8 4.2m8.7-1.4 1.7 1.4"/></svg>
-            </span>
-            <span class="mode-tag">ÉPREUVE COMPLÈTE</span>
-          </span>
-          <span class="carte-action-info">
-            <span class="carte-action-title">Concours standard</span>
-            <span class="carte-action-description">Une épreuve mixte pour vous préparer au format du concours.</span>
-          </span>
-          <span class="mode-meta"><span>60 questions</span><span>60 minutes</span><span class="mode-arrow" aria-hidden="true">→</span></span>
-        </button>
-
-        <article class="carte-action carte-action-secondaire">
-          <div class="carte-action-heading">
-            <span class="carte-action-icone" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 14.5 9l5.5 2.5-5.5 2.5-2.5 5.5-2.5-5.5L4 11.5 9.5 9 12 3.5z"/><path d="m19 16 .8 1.7 1.7.8-1.7.8L19 21l-.8-1.7-1.7-.8 1.7-.8L19 16z"/></svg>
-            </span>
-            <span class="mode-tag">FOCUS MATIÈRE</span>
+          <div class="hero-meta">
+            <span class="hero-eyebrow">CAMPUS DE PRÉPARATION · 2027</span>
+            <span class="hero-edition">Édition candidate</span>
           </div>
-          <div class="carte-action-info">
-            <h3>Concours par matière</h3>
-            <p>Concentrez vos efforts sur une discipline précise.</p>
+          <h1 id="titre-accueil">Votre parcours commence ici.</h1>
+          <p>Une préparation claire, régulière et à votre rythme. Chaque séance vous rapproche du concours.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primaire hero-cta" href="#section-formats">
+              Choisir une séance
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5"/></svg>
+            </a>
+            <a class="hero-lien" href="#section-progression">Voir ma progression <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="form-groupe">
-            <label for="select-matiere-unidisciplinaire">Choisir une matière</label>
-            <select id="select-matiere-unidisciplinaire">
-              <option value="">Choisir une matière...</option>
-            </select>
+        </div>
+        <aside class="hero-embleme" aria-label="Progression dans le catalogue">
+          <div class="hero-embleme-top"><span>VOTRE CAP</span><span class="hero-embleme-dot" aria-hidden="true"></span></div>
+          <div class="hero-embleme-mark">DUC<span>·</span></div>
+          <div class="hero-embleme-rule"></div>
+          <p>La régularité fait la différence.</p>
+          <div class="hero-mini-progress">
+            <div><span>Questions étudiées</span><strong id="hero-question-count">0</strong></div>
+            <span class="hero-mini-total">sur <span id="hero-question-total">0</span> au catalogue</span>
           </div>
-          <button id="btn-mode-unidisciplinaire" class="btn-action-uni" type="button">Démarrer l'épreuve <span aria-hidden="true">→</span></button>
-        </article>
-      </div>
-
-      <div class="dashboard-lower-grid">
-        <section class="entrainement-panel" aria-labelledby="titre-entrainement">
-          <div class="dashboard-section-heading">
-            <div>
-              <span class="section-kicker">À votre rythme</span>
-              <h2 class="titre-section" id="titre-entrainement">Entraînement libre</h2>
-            </div>
-          </div>
-          <div class="carte-entrainement">
-            <div class="training-fields">
-              <div class="form-groupe">
-                <label for="select-matiere-libre">Matière</label>
-                <select id="select-matiere-libre">
-                  <option value="toutes">Toutes les matières</option>
-                </select>
-              </div>
-              <div class="form-groupe">
-                <label for="select-nombre-libre">Nombre de questions</label>
-                <select id="select-nombre-libre">
-                  <option value="10">10 questions · Express</option>
-                  <option value="20" selected>20 questions</option>
-                  <option value="all">Toutes les questions</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-case-a-cocher">
-              <input type="checkbox" id="check-leitner" checked>
-              <label for="check-leitner"><strong>Priorité aux questions à réviser</strong><br>Revoir en premier les questions déjà étudiées ou difficiles.</label>
-            </div>
-            <button id="btn-lancer-entrainement" class="btn btn-primaire" type="button">Commencer l'entraînement</button>
-          </div>
-        </section>
-
-        <aside class="carte-support-whatsapp">
-          <div>
-            <span class="support-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a7.5 7.5 0 0 1-11.1 6.6L4 19l1.1-4.3A7.5 7.5 0 1 1 20 11.5z"/><path d="M9 9.2c.4 1.8 1.8 3.2 3.6 3.7l1-.9 1.6.8-.2 1.4c-.1.5-.6.8-1.1.8-3.5-.5-6.3-3.3-6.7-6.8-.1-.5.3-1 .8-1.1l1.4-.2.8 1.6-.8.7z"/></svg>
-            </span>
-            <div class="whatsapp-texte">
-              <h3>Besoin d'un conseil ?</h3>
-              <p>L'équipe DUC Concours est disponible pour vous accompagner dans votre préparation.</p>
-            </div>
-          </div>
-          <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question."
-             target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-            Contacter l'équipe <span aria-hidden="true">↗</span>
-          </a>
         </aside>
+        <span class="hero-index" aria-hidden="true">01</span>
       </div>
+
+      <div id="alerte-reprise" class="alerte-reprise cache" role="status">
+        <div class="alerte-reprise-copy">
+          <span class="alerte-icone" aria-hidden="true">↗</span>
+          <div><strong>Votre épreuve est en pause</strong><p>Reprenez là où vous vous êtes arrêté.</p></div>
+        </div>
+        <button id="btn-reprendre-quiz" class="btn btn-avertissement" type="button">Reprendre l’épreuve <span aria-hidden="true">→</span></button>
+      </div>
+
+      <section class="stats-section" aria-label="Résumé de votre activité">
+        <div class="stats-caption"><span class="section-kicker">EN UN COUP D’ŒIL</span><span class="stats-caption-note">Votre activité sur cet appareil</span></div>
+        <div class="grille-stats">
+          <article class="carte-stat">
+            <span class="stat-index">01</span>
+            <div class="stat-contenu"><span class="stat-libelle">Sessions terminées</span><strong class="stat-chiffre" id="stat-quiz-termines">0</strong></div>
+            <span class="stat-symbol" aria-hidden="true">↗</span>
+          </article>
+          <article class="carte-stat">
+            <span class="stat-index">02</span>
+            <div class="stat-contenu"><span class="stat-libelle">Score moyen</span><strong class="stat-chiffre" id="stat-taux-reussite">—</strong></div>
+            <span class="stat-symbol" aria-hidden="true">%</span>
+          </article>
+          <article class="carte-stat">
+            <span class="stat-index">03</span>
+            <div class="stat-contenu"><span class="stat-libelle">Questions étudiées</span><strong class="stat-chiffre" id="stat-questions-etudiees">0</strong></div>
+            <span class="stat-symbol" aria-hidden="true">✓</span>
+          </article>
+          <article class="carte-stat">
+            <span class="stat-index">04</span>
+            <div class="stat-contenu"><span class="stat-libelle">Série de révision</span><strong class="stat-chiffre" id="stat-serie-active">0 j</strong></div>
+            <span class="stat-symbol" aria-hidden="true">✳</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="section-formats" class="section-block" aria-labelledby="titre-formats">
+        <div class="section-heading">
+          <div class="section-title-group"><span class="section-kicker">01 / CHOISIR SON FORMAT</span><h2 class="titre-section" id="titre-formats">Quelle séance vous convient aujourd’hui&nbsp;?</h2></div>
+          <p class="section-description">Un examen blanc pour vous situer, ou une séance ciblée pour progresser.</p>
+        </div>
+
+        <div class="grille-actions-principales">
+          <button id="btn-mode-standard" class="carte-action carte-action-primaire" type="button">
+            <span class="mode-card-top"><span class="mode-index">01</span><span class="mode-tag">FORMAT CONCOURS</span></span>
+            <span class="mode-card-content"><span class="mode-eyebrow">SIMULATION COMPLÈTE</span><span class="carte-action-title">Concours blanc</span><span class="carte-action-description">Une épreuve mixte pour vous entraîner dans les conditions du jour J.</span></span>
+            <span class="mode-meta"><span>60 questions</span><span class="mode-separator" aria-hidden="true">·</span><span>60 minutes</span><span class="mode-arrow" aria-hidden="true">↗</span></span>
+          </button>
+
+          <article class="carte-action carte-action-secondaire">
+            <div class="mode-card-top"><span class="mode-index">02</span><span class="mode-tag">FOCUS DISCIPLINAIRE</span></div>
+            <div class="mode-card-content"><span class="mode-eyebrow">APPROFONDIR UNE MATIÈRE</span><h3 class="carte-action-title">Épreuve ciblée</h3><p class="carte-action-description">Choisissez une matière et concentrez votre effort là où il compte.</p></div>
+            <div class="form-groupe">
+              <label for="select-matiere-unidisciplinaire">Matière de l’épreuve</label>
+              <select id="select-matiere-unidisciplinaire"><option value="">Choisir une matière…</option></select>
+            </div>
+            <button id="btn-mode-unidisciplinaire" class="btn-action-uni" type="button">Démarrer l’épreuve <span aria-hidden="true">→</span></button>
+          </article>
+        </div>
+      </section>
+
+      <section id="section-entrainement" class="section-block section-block-training" aria-labelledby="titre-entrainement">
+        <div class="section-heading">
+          <div class="section-title-group"><span class="section-kicker">02 / À VOTRE RYTHME</span><h2 class="titre-section" id="titre-entrainement">Composer une séance libre</h2></div>
+          <p class="section-description">Révisez sans chronomètre et obtenez une explication après chaque réponse.</p>
+        </div>
+        <div class="dashboard-lower-grid">
+          <section class="entrainement-panel" aria-label="Réglages de l’entraînement libre">
+            <div class="carte-entrainement">
+              <div class="training-fields">
+                <div class="form-groupe"><label for="select-matiere-libre">Matière</label><select id="select-matiere-libre"><option value="toutes">Toutes les matières</option></select></div>
+                <div class="form-groupe"><label for="select-nombre-libre">Longueur de la séance</label><select id="select-nombre-libre"><option value="10">10 questions · Express</option><option value="20" selected>20 questions · Approfondie</option><option value="all">Tout le catalogue</option></select></div>
+              </div>
+              <label class="form-case-a-cocher" for="check-leitner">
+                <input type="checkbox" id="check-leitner" checked>
+                <span><strong>Prioriser mes points à renforcer</strong><small>Les questions inédites et celles souvent manquées passent en premier.</small></span>
+              </label>
+              <button id="btn-lancer-entrainement" class="btn btn-primaire btn-entrainement" type="button">Commencer la séance <span aria-hidden="true">→</span></button>
+              <p class="note-locale"><span aria-hidden="true">●</span> Votre progression est conservée sur cet appareil.</p>
+            </div>
+          </section>
+          <aside class="carte-support-whatsapp">
+            <span class="support-overline">UN CONSEIL POUR LA SUITE</span>
+            <div class="support-mark" aria-hidden="true">D.</div>
+            <div class="whatsapp-texte"><h3>Un concours se prépare aussi ensemble.</h3><p>Besoin d’un renseignement sur les épreuves ou votre préparation&nbsp;? Écrivez à l’équipe DUC Concours.</p></div>
+            <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question." target="_blank" rel="noopener noreferrer" class="btn-whatsapp">Contacter l’équipe <span aria-hidden="true">↗</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section id="section-progression" class="section-block section-block-progress" aria-labelledby="titre-progression">
+        <div class="section-heading">
+          <div class="section-title-group"><span class="section-kicker">03 / MES REPÈRES</span><h2 class="titre-section" id="titre-progression">La progression, concrètement.</h2></div>
+          <p class="section-description">Un aperçu de ce que vous avez déjà travaillé et de vos dernières séances.</p>
+        </div>
+        <div class="progress-layout">
+          <article class="progress-card progress-card-main">
+            <div class="progress-card-heading"><div><span class="progress-overline">VOTRE COUVERTURE</span><h3>Le catalogue en perspective</h3></div><div class="progress-ring-label"><strong id="progression-pourcentage">0%</strong><span>exploré</span></div></div>
+            <div class="progression-barre-fond" role="progressbar" aria-label="Questions du catalogue étudiées" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progression-barre-catalogue" class="progression-barre-remplissage"></div></div>
+            <p class="progress-summary"><strong id="progression-questions-vues">0</strong> question(s) travaillée(s) sur <strong id="progression-total">0</strong> dans votre catalogue.</p>
+            <div class="subject-progress-heading"><span>PAR MATIÈRE</span><span>QUESTIONS VUES</span></div>
+            <div id="progression-matieres" class="progression-matieres"><p class="empty-state">Vos matières apparaîtront ici après vos premières révisions.</p></div>
+          </article>
+
+          <article class="progress-card progress-card-history">
+            <div class="progress-card-heading"><div><span class="progress-overline">VOTRE PARCOURS</span><h3>Dernières séances</h3></div><span class="history-stamp" aria-hidden="true">HIST.</span></div>
+            <div id="historique-sessions" class="historique-sessions"><p class="empty-state">Vos séances terminées apparaîtront ici.</p></div>
+            <p class="history-footnote">Historique conservé sur cet appareil.</p>
+          </article>
+        </div>
+      </section>
     </section>
-    <!-- ESPACE ADMINISTRATEUR - DASHBOARD PREMIUM -->
-    <section id="ecran-admin" class="ecran">
-      <!-- Header Admin -->
+
+    <section id="ecran-admin" class="ecran" aria-labelledby="admin-titre">
       <div class="admin-header">
-        <div>
-          <h1 class="admin-title">Espace administration</h1>
-          <p class="admin-subtitle">Suivi des inscriptions et de l'activité des candidats</p>
-        </div>
-        <button id="btn-retour-dashboard-admin" class="btn-admin-retour">
-          ← Retour Étudiant
-        </button>
+        <div><span class="section-kicker">ESPACE DE GESTION</span><h1 class="admin-title" id="admin-titre">Pilotage DUC Concours</h1><p class="admin-subtitle">Inscriptions, activité et retours des candidats.</p></div>
+        <div class="admin-header-actions"><span class="admin-beta-badge">BÊTA · EXPÉRIMENTAL</span><button id="admin-actualiser" class="btn-admin-retour" type="button"><span aria-hidden="true">↻</span> Actualiser</button><button id="btn-retour-dashboard-admin" class="btn-admin-retour" type="button">← Espace étudiant</button></div>
       </div>
+      <div id="admin-alerte-securite" class="admin-alerte-securite" role="note"><span class="admin-alerte-icon" aria-hidden="true">i</span><div class="admin-alerte-texte"><strong>Fonctionnalités en cours de validation</strong><p>Les actions d’administration sont limitées aux fonctions actives dans votre compte.</p></div></div>
 
-      <!-- 1. ALERTE SÉCURITÉ (Prioritaire) -->
-      <div id="admin-alerte-securite" class="admin-alerte-securite">
-        <div class="admin-alerte-content">
-          <div class="admin-alerte-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-            </svg>
-          </div>
-          <div class="admin-alerte-texte">
-            <strong>Espace en expérimentation</strong>
-            <p>Les indicateurs et outils de sécurité sont en cours d'intégration.</p>
-          </div>
-        </div>
-      </div>
+      <section class="admin-kpi-grid" aria-label="Indicateurs d'activité">
+        <article class="admin-kpi-card"><span class="admin-kpi-icon admin-kpi-icon-blue" aria-hidden="true">01</span><div class="admin-kpi-content"><span class="admin-kpi-label">Comptes autorisés</span><strong class="admin-kpi-value" id="admin-kpi-total">—</strong></div></article>
+        <article class="admin-kpi-card"><span class="admin-kpi-icon admin-kpi-icon-green" aria-hidden="true">02</span><div class="admin-kpi-content"><span class="admin-kpi-label">Candidats actifs aujourd’hui</span><strong class="admin-kpi-value" id="admin-kpi-actifs">—</strong></div></article>
+        <article class="admin-kpi-card"><span class="admin-kpi-icon admin-kpi-icon-purple" aria-hidden="true">03</span><div class="admin-kpi-content"><span class="admin-kpi-label">Score moyen</span><strong class="admin-kpi-value" id="admin-kpi-completion">—</strong></div></article>
+      </section>
 
-      <!-- 2. KPI CARDS -->
-      <div class="admin-kpi-grid">
-        <div class="admin-kpi-card">
-          <div class="admin-kpi-icon admin-kpi-icon-blue">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <div class="admin-kpi-content">
-            <div class="admin-kpi-value" id="admin-kpi-total">—</div>
-            <div class="admin-kpi-label">Total des inscrits</div>
-          </div>
-        </div>
+      <section class="admin-card" aria-labelledby="admin-activite-title">
+        <div class="admin-card-header"><div><span class="progress-overline">TENDANCE RÉCENTE</span><h2 class="admin-card-title" id="admin-activite-title">Sessions au cours des dernières 24 heures</h2></div><span class="admin-card-badge">PAR TRANCHE DE 2 H</span></div>
+        <div class="admin-chart-container"><canvas id="admin-activity-chart" aria-label="Graphique des sessions récentes"></canvas><p id="admin-chart-empty" class="chart-empty cache">Le graphique sera disponible lorsque les données pourront être chargées.</p></div>
+      </section>
 
-        <div class="admin-kpi-card">
-          <div class="admin-kpi-icon admin-kpi-icon-green">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-            </svg>
-          </div>
-          <div class="admin-kpi-content">
-            <div class="admin-kpi-value" id="admin-kpi-actifs">—</div>
-            <div class="admin-kpi-label">Actifs aujourd'hui</div>
-          </div>
-        </div>
+      <section class="admin-card" aria-labelledby="admin-signalements-title">
+        <div class="admin-card-header"><div><span class="progress-overline">QUALITÉ DU CATALOGUE</span><h2 class="admin-card-title" id="admin-signalements-title">Retours sur les questions</h2></div><span id="admin-signalements-badge" class="admin-card-badge">Chargement…</span></div>
+        <p class="admin-card-description">Consultez les signalements et mettez à jour leur état de traitement.</p>
+        <div id="admin-feedback" class="admin-feedback cache" role="status" aria-live="polite"></div>
+        <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Question</th><th>Commentaire</th><th>Reçu le</th><th>État</th></tr></thead><tbody id="admin-signalements-table"><tr><td colspan="4" class="table-empty">Chargement des retours…</td></tr></tbody></table></div>
+      </section>
 
-        <div class="admin-kpi-card">
-          <div class="admin-kpi-icon admin-kpi-icon-purple">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <div class="admin-kpi-content">
-            <div class="admin-kpi-value" id="admin-kpi-completion">—</div>
-            <div class="admin-kpi-label">Taux moyen de réussite</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. GRAPHIQUE D'ACTIVITÉ -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <h3 class="admin-card-title">Activité par heure</h3>
-          <span class="admin-card-badge">Dernières 24h</span>
-        </div>
-        <div class="admin-chart-container">
-          <canvas id="admin-activity-chart"></canvas>
-        </div>
-      </div>
-
-      <!-- 4. TABLEAU DE MODÉRATION -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <h3 class="admin-card-title">Comptes en attente</h3>
-          <span class="admin-card-badge admin-badge-orange">0 en attente</span>
-        </div>
-        <div class="admin-table-container">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Étudiant</th>
-                <th>Email</th>
-                <th>Date d'inscription</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="admin-moderation-table">
-              <!-- Rempli par JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <section class="admin-card" aria-labelledby="admin-inscriptions-title">
+        <div class="admin-card-header"><div><span class="progress-overline">ACCÈS À LA PLATEFORME</span><h2 class="admin-card-title" id="admin-inscriptions-title">Demandes d’autorisation</h2></div><span id="admin-badge-moderation" class="admin-card-badge admin-badge-orange">0 en attente</span></div>
+        <div class="admin-toolbar"><p class="admin-card-description">Autorisez les comptes vérifiés à accéder aux fonctionnalités candidates.</p><label class="admin-search"><span class="sr-only">Filtrer les demandes</span><span aria-hidden="true">⌕</span><input id="admin-filtre-moderation" type="search" placeholder="Nom ou adresse email…" autocomplete="off"></label></div>
+        <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Candidat</th><th>Adresse email</th><th>Inscrit le</th><th>Décision</th></tr></thead><tbody id="admin-moderation-table"><tr><td colspan="4" class="table-empty">Chargement des comptes…</td></tr></tbody></table></div>
+      </section>
     </section>
 
-    <!-- ÉCRAN 2 & 3 : QUIZ -->
-    <section id="ecran-quiz" class="ecran">
-      <div class="quiz-barre-infos">
-        <div class="progression-texte" id="compteur-questions">Question 1 / 60</div>
-        <div id="chrono-container" class="chrono-badge">
-          <span aria-hidden="true">Temps restant</span><span id="chrono-temps">60:00</span>
-        </div>
-      </div>
-
-      <div class="barre-progression-fond">
-        <div id="barre-progression-remplissage" class="barre-progression-remplissage"></div>
-      </div>
-
-      <div class="carte-question">
-        <div class="question-en-tete">
-          <span id="badge-matiere" class="badge-matiere">Matière</span>
-          <span id="badge-type-reponse" class="badge-type">Choix unique</span>
-        </div>
-
-        <h2 id="texte-question" class="texte-question">Chargement...</h2>
-        <div id="liste-options" class="liste-options"></div>
-
-        <div id="bloc-explication-directe" class="bloc-explication cache">
-          <div class="explication-titre">Explication</div>
-          <p id="texte-explication-directe"></p>
-        </div>
-
-        <div class="actions-quiz">
-          <button id="btn-action-quiz" class="btn btn-primaire" disabled>Valider la réponse</button>
-        </div>
-      </div>
+    <section id="ecran-quiz" class="ecran" aria-labelledby="texte-question">
+      <div class="quiz-topline"><span class="section-kicker">DUC CONCOURS · SESSION EN COURS</span><span class="quiz-retour-lien">Concentrez-vous sur une question à la fois</span></div>
+      <div class="quiz-barre-infos"><div><span class="progress-overline">VOTRE AVANCÉE</span><div class="progression-texte" id="compteur-questions">Question 1 / 60</div></div><div id="chrono-container" class="chrono-badge"><span class="chrono-caption">TEMPS RESTANT</span><strong id="chrono-temps">60:00</strong></div></div>
+      <div class="barre-progression-fond" role="progressbar" aria-label="Avancement de la séance" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="barre-progression-remplissage" class="barre-progression-remplissage"></div></div>
+      <article class="carte-question">
+        <div class="question-en-tete"><span id="badge-matiere" class="badge-matiere">MATIÈRE</span><span id="badge-type-reponse" class="badge-type">CHOIX UNIQUE</span></div>
+        <p class="question-instruction" id="question-instruction">Sélectionnez la réponse qui vous semble juste.</p>
+        <h2 id="texte-question" class="texte-question" aria-live="polite">Chargement…</h2>
+        <div id="liste-options" class="liste-options" role="group" aria-label="Propositions de réponse"></div>
+        <div id="bloc-explication-directe" class="bloc-explication cache"><div class="explication-titre"><span aria-hidden="true">✦</span> À retenir</div><p id="texte-explication-directe"></p></div>
+        <div class="actions-quiz"><span class="quiz-shortcut">Vous pouvez choisir une réponse au clavier.</span><button id="btn-action-quiz" class="btn btn-primaire" type="button" disabled>Valider la réponse <span aria-hidden="true">→</span></button></div>
+      </article>
     </section>
 
-    <!-- ÉCRAN 4 : BILAN -->
-    <section id="ecran-bilan" class="ecran">
-      <div class="carte-score-bilan">
-        <h2>Résultat de la session</h2>
-        <div class="score-cercle">
-          <span id="bilan-score-note">0</span>
-          <span id="bilan-score-max">/ 60</span>
-        </div>
-        <p id="bilan-mention" class="bilan-mention">Bien joué !</p>
-        <button id="btn-retour-dashboard" class="btn btn-primaire">Retour au tableau de bord</button>
-      </div>
-
-      <h3 class="titre-section">Correction détaillée :</h3>
+    <section id="ecran-bilan" class="ecran" aria-labelledby="bilan-titre">
+      <div class="bilan-eyebrow"><span class="section-kicker">VOTRE SESSION EST TERMINÉE</span></div>
+      <article class="carte-score-bilan"><div class="bilan-ornement" aria-hidden="true">DUC</div><span class="progress-overline">RÉSULTAT</span><h1 id="bilan-titre">Résultat de la session</h1><div class="score-cercle"><strong id="bilan-score-note">0</strong><span id="bilan-score-max">/ 60</span></div><p id="bilan-mention" class="bilan-mention">Votre progression se construit à chaque séance.</p><button id="btn-retour-dashboard" class="btn btn-primaire" type="button">Retour à mon espace <span aria-hidden="true">→</span></button></article>
+      <div class="correction-header"><div><span class="section-kicker">REVOIR POUR PROGRESSER</span><h2 class="titre-section">Correction détaillée</h2></div><p>Reprenez chaque question et son explication.</p></div>
       <div id="liste-accordions-correction" class="liste-corrections"></div>
     </section>
-
   </main>
 
-  <footer class="app-footer">
-    <span><strong>DUC CONCOURS</strong> · Préparation aux concours</span>
-    <span>La régularité fait la différence.</span>
-  </footer>
+  <footer class="app-footer"><span><strong>DUC CONCOURS</strong><span class="footer-separator">/</span> PRÉPARATION AUX CONCOURS</span><span>Rigueur · Constance · Réussite</span></footer>
 
-  <!-- FENÊTRE POPUP DE CONNEXION / INSCRIPTION -->
-  <div id="modal-auth" class="modal-fond cache">
+  <div id="modal-auth" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="auth-titre">
     <div class="modal-boite">
-      <div class="auth-logo">DUC Concours</div>
+      <div class="auth-logo">DUC Concours <span>· Espace candidat</span></div>
       <h2 id="auth-titre">Connexion Candidat</h2>
-      <p id="auth-sous-titre">Connectez-vous pour synchroniser vos scores avec le Cloud.</p>
-
+      <p id="auth-sous-titre">Connectez-vous pour retrouver votre progression et synchroniser vos résultats.</p>
       <form id="form-auth" novalidate>
-        <div id="groupe-nom-complet" class="form-groupe cache">
-          <label for="auth-nom">Nom et Prénom :</label>
-          <input type="text" id="auth-nom" placeholder="Ex: Sambo Traoré">
-        </div>
-
-        <div class="form-groupe">
-          <label for="auth-email">Adresse Email :</label>
-          <input type="email" id="auth-email" placeholder="votre.email@exemple.com" required>
-        </div>
-
-        <div class="form-groupe">
-          <label for="auth-mdp">Mot de passe :</label>
-          <input type="password" id="auth-mdp" placeholder="••••••••" required minlength="6">
-        </div>
-
-        <div id="auth-erreur" class="auth-erreur cache"></div>
-
-        <button type="submit" id="btn-soumettre-auth" class="btn btn-primaire">
-          Se connecter
-        </button>
-        <button type="button" id="btn-renvoyer-confirmation" class="btn btn-secondaire cache">
-          Renvoyer l'email de confirmation
-        </button>
+        <div id="groupe-nom-complet" class="form-groupe cache"><label for="auth-nom">Nom et prénom</label><input type="text" id="auth-nom" placeholder="Ex. Awa Traoré" autocomplete="name"></div>
+        <div class="form-groupe"><label for="auth-email">Adresse email</label><input type="email" id="auth-email" placeholder="vous@exemple.com" autocomplete="email" required></div>
+        <div class="form-groupe"><label for="auth-mdp">Mot de passe</label><input type="password" id="auth-mdp" placeholder="Au moins 6 caractères" autocomplete="current-password" required minlength="6"></div>
+        <div id="auth-erreur" class="auth-erreur cache" role="status" aria-live="polite"></div>
+        <button type="submit" id="btn-soumettre-auth" class="btn btn-primaire">Se connecter</button>
+        <button type="button" id="btn-renvoyer-confirmation" class="btn btn-secondaire cache">Renvoyer le lien de confirmation</button>
       </form>
-
-      <div class="auth-bascule">
-        <span id="auth-texte-bascule">Pas encore de compte ?</span>
-        <button type="button" id="auth-lien-bascule">Créer un compte</button>
-      </div>
+      <div class="auth-bascule"><span id="auth-texte-bascule">Pas encore de compte ?</span><button type="button" id="auth-lien-bascule">Créer un compte</button></div>
     </div>
   </div>
 
-  <!-- FENÊTRE POPUP DE SIGNALEMENT -->
   <div id="modal-signalement" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="signalement-titre">
     <div class="modal-boite modal-signalement-boite">
-      <div class="auth-logo">DUC Concours · Signalement</div>
-      <h2 id="signalement-titre">Signaler une erreur</h2>
-      <p>Indiquez brièvement ce qui vous semble incorrect. Le commentaire est facultatif.</p>
-      <form id="form-signalement">
-        <div class="form-groupe">
-          <label for="signalement-commentaire">Votre commentaire :</label>
-          <textarea id="signalement-commentaire" rows="4" maxlength="1000"
-            placeholder="Ex. La bonne réponse semble être la proposition B."></textarea>
-        </div>
-        <div class="actions-modal">
-          <button type="button" id="btn-annuler-signalement" class="btn btn-secondaire">Annuler</button>
-          <button type="submit" id="btn-envoyer-signalement" class="btn btn-primaire">Envoyer le signalement</button>
-        </div>
-      </form>
+      <div class="auth-logo">DUC Concours <span>· Retour candidat</span></div><h2 id="signalement-titre">Signaler une erreur</h2><p>Votre retour aidera l’équipe à améliorer le catalogue. Le commentaire est facultatif.</p>
+      <form id="form-signalement"><div class="form-groupe"><label for="signalement-commentaire">Votre commentaire</label><textarea id="signalement-commentaire" rows="4" maxlength="1000" placeholder="Ex. La réponse B semble correcte car…"></textarea></div><div class="actions-modal"><button type="button" id="btn-annuler-signalement" class="btn btn-secondaire">Annuler</button><button type="submit" id="btn-envoyer-signalement" class="btn btn-primaire">Envoyer le retour</button></div></form>
     </div>
   </div>
 
-  <!-- SCRIPTS DANS L'ORDRE STRICT -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.4/dexie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="supabaseClient.js?v=21"></script>
   <script src="db.js?v=21"></script>
-  <script src="app.js?v=22"></script>
-  <script src="adminDashboard.js?v=2"></script>
-
+  <script src="app.js?v=24"></script>
+  <script src="adminDashboard.js?v=24"></script>
   <script>
-    // Bascule indépendante du module principal pour garder l'inscription accessible.
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {
       const inscription = document.getElementById('auth-titre').textContent !== 'Inscription Candidat';
       document.getElementById('auth-erreur').classList.add('cache');
@@ -431,19 +292,14 @@
       document.getElementById('btn-soumettre-auth').textContent = inscription ? 'Créer mon compte' : 'Se connecter';
       document.getElementById('auth-texte-bascule').textContent = inscription ? 'Déjà inscrit ?' : 'Pas encore de compte ?';
       document.getElementById('auth-lien-bascule').textContent = inscription ? 'Se connecter' : 'Créer un compte';
+      document.getElementById('auth-mdp').setAttribute('autocomplete', inscription ? 'new-password' : 'current-password');
     });
-
-    // Bouton manuel d'ouverture de la connexion si besoin
     document.getElementById('btn-ouvrir-connexion').addEventListener('click', () => {
       document.getElementById('modal-auth').classList.remove('cache');
+      document.getElementById('auth-email').focus();
     });
-
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(() => console.log('🚀 PWA PREPA_CONCOURS : Enregistrée !'))
-          .catch((err) => console.log('Échec SW :', err));
-      });
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch((err) => console.warn('Service worker indisponible :', err)));
     }
   </script>
 </body>

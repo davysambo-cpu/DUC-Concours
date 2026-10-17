@@ -381,6 +381,7 @@ elBtnDeconnexion.addEventListener('click', async () => {
 // 4. GESTION DES ÉCRANS & QUIZ ENGINE
 // ========================================================
 function afficherEcran(nomEcran) {
+  document.body.dataset.ecran = nomEcran;
   [elDashboard, elQuiz, elBilan, elAdmin].forEach(e => {
     if (e) {
       e.classList.remove('actif');
@@ -396,9 +397,8 @@ function afficherEcran(nomEcran) {
   } else if (nomEcran === 'bilan') {
     elBilan.classList.add('actif');
   } else if (nomEcran === 'admin') {
-    // Permettre l'accès admin via le bouton switch temporaire
-    // ou si l'utilisateur est vraiment admin
-    if (!utilisateurEstAdmin && !window.modeAdminSwitch) {
+    // L'espace d'administration n'est accessible qu'après vérification du rôle Supabase.
+    if (!utilisateurEstAdmin) {
       console.error("Accès administrateur refusé.");
       afficherEcran('dashboard');
       return;
@@ -424,63 +424,203 @@ async function chargerEspaceAdmin() {
 
 async function mettreAJourDashboard() {
   try {
-    const sessions = await db.exam_sessions.toArray();
+    const [sessions, questionsToutes, statistiques, quizEnCours] = await Promise.all([
+      db.exam_sessions.toArray(),
+      db.questions.toArray(),
+      db.stats_par_question.toArray(),
+      db.quiz_en_cours.get('session_active')
+    ]);
+
     const nbSessions = sessions.length;
-    document.getElementById('stat-quiz-termines').textContent = nbSessions;
+    const elNbSessions = document.getElementById('stat-quiz-termines');
+    const elTauxReussite = document.getElementById('stat-taux-reussite');
+    if (elNbSessions) elNbSessions.textContent = nbSessions.toLocaleString('fr-FR');
 
-    if (nbSessions > 0) {
-      const moyenne = sessions.reduce((acc, s) => acc + (s.score_total / s.total_questions), 0) / nbSessions;
-      document.getElementById('stat-taux-reussite').textContent = `${Math.round(moyenne * 100)}%`;
-    } else {
-      document.getElementById('stat-taux-reussite').textContent = '— %';
+    if (elTauxReussite) {
+      if (nbSessions > 0) {
+        const moyenne = sessions.reduce((acc, session) => {
+          const total = Number(session.total_questions) || 0;
+          return acc + (total > 0 ? (Number(session.score_total) || 0) / total : 0);
+        }, 0) / nbSessions;
+        elTauxReussite.textContent = `${Math.round(moyenne * 100)} %`;
+      } else {
+        elTauxReussite.textContent = '—';
+      }
     }
 
-    const quizEnCours = await db.quiz_en_cours.get('session_active');
-    if (quizEnCours) {
-      elAlerteReprise.classList.remove('cache');
-    } else {
-      elAlerteReprise.classList.add('cache');
-    }
+    if (elAlerteReprise) elAlerteReprise.classList.toggle('cache', !quizEnCours);
 
-    const questionsToutes = await db.questions.toArray();
-    const listeMatieres = [...new Set(questionsToutes.map(q => q.matiere))];
-    
-    // Remplir le select d'entraînement libre
-    const selectMatiere = document.getElementById('select-matiere-libre');
-    if (listeMatieres.length > 0) {
-      selectMatiere.innerHTML = '<option value="toutes">Toutes les matières</option>';
-      listeMatieres.forEach(m => {
-        const opt = document.createElement('option');
-        opt.value = m;
-        opt.textContent = m.charAt(0).toUpperCase() + m.slice(1);
-        selectMatiere.appendChild(opt);
-      });
+    const idsEtudies = new Set(statistiques.filter(stat => Number(stat.vues) > 0).map(stat => stat.id));
+    const totalQuestions = questionsToutes.length;
+    const nbEtudiees = questionsToutes.reduce((count, question) => count + (idsEtudies.has(question.id) ? 1 : 0), 0);
+    const couverture = totalQuestions ? Math.round((nbEtudiees / totalQuestions) * 100) : 0;
+    const elQuestionsEtudiees = document.getElementById('stat-questions-etudiees');
+    const elSerie = document.getElementById('stat-serie-active');
+    const elPourcentage = document.getElementById('progression-pourcentage');
+    const elQuestionsVues = document.getElementById('progression-questions-vues');
+    const elTotalQuestions = document.getElementById('progression-total');
+    const elBarreCatalogue = document.getElementById('progression-barre-catalogue');
+    const elHeroQuestions = document.getElementById('hero-question-count');
+    const elHeroTotal = document.getElementById('hero-question-total');
+
+    if (elQuestionsEtudiees) elQuestionsEtudiees.textContent = nbEtudiees.toLocaleString('fr-FR');
+    if (elSerie) elSerie.textContent = `${calculerSerieActive(sessions)} j`;
+    if (elPourcentage) elPourcentage.textContent = `${couverture} %`;
+    if (elQuestionsVues) elQuestionsVues.textContent = nbEtudiees.toLocaleString('fr-FR');
+    if (elTotalQuestions) elTotalQuestions.textContent = totalQuestions.toLocaleString('fr-FR');
+    if (elBarreCatalogue) {
+      elBarreCatalogue.style.width = `${couverture}%`;
+      elBarreCatalogue.parentElement?.setAttribute('aria-valuenow', String(couverture));
     }
-    
-    // Remplir le select de concours unidisciplinaire
-    const selectMatiereUni = document.getElementById('select-matiere-unidisciplinaire');
-    if (selectMatiereUni && listeMatieres.length > 0) {
-      selectMatiereUni.innerHTML = '<option value="">Choisir une matière...</option>';
-      listeMatieres.forEach(m => {
-        const opt = document.createElement('option');
-        opt.value = m;
-        opt.textContent = m.charAt(0).toUpperCase() + m.slice(1);
-        selectMatiereUni.appendChild(opt);
-      });
-      console.log('Matières unidisciplinaire peuplées :', listeMatieres);
-      // Empêcher le select de déclencher le clic sur le bouton parent
-      selectMatiereUni.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
-      selectMatiereUni.addEventListener('change', (e) => {
-        e.stopPropagation();
-      });
-    } else {
-      console.warn('Select unidisciplinaire non trouvé ou aucune matière disponible');
-    }
+    if (elHeroQuestions) elHeroQuestions.textContent = nbEtudiees.toLocaleString('fr-FR');
+    if (elHeroTotal) elHeroTotal.textContent = totalQuestions.toLocaleString('fr-FR');
+
+    const listeMatieres = [...new Set(questionsToutes.map(question => question.matiere).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b, 'fr'));
+    remplirSelectMatiere(document.getElementById('select-matiere-libre'), listeMatieres, 'toutes', 'Toutes les matières');
+    remplirSelectMatiere(document.getElementById('select-matiere-unidisciplinaire'), listeMatieres, '', 'Choisir une matière…');
+    afficherProgressionMatieres(questionsToutes, statistiques);
+    afficherHistoriqueSessions(sessions);
   } catch (e) {
-    console.error("Erreur Dashboard :", e);
+    console.error("Erreur du tableau de bord :", e);
   }
+}
+
+function remplirSelectMatiere(select, matieres, valeurInitiale, texteInitial) {
+  if (!select) return;
+  const valeurPrecedente = select.value;
+  select.replaceChildren();
+  const optionInitiale = document.createElement('option');
+  optionInitiale.value = valeurInitiale;
+  optionInitiale.textContent = texteInitial;
+  select.appendChild(optionInitiale);
+
+  matieres.forEach(matiere => {
+    const option = document.createElement('option');
+    option.value = matiere;
+    option.textContent = matiere.charAt(0).toLocaleUpperCase('fr-FR') + matiere.slice(1);
+    select.appendChild(option);
+  });
+  if ([...select.options].some(option => option.value === valeurPrecedente)) select.value = valeurPrecedente;
+}
+
+function calculerSerieActive(sessions) {
+  const joursActifs = new Set(sessions
+    .map(session => session.date_passage ? new Date(session.date_passage) : null)
+    .filter(date => date && !Number.isNaN(date.getTime()))
+    .map(date => `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`));
+  if (joursActifs.size === 0) return 0;
+
+  const cleJour = date => `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  const jour = new Date();
+  jour.setHours(0, 0, 0, 0);
+  if (!joursActifs.has(cleJour(jour))) jour.setDate(jour.getDate() - 1);
+
+  let serie = 0;
+  while (joursActifs.has(cleJour(jour))) {
+    serie++;
+    jour.setDate(jour.getDate() - 1);
+  }
+  return serie;
+}
+
+function afficherProgressionMatieres(questions, statistiques) {
+  const conteneur = document.getElementById('progression-matieres');
+  if (!conteneur) return;
+  conteneur.replaceChildren();
+  if (questions.length === 0) {
+    const vide = document.createElement('p');
+    vide.className = 'empty-state';
+    vide.textContent = 'Le catalogue de questions n’est pas encore disponible.';
+    conteneur.appendChild(vide);
+    return;
+  }
+
+  const statsParId = new Map(statistiques.map(stat => [stat.id, stat]));
+  const groupes = new Map();
+  questions.forEach(question => {
+    const matiere = question.matiere || 'Autre';
+    if (!groupes.has(matiere)) groupes.set(matiere, { total: 0, etudiees: 0 });
+    const groupe = groupes.get(matiere);
+    groupe.total++;
+    if ((Number(statsParId.get(question.id)?.vues) || 0) > 0) groupe.etudiees++;
+  });
+
+  [...groupes.entries()]
+    .map(([matiere, data]) => ({ matiere, ...data, ratio: data.total ? data.etudiees / data.total : 0 }))
+    .sort((a, b) => a.ratio - b.ratio || a.matiere.localeCompare(b.matiere, 'fr'))
+    .slice(0, 7)
+    .forEach(groupe => {
+      const ligne = document.createElement('div');
+      ligne.className = 'subject-progress-row';
+      const nom = document.createElement('span');
+      nom.className = 'subject-progress-name';
+      nom.textContent = groupe.matiere.charAt(0).toLocaleUpperCase('fr-FR') + groupe.matiere.slice(1);
+      nom.title = nom.textContent;
+      const piste = document.createElement('span');
+      piste.className = 'subject-progress-track';
+      piste.setAttribute('role', 'progressbar');
+      piste.setAttribute('aria-valuemin', '0');
+      piste.setAttribute('aria-valuemax', String(groupe.total));
+      piste.setAttribute('aria-valuenow', String(groupe.etudiees));
+      piste.setAttribute('aria-label', `Questions étudiées en ${groupe.matiere}`);
+      const remplissage = document.createElement('span');
+      remplissage.className = 'subject-progress-fill';
+      remplissage.style.width = `${Math.round(groupe.ratio * 100)}%`;
+      piste.appendChild(remplissage);
+      const valeur = document.createElement('span');
+      valeur.className = 'subject-progress-value';
+      valeur.textContent = `${groupe.etudiees}/${groupe.total}`;
+      ligne.append(nom, piste, valeur);
+      conteneur.appendChild(ligne);
+    });
+}
+
+function afficherHistoriqueSessions(sessions) {
+  const conteneur = document.getElementById('historique-sessions');
+  if (!conteneur) return;
+  conteneur.replaceChildren();
+  const recentes = [...sessions]
+    .filter(session => session.date_passage && !Number.isNaN(new Date(session.date_passage).getTime()))
+    .sort((a, b) => new Date(b.date_passage) - new Date(a.date_passage))
+    .slice(0, 4);
+
+  if (recentes.length === 0) {
+    const vide = document.createElement('p');
+    vide.className = 'empty-state';
+    vide.textContent = 'Vos séances terminées apparaîtront ici.';
+    conteneur.appendChild(vide);
+    return;
+  }
+
+  recentes.forEach(session => {
+    const ligne = document.createElement('div');
+    ligne.className = 'history-row';
+    const marque = document.createElement('span');
+    marque.className = 'history-row-mark';
+    marque.setAttribute('aria-hidden', 'true');
+    marque.textContent = session.mode === 'standard' ? 'B' : session.mode === 'unidisciplinaire' ? 'M' : 'R';
+
+    const details = document.createElement('div');
+    const titre = document.createElement('div');
+    titre.className = 'history-row-title';
+    titre.textContent = session.mode === 'standard'
+      ? 'Concours blanc'
+      : session.mode === 'unidisciplinaire'
+        ? `Épreuve · ${session.matiere || 'Matière'}`
+        : `Révision libre${session.matiere && session.matiere !== 'toutes' ? ` · ${session.matiere}` : ''}`;
+    const date = new Date(session.date_passage);
+    const meta = document.createElement('div');
+    meta.className = 'history-row-meta';
+    meta.textContent = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+    details.append(titre, meta);
+
+    const score = document.createElement('strong');
+    score.className = 'history-row-score';
+    score.textContent = `${Number(session.score_total) || 0}/${Number(session.total_questions) || 0}`;
+    ligne.append(marque, details, score);
+    conteneur.appendChild(ligne);
+  });
 }
 
 async function selectionnerQuestions({ matiere, quantite, utiliserLeitner }) {
@@ -625,9 +765,14 @@ function afficherQuestionCourante() {
   elCompteur.textContent = `Question ${index + 1} / ${total}`;
   const pct = ((index + 1) / total) * 100;
   elBarreRemplissage.style.width = `${pct}%`;
+  elBarreRemplissage.parentElement?.setAttribute('aria-valuenow', String(Math.round(pct)));
 
   elBadgeMatiere.textContent = (q.matiere || 'Quiz').toUpperCase();
   elBadgeType.textContent = q.type === 'multiple' ? 'Choix multiples' : 'Choix unique';
+  const instruction = document.getElementById('question-instruction');
+  if (instruction) instruction.textContent = q.type === 'multiple'
+    ? 'Sélectionnez toutes les réponses exactes.'
+    : 'Sélectionnez la réponse qui vous semble juste.';
   elTexteQuestion.textContent = q.question;
 
   elListeOptions.innerHTML = '';
@@ -640,9 +785,11 @@ function afficherQuestionCourante() {
   const choixFaits = sessionActuelle.reponsesUtilisateur[index] || [];
 
   q.options.forEach((optTexte, idx) => {
-    const optDiv = document.createElement('div');
+    const optDiv = document.createElement('button');
+    optDiv.type = 'button';
     optDiv.className = 'option-item';
     optDiv.dataset.index = idx;
+    optDiv.setAttribute('aria-pressed', String(choixFaits.includes(idx)));
 
     const lettre = String.fromCharCode(65 + idx);
     const lettreElement = document.createElement('strong');
@@ -651,10 +798,7 @@ function afficherQuestionCourante() {
     texteElement.textContent = optTexte;
     optDiv.append(lettreElement, document.createTextNode(' '), texteElement);
 
-    if (choixFaits.includes(idx)) {
-      optDiv.classList.add('selectionne');
-    }
-
+    if (choixFaits.includes(idx)) optDiv.classList.add('selectionne');
     optDiv.addEventListener('click', () => gererClicOption(idx, q.type));
     elListeOptions.appendChild(optDiv);
   });
@@ -683,9 +827,10 @@ function gererClicOption(indexOption, typeQuestion) {
   sessionActuelle.reponsesUtilisateur[index] = choix;
 
   document.querySelectorAll('.option-item').forEach(el => {
-    const idx = parseInt(el.dataset.index);
-    if (choix.includes(idx)) el.classList.add('selectionne');
-    else el.classList.remove('selectionne');
+    const idx = parseInt(el.dataset.index, 10);
+    const selectionne = choix.includes(idx);
+    el.classList.toggle('selectionne', selectionne);
+    el.setAttribute('aria-pressed', String(selectionne));
   });
 
   elBtnAction.disabled = choix.length === 0;

@@ -1,437 +1,389 @@
-/**
- * ADMIN DASHBOARD - PREPA_CONCOURS
- * Dashboard Premium pour l'administration
- * Connecté à Supabase pour les données réelles
- */
-
+/* DUC Concours — console d'administration (rôle vérifié par Supabase) */
 const supabase = window.supabaseClient;
-
-// Instance du graphique
 let activityChart = null;
+let profilsEnAttente = [];
+const animationsKpi = new Map();
 
-// ========================================================
-// INITIALISATION DU DASHBOARD ADMIN
-// ========================================================
 async function initialiserDashboardAdmin() {
-  console.log("🔐 Initialisation Dashboard Admin...");
-
-  // Charger toutes les données en parallèle
-  await Promise.all([
+  const resultats = await Promise.allSettled([
     remplirTableModeration(),
     initialiserGraphiqueActivite(),
-    mettreAJourKPIs()
+    mettreAJourKPIs(),
+    chargerSignalements()
   ]);
+  resultats.filter(resultat => resultat.status === 'rejected')
+    .forEach(resultat => console.error('Échec de chargement du panneau admin :', resultat.reason));
 }
 
-// ========================================================
-// 1. REMPLIR LE TABLEAU DE MODÉRATION (Données Supabase)
-// ========================================================
 async function remplirTableModeration() {
   const tbody = document.getElementById('admin-moderation-table');
   if (!tbody) return;
+  if (!supabase) {
+    afficherLigneVide(tbody, 4, 'Connexion Supabase indisponible.');
+    mettreAJourBadgeModeration(0);
+    return;
+  }
 
-  tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Chargement...</td></tr>';
-
+  afficherLigneVide(tbody, 4, 'Chargement des demandes…');
   try {
-    // Récupérer les profils non autorisés depuis Supabase
-    const { data: profils, error } = await supabase
+    const { data, error } = await supabase
       .from('profiles')
-      .select('*')
+      .select('id, nom_complet, email, date_inscription')
       .eq('est_autorise', false)
       .order('date_inscription', { ascending: false });
-
     if (error) throw error;
 
-    tbody.innerHTML = '';
-
-    if (!profils || profils.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color: #64748b;">Aucun étudiant en attente</td></tr>';
-      mettreAJourBadgeModeration(0);
-      return;
-    }
-
-    profils.forEach(etudiant => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><strong>${etudiant.nom_complet || 'Non renseigné'}</strong></td>
-        <td>${etudiant.email}</td>
-        <td>${formaterDate(etudiant.date_inscription)}</td>
-        <td>
-          <div class="admin-table-actions">
-            <button class="btn-accepter" onclick="accepterEtudiant('${etudiant.id}')">
-              ✓ Accepter
-            </button>
-            <button class="btn-bloquer" onclick="bloquerEtudiant('${etudiant.id}')">
-              ✗ Bloquer
-            </button>
-          </div>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-
-    mettreAJourBadgeModeration(profils.length);
-
-  } catch (err) {
-    console.error("Erreur chargement modération:", err);
-    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color: #ef4444;">Erreur de chargement</td></tr>';
+    profilsEnAttente = Array.isArray(data) ? data : [];
+    mettreAJourBadgeModeration(profilsEnAttente.length);
+    dessinerTableModeration();
+  } catch (error) {
+    console.error('Erreur de chargement des inscriptions :', error);
+    afficherLigneVide(tbody, 4, 'Les demandes ne peuvent pas être chargées pour le moment.');
+    afficherAdminFeedback('Impossible de charger les demandes d’inscription.', true);
   }
 }
 
-// ========================================================
-// 2. INITIALISER LE GRAPHIQUE D'ACTIVITÉ (Données Supabase)
-// ========================================================
+function dessinerTableModeration() {
+  const tbody = document.getElementById('admin-moderation-table');
+  if (!tbody) return;
+  const filtre = (document.getElementById('admin-filtre-moderation')?.value || '').trim().toLocaleLowerCase('fr-FR');
+  const filtres = profilsEnAttente.filter(profil =>
+    `${profil.nom_complet || ''} ${profil.email || ''}`.toLocaleLowerCase('fr-FR').includes(filtre)
+  );
+  tbody.replaceChildren();
+
+  if (filtres.length === 0) {
+    afficherLigneVide(tbody, 4, profilsEnAttente.length ? 'Aucun résultat pour cette recherche.' : 'Aucune demande en attente.');
+    return;
+  }
+
+  filtres.forEach(profil => {
+    const row = document.createElement('tr');
+    const nameCell = document.createElement('td');
+    const name = document.createElement('strong');
+    name.textContent = profil.nom_complet || 'Nom non renseigné';
+    nameCell.appendChild(name);
+
+    const emailCell = document.createElement('td');
+    emailCell.textContent = profil.email || '—';
+    const dateCell = document.createElement('td');
+    dateCell.textContent = formaterDate(profil.date_inscription);
+    const actionCell = document.createElement('td');
+    const actionGroup = document.createElement('div');
+    actionGroup.className = 'admin-table-actions';
+    const acceptButton = document.createElement('button');
+    acceptButton.type = 'button';
+    acceptButton.className = 'btn-accepter';
+    acceptButton.textContent = 'Autoriser l’accès';
+    acceptButton.addEventListener('click', () => accepterEtudiant(profil.id, acceptButton));
+    actionGroup.appendChild(acceptButton);
+    actionCell.appendChild(actionGroup);
+
+    row.append(nameCell, emailCell, dateCell, actionCell);
+    tbody.appendChild(row);
+  });
+}
+
+async function accepterEtudiant(id, bouton) {
+  if (!supabase || !id) return;
+  if (bouton) bouton.disabled = true;
+  try {
+    const { error } = await supabase.from('profiles').update({ est_autorise: true }).eq('id', id);
+    if (error) throw error;
+    afficherAdminFeedback('Accès autorisé. La liste a été actualisée.', false);
+    await Promise.all([remplirTableModeration(), mettreAJourKPIs()]);
+  } catch (error) {
+    console.error('Erreur lors de l’autorisation du compte :', error);
+    afficherAdminFeedback(`L’autorisation n’a pas abouti : ${error.message || 'erreur inconnue'}`, true);
+    if (bouton) bouton.disabled = false;
+  }
+}
+
+function mettreAJourBadgeModeration(nombre) {
+  const badge = document.getElementById('admin-badge-moderation');
+  if (!badge) return;
+  badge.textContent = nombre === 1 ? '1 en attente' : `${nombre} en attente`;
+}
+
+async function chargerSignalements() {
+  const tbody = document.getElementById('admin-signalements-table');
+  const badge = document.getElementById('admin-signalements-badge');
+  if (!tbody) return;
+  if (!supabase) {
+    afficherLigneVide(tbody, 4, 'Connexion Supabase indisponible.');
+    if (badge) badge.textContent = 'Indisponible';
+    return;
+  }
+
+  afficherLigneVide(tbody, 4, 'Chargement des retours…');
+  try {
+    const { data, error } = await supabase
+      .from('question_reports')
+      .select('id, question_id, commentaire, statut, date_signalement')
+      .order('date_signalement', { ascending: false })
+      .limit(100);
+    if (error) throw error;
+
+    const rapports = Array.isArray(data) ? data : [];
+    const aTraiter = rapports.filter(rapport => rapport.statut === 'nouveau').length;
+    if (badge) badge.textContent = rapports.length
+      ? `${aTraiter} à traiter · ${rapports.length} au total`
+      : 'Aucun retour';
+
+    let questionsParId = new Map();
+    try {
+      const questions = await db.questions.toArray();
+      questionsParId = new Map(questions.map(question => [question.id, question]));
+    } catch (errorLecture) {
+      console.warn('Le catalogue local ne peut pas enrichir les signalements :', errorLecture);
+    }
+
+    tbody.replaceChildren();
+    if (rapports.length === 0) {
+      afficherLigneVide(tbody, 4, 'Aucun signalement reçu.');
+      return;
+    }
+
+    rapports.forEach(rapport => {
+      const row = document.createElement('tr');
+      const questionCell = document.createElement('td');
+      const questionLabel = document.createElement('span');
+      questionLabel.className = 'report-question';
+      const question = questionsParId.get(rapport.question_id);
+      questionLabel.textContent = question?.question || 'Question du catalogue';
+      questionLabel.title = questionLabel.textContent;
+      const questionId = document.createElement('span');
+      questionId.className = 'report-id';
+      questionId.textContent = rapport.question_id || 'ID inconnu';
+      questionCell.append(questionLabel, questionId);
+
+      const commentCell = document.createElement('td');
+      const comment = document.createElement('span');
+      comment.className = 'report-comment';
+      comment.textContent = rapport.commentaire?.trim() || 'Aucun commentaire ajouté.';
+      comment.title = comment.textContent;
+      commentCell.appendChild(comment);
+
+      const dateCell = document.createElement('td');
+      dateCell.textContent = formaterDate(rapport.date_signalement);
+      const statusCell = document.createElement('td');
+      const select = document.createElement('select');
+      select.className = 'report-state-select';
+      select.setAttribute('aria-label', `État du signalement ${rapport.question_id || ''}`);
+      [
+        ['nouveau', 'À traiter'],
+        ['corrige', 'Corrigé'],
+        ['rejete', 'Non retenu']
+      ].forEach(([value, label]) => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = label;
+        select.appendChild(option);
+      });
+      select.value = ['nouveau', 'corrige', 'rejete'].includes(rapport.statut) ? rapport.statut : 'nouveau';
+      select.addEventListener('change', () => mettreAJourStatutSignalement(rapport, select));
+      statusCell.appendChild(select);
+      row.append(questionCell, commentCell, dateCell, statusCell);
+      tbody.appendChild(row);
+    });
+  } catch (error) {
+    console.error('Erreur de chargement des signalements :', error);
+    afficherLigneVide(tbody, 4, 'Les signalements ne peuvent pas être chargés pour le moment.');
+    if (badge) badge.textContent = 'Erreur de chargement';
+  }
+}
+
+async function mettreAJourStatutSignalement(rapport, select) {
+  if (!supabase || !rapport?.id) return;
+  const ancienStatut = rapport.statut;
+  const nouveauStatut = select.value;
+  select.disabled = true;
+  try {
+    const { error } = await supabase.from('question_reports').update({ statut: nouveauStatut }).eq('id', rapport.id);
+    if (error) throw error;
+    rapport.statut = nouveauStatut;
+    afficherAdminFeedback('État du signalement mis à jour.', false);
+    await chargerSignalements();
+  } catch (error) {
+    console.error('Erreur de mise à jour du signalement :', error);
+    select.value = ancienStatut;
+    select.disabled = false;
+    afficherAdminFeedback(`Impossible de modifier ce signalement : ${error.message || 'erreur inconnue'}`, true);
+  }
+}
+
 async function initialiserGraphiqueActivite() {
   const canvas = document.getElementById('admin-activity-chart');
+  const empty = document.getElementById('admin-chart-empty');
   if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-
-  // Détruire l'instance existante si elle existe
   if (activityChart) {
     activityChart.destroy();
+    activityChart = null;
+  }
+  if (!supabase || typeof window.Chart !== 'function') {
+    canvas.classList.add('cache');
+    empty?.classList.remove('cache');
+    if (empty) empty.textContent = !supabase
+      ? 'Les données d’activité sont indisponibles sans connexion Supabase.'
+      : 'Le module de graphique n’a pas pu être chargé.';
+    return;
   }
 
   try {
-    // Récupérer les sessions des dernières 24h depuis Supabase
-    const ilYA24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-
+    const maintenant = Date.now();
+    const ilYa24h = new Date(maintenant - 24 * 60 * 60 * 1000).toISOString();
     const { data: sessions, error } = await supabase
       .from('exam_sessions')
       .select('date_passage')
-      .gte('date_passage', ilYA24h);
-
+      .gte('date_passage', ilYa24h);
     if (error) throw error;
 
-    // Agréger les données par heure
-    const heures = ['00h', '02h', '04h', '06h', '08h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'];
-    const connexionsParHeure = new Array(12).fill(0);
+    canvas.classList.remove('cache');
+    empty?.classList.add('cache');
+    const labels = Array.from({ length: 12 }, (_, index) => `−${24 - index * 2} h`);
+    const nombreParTranche = new Array(12).fill(0);
+    (sessions || []).forEach(session => {
+      const difference = maintenant - new Date(session.date_passage).getTime();
+      const index = Math.floor((24 * 60 * 60 * 1000 - difference) / (2 * 60 * 60 * 1000));
+      if (index >= 0 && index < 12) nombreParTranche[index]++;
+    });
 
-    if (sessions && sessions.length > 0) {
-      sessions.forEach(session => {
-        const heure = new Date(session.date_passage).getHours();
-        const index = Math.floor(heure / 2); // Grouper par créneaux de 2h
-        if (index >= 0 && index < 12) {
-          connexionsParHeure[index]++;
-        }
-      });
-    }
-
-    // Créer le gradient pour la courbe
-    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, 'rgba(29, 90, 79, 0.18)');
-    gradient.addColorStop(1, 'rgba(29, 90, 79, 0.0)');
-
-    activityChart = new Chart(ctx, {
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 240);
+    gradient.addColorStop(0, 'rgba(49, 91, 78, .19)');
+    gradient.addColorStop(1, 'rgba(49, 91, 78, 0)');
+    activityChart = new window.Chart(ctx, {
       type: 'line',
-      data: {
-        labels: heures,
-        datasets: [{
-          label: 'Sessions d’examen',
-          data: connexionsParHeure,
-          borderColor: '#1d5a4f',
-          backgroundColor: gradient,
-          borderWidth: 3,
-          fill: true,
-          tension: 0.4,
-          pointBackgroundColor: '#1d5a4f',
-          pointBorderColor: '#ffffff',
-          pointBorderWidth: 2,
-          pointRadius: 4,
-          pointHoverRadius: 6
-        }]
-      },
+      data: { labels, datasets: [{
+        label: 'Sessions d’examen',
+        data: nombreParTranche,
+        borderColor: '#315b4e',
+        backgroundColor: gradient,
+        borderWidth: 2,
+        fill: true,
+        tension: .34,
+        pointBackgroundColor: '#a85840',
+        pointBorderColor: '#fffefa',
+        pointBorderWidth: 2,
+        pointRadius: 3.5,
+        pointHoverRadius: 5
+      }] },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            backgroundColor: 'rgba(25, 48, 41, 0.94)',
-            titleColor: '#ffffff',
-            bodyColor: '#ffffff',
-            padding: 12,
-            cornerRadius: 8,
-            displayColors: false
-          }
+          legend: { display: false },
+          tooltip: { backgroundColor: '#183b32', titleColor: '#fffefa', bodyColor: '#fffefa', padding: 10, cornerRadius: 5, displayColors: false }
         },
         scales: {
-          x: {
-            grid: {
-              display: false
-            },
-            ticks: {
-              color: '#718078',
-              font: {
-                size: 11,
-                weight: 600
-              }
-            }
-          },
-          y: {
-            grid: {
-              color: '#e2e9e3',
-              drawBorder: false
-            },
-            ticks: {
-              color: '#718078',
-              font: {
-                size: 11,
-                weight: 600
-              }
-            },
-            beginAtZero: true
-          }
+          x: { grid: { display: false }, ticks: { color: '#858a80', font: { size: 10, weight: 600 } } },
+          y: { beginAtZero: true, ticks: { precision: 0, color: '#858a80', font: { size: 10, weight: 600 } }, grid: { color: '#ecece4', drawBorder: false } }
         },
-        interaction: {
-          intersect: false,
-          mode: 'index'
-        }
+        interaction: { intersect: false, mode: 'index' }
       }
     });
-
-  } catch (err) {
-    console.error("Erreur chargement graphique:", err);
-    // Afficher un graphique neutre si les données ne sont pas accessibles
-    afficherGraphiqueFallback(ctx);
+  } catch (error) {
+    console.error('Erreur de chargement du graphique :', error);
+    canvas.classList.add('cache');
+    empty?.classList.remove('cache');
+    if (empty) empty.textContent = 'Les données d’activité ne sont pas disponibles pour le moment.';
   }
 }
 
-function afficherGraphiqueFallback(ctx) {
-  const heures = ['00h', '02h', '04h', '06h', '08h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'];
-  const connexions = new Array(12).fill(0);
-
-  const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-  gradient.addColorStop(0, 'rgba(29, 90, 79, 0.18)');
-  gradient.addColorStop(1, 'rgba(29, 90, 79, 0.0)');
-
-  activityChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: heures,
-      datasets: [{
-        label: 'Sessions d’examen',
-        data: connexions,
-        borderColor: '#1d5a4f',
-        backgroundColor: gradient,
-        borderWidth: 3,
-        fill: true,
-        tension: 0.4,
-        pointBackgroundColor: '#1d5a4f',
-        pointBorderColor: '#ffffff',
-        pointBorderWidth: 2,
-        pointRadius: 4,
-        pointHoverRadius: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { display: false }, ticks: { color: '#718078' } },
-        y: { grid: { color: '#e2e9e3' }, beginAtZero: true }
-      }
-    }
-  });
-}
-
-// ========================================================
-// 3. METTRE À JOUR LES KPIS (Données Supabase)
-// ========================================================
 async function mettreAJourKPIs() {
+  if (!supabase) {
+    ['admin-kpi-total', 'admin-kpi-actifs', 'admin-kpi-completion'].forEach(id => {
+      const element = document.getElementById(id);
+      if (element) element.textContent = '—';
+    });
+    return;
+  }
+
   try {
-    // Total des étudiants autorisés
-    const { data: profils, error: errorProfils } = await supabase
-      .from('profiles')
-      .select('id')
-      .eq('est_autorise', true);
-
-    if (!errorProfils && profils) {
-      animerNombre('admin-kpi-total', profils.length);
-    }
-
-    // Étudiants actifs aujourd'hui (au moins une session aujourd'hui)
     const debutJournee = new Date();
     debutJournee.setHours(0, 0, 0, 0);
-    const debutJourneeISO = debutJournee.toISOString();
+    const [resultatProfils, resultatSessionsJour, resultatToutesSessions] = await Promise.all([
+      supabase.from('profiles').select('id').eq('est_autorise', true),
+      supabase.from('exam_sessions').select('user_id').gte('date_passage', debutJournee.toISOString()),
+      supabase.from('exam_sessions').select('score_total, total_questions')
+    ]);
+    if (resultatProfils.error) throw resultatProfils.error;
+    if (resultatSessionsJour.error) throw resultatSessionsJour.error;
+    if (resultatToutesSessions.error) throw resultatToutesSessions.error;
 
-    const { data: sessionsAujourdhui, error: errorSessions } = await supabase
-      .from('exam_sessions')
-      .select('user_id')
-      .gte('date_passage', debutJourneeISO);
-
-    if (!errorSessions && sessionsAujourdhui) {
-      const utilisateursUniques = new Set(sessionsAujourdhui.map(s => s.user_id));
-      animerNombre('admin-kpi-actifs', utilisateursUniques.size);
-    }
-
-    // Taux de complétion moyen (score moyen / total questions)
-    const { data: toutesSessions, error: errorToutes } = await supabase
-      .from('exam_sessions')
-      .select('score_total, total_questions');
-
-    if (!errorToutes && toutesSessions && toutesSessions.length > 0) {
-      const tauxMoyen = toutesSessions.reduce((acc, s) => {
-        return acc + (s.score_total / s.total_questions);
-      }, 0) / toutesSessions.length;
-
-      const pourcentage = Math.round(tauxMoyen * 100);
-      const element = document.getElementById('admin-kpi-completion');
-      if (element) {
-        animerNombre('admin-kpi-completion', pourcentage);
-        element.textContent = pourcentage + '%';
-      }
-    }
-
-  } catch (err) {
-    console.error("Erreur chargement KPIs:", err);
-    // Valeurs par défaut en cas d'erreur
-    animerNombre('admin-kpi-total', 0);
-    animerNombre('admin-kpi-actifs', 0);
+    animerNombre('admin-kpi-total', resultatProfils.data?.length || 0);
+    const candidatsActifs = new Set((resultatSessionsJour.data || []).map(session => session.user_id)).size;
+    animerNombre('admin-kpi-actifs', candidatsActifs);
+    const sessions = resultatToutesSessions.data || [];
+    const moyenne = sessions.length
+      ? sessions.reduce((total, session) => total + (Number(session.total_questions) > 0 ? Number(session.score_total) / Number(session.total_questions) : 0), 0) / sessions.length
+      : null;
+    animerNombre('admin-kpi-completion', moyenne === null ? '—' : Math.round(moyenne * 100), '%');
+  } catch (error) {
+    console.error('Erreur de chargement des indicateurs :', error);
+    afficherAdminFeedback('Certains indicateurs n’ont pas pu être actualisés.', true);
   }
 }
 
-// ========================================================
-// ACTIONS DE MODÉRATION (Supabase)
-// ========================================================
-async function accepterEtudiant(id) {
-  try {
-    const { error } = await supabase
-      .from('profiles')
-      .update({ est_autorise: true })
-      .eq('id', id);
-
-    if (error) throw error;
-
-    alert('✅ Étudiant accepté avec succès !');
-    remplirTableModeration();
-    mettreAJourKPIs(); // Mettre à jour les KPIs
-  } catch (err) {
-    console.error("Erreur acceptation:", err);
-    alert('❌ Erreur lors de l\'acceptation: ' + err.message);
-  }
+function afficherLigneVide(tbody, colonnes, message) {
+  tbody.replaceChildren();
+  const row = document.createElement('tr');
+  const cell = document.createElement('td');
+  cell.colSpan = colonnes;
+  cell.className = 'table-empty';
+  cell.textContent = message;
+  row.appendChild(cell);
+  tbody.appendChild(row);
 }
 
-async function bloquerEtudiant(id) {
-  if (!confirm('⚠️ Voulez-vous vraiment bloquer cet étudiant ?')) return;
-
-  try {
-    // Option 1: Supprimer le profil (plus drastique)
-    // const { error } = await supabase.from('profiles').delete().eq('id', id);
-
-    // Option 2: Garder le profil mais marquer comme non autorisé (plus doux)
-    const { error } = await supabase
-      .from('profiles')
-      .update({ est_autorise: false })
-      .eq('id', id);
-
-    if (error) throw error;
-
-    alert('🚫 Étudiant bloqué avec succès !');
-    remplirTableModeration();
-    mettreAJourKPIs(); // Mettre à jour les KPIs
-  } catch (err) {
-    console.error("Erreur blocage:", err);
-    alert('❌ Erreur lors du blocage: ' + err.message);
-  }
+function afficherAdminFeedback(message, erreur = false) {
+  const element = document.getElementById('admin-feedback');
+  if (!element) return;
+  element.textContent = message;
+  element.classList.toggle('error', erreur);
+  element.classList.remove('cache');
+  clearTimeout(element._timer);
+  element._timer = setTimeout(() => element.classList.add('cache'), 5500);
 }
 
-function mettreAJourBadgeModeration(count) {
-  const badge = document.querySelector('.admin-badge-orange');
-  if (badge) {
-    badge.textContent = `${count} en attente`;
-    if (count === 0) {
-      badge.style.display = 'none';
-    } else {
-      badge.style.display = 'inline-block';
-    }
-  }
-}
-
-// ========================================================
-// ACTION SÉCURITÉ
-// ========================================================
-function forcerDeconnexion() {
-  if (confirm("⚠️ Voulez-vous vraiment forcer la déconnexion de cet utilisateur ?")) {
-    const alerte = document.getElementById('admin-alerte-securite');
-    if (alerte) {
-      alerte.style.animation = 'apparition 0.3s ease reverse';
-      setTimeout(() => {
-        alerte.style.display = 'none';
-      }, 300);
-    }
-    alert("✅ La déconnexion forcée a été effectuée avec succès !");
-  }
-}
-
-// ========================================================
-// UTILITAIRES
-// ========================================================
 function formaterDate(dateStr) {
+  if (!dateStr) return '—';
   const date = new Date(dateStr);
-  return date.toLocaleDateString('fr-FR', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric'
-  });
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
-function animerNombre(elementId, valeurCible) {
+function animerNombre(elementId, valeurCible, suffixe = '') {
   const element = document.getElementById(elementId);
   if (!element) return;
-
-  const valeurActuelle = parseInt(element.textContent) || 0;
-  const duree = 1000; // 1 seconde
-  const etapes = 30;
-  const increment = (valeurCible - valeurActuelle) / etapes;
-  let etape = 0;
-
-  const interval = setInterval(() => {
-    etape++;
-    const nouvelleValeur = Math.round(valeurActuelle + (increment * etape));
-    element.textContent = nouvelleValeur;
-
-    if (etape >= etapes) {
-      clearInterval(interval);
-      element.textContent = valeurCible;
-    }
-  }, duree / etapes);
-}
-
-// ========================================================
-// SWITCH MODE (Temporaire pour tests)
-// ========================================================
-let modeAdmin = false;
-
-function initialiserSwitchMode() {
-  const btnSwitch = document.getElementById('btn-switch-mode');
-  const switchText = document.getElementById('switch-mode-text');
-
-  if (btnSwitch) {
-    btnSwitch.addEventListener('click', async () => {
-      modeAdmin = !modeAdmin;
-      window.modeAdminSwitch = modeAdmin; // Marquer globalement pour app.js
-
-      if (modeAdmin) {
-        switchText.textContent = 'Mode étudiant';
-        btnSwitch.classList.add('mode-etudiant');
-        afficherEcran('admin');
-        await initialiserDashboardAdmin(); // Attendre le chargement des données
-      } else {
-        switchText.textContent = 'Mode admin · test';
-        btnSwitch.classList.remove('mode-etudiant');
-        afficherEcran('dashboard');
-      }
-    });
+  const animationExistante = animationsKpi.get(elementId);
+  if (animationExistante) cancelAnimationFrame(animationExistante);
+  if (typeof valeurCible !== 'number' || !Number.isFinite(valeurCible)) {
+    element.textContent = String(valeurCible);
+    animationsKpi.delete(elementId);
+    return;
   }
+  const depart = parseInt(element.textContent, 10) || 0;
+  const duree = 520;
+  const debut = performance.now();
+  const animer = maintenant => {
+    const progression = Math.min((maintenant - debut) / duree, 1);
+    const valeur = Math.round(depart + (valeurCible - depart) * progression);
+    element.textContent = `${valeur.toLocaleString('fr-FR')}${suffixe}`;
+    if (progression < 1) animationsKpi.set(elementId, requestAnimationFrame(animer));
+    else animationsKpi.delete(elementId);
+  };
+  animationsKpi.set(elementId, requestAnimationFrame(animer));
 }
 
-// ========================================================
-// CHARGER AU DÉMARRAGE
-// ========================================================
 document.addEventListener('DOMContentLoaded', () => {
-  initialiserSwitchMode();
+  const filtre = document.getElementById('admin-filtre-moderation');
+  filtre?.addEventListener('input', dessinerTableModeration);
+  const actualiser = document.getElementById('admin-actualiser');
+  actualiser?.addEventListener('click', async () => {
+    actualiser.disabled = true;
+    actualiser.setAttribute('aria-busy', 'true');
+    try { await initialiserDashboardAdmin(); }
+    finally { actualiser.disabled = false; actualiser.removeAttribute('aria-busy'); }
+  });
 });
