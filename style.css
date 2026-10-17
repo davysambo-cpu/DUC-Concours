@@ -249,7 +249,7 @@ button.carte-action:hover .mode-arrow { transform: translate(2px, -2px); }
 .carte-support-whatsapp { position: relative; display: flex; min-height: 100%; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 19px; overflow: hidden; padding: 23px; border: 1px solid #d7ded3; border-radius: 5px 15px 5px 15px; background: #e9eee5; }
 .carte-support-whatsapp::after { position: absolute; right: -58px; bottom: -72px; width: 180px; height: 180px; border: 1px solid rgba(24, 59, 50, .1); border-radius: 50%; box-shadow: 0 0 0 16px rgba(24,59,50,.025), 0 0 0 33px rgba(24,59,50,.025); content: ""; pointer-events: none; }
 .support-overline { color: var(--clay); font-size: .58rem; font-weight: 800; letter-spacing: .13em; }
-.support-mark { color: var(--forest); font-family: Georgia, "Times New Roman", serif; font-size: 2.7rem; font-style: italic; letter-spacing: -.12em; line-height: .95; }
+.support-mark { color: var(--forest); font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; font-style: normal; font-weight: 700; letter-spacing: .19em; line-height: 1; }
 .whatsapp-texte { position: relative; z-index: 1; }
 .whatsapp-texte h3 { max-width: 270px; color: var(--forest-deep); font-family: Georgia, "Times New Roman", serif; font-size: 1.24rem; font-weight: 500; letter-spacing: -.035em; line-height: 1.25; }
 .whatsapp-texte p { max-width: 300px; margin-top: 8px; color: #667368; font-size: .72rem; line-height: 1.7; }
