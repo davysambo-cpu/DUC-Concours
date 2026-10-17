@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=25">
+  <link rel="stylesheet" href="style.css?v=26">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -260,11 +260,27 @@
         <div id="groupe-nom-complet" class="form-groupe cache"><label for="auth-nom">Nom et prénom</label><input type="text" id="auth-nom" placeholder="Ex. Awa Traoré" autocomplete="name"></div>
         <div class="form-groupe"><label for="auth-email">Adresse email</label><input type="email" id="auth-email" placeholder="vous@exemple.com" autocomplete="email" required></div>
         <div class="form-groupe"><label for="auth-mdp">Mot de passe</label><input type="password" id="auth-mdp" placeholder="Au moins 6 caractères" autocomplete="current-password" required minlength="6"></div>
+        <div class="auth-password-actions"><button id="btn-mot-de-passe-oublie" class="auth-forgot-link" type="button">Mot de passe oublié&nbsp;?</button></div>
         <div id="auth-erreur" class="auth-erreur cache" role="status" aria-live="polite"></div>
         <button type="submit" id="btn-soumettre-auth" class="btn btn-primaire">Se connecter</button>
         <button type="button" id="btn-renvoyer-confirmation" class="btn btn-secondaire cache">Renvoyer le lien de confirmation</button>
       </form>
       <div class="auth-bascule"><span id="auth-texte-bascule">Pas encore de compte ?</span><button type="button" id="auth-lien-bascule">Créer un compte</button></div>
+    </div>
+  </div>
+
+  <div id="modal-reset-password" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="reset-password-titre">
+    <div class="modal-boite">
+      <div class="auth-logo">DUC Concours <span>· Sécurité du compte</span></div>
+      <h2 id="reset-password-titre">Choisir un nouveau mot de passe</h2>
+      <p>Choisissez un mot de passe d’au moins 6 caractères pour sécuriser votre compte.</p>
+      <form id="form-reset-password" novalidate>
+        <div class="form-groupe"><label for="reset-password-nouveau">Nouveau mot de passe</label><input type="password" id="reset-password-nouveau" autocomplete="new-password" minlength="6" required></div>
+        <div class="form-groupe"><label for="reset-password-confirmation">Confirmer le mot de passe</label><input type="password" id="reset-password-confirmation" autocomplete="new-password" minlength="6" required></div>
+        <div id="reset-password-message" class="auth-erreur cache" role="status" aria-live="polite"></div>
+        <button type="submit" id="btn-reset-password-submit" class="btn btn-primaire">Mettre à jour le mot de passe</button>
+      </form>
+      <button type="button" id="btn-reset-password-continuer" class="btn btn-primaire cache">Continuer</button>
     </div>
   </div>
 
@@ -280,7 +296,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="supabaseClient.js?v=21"></script>
   <script src="db.js?v=21"></script>
-  <script src="app.js?v=24"></script>
+  <script src="app.js?v=25"></script>
   <script src="adminDashboard.js?v=24"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {
@@ -289,6 +305,7 @@
       document.getElementById('btn-renvoyer-confirmation').classList.add('cache');
       document.getElementById('auth-titre').textContent = inscription ? 'Inscription Candidat' : 'Connexion Candidat';
       document.getElementById('groupe-nom-complet').classList.toggle('cache', !inscription);
+      document.getElementById('btn-mot-de-passe-oublie').classList.toggle('cache', inscription);
       document.getElementById('btn-soumettre-auth').textContent = inscription ? 'Créer mon compte' : 'Se connecter';
       document.getElementById('auth-texte-bascule').textContent = inscription ? 'Déjà inscrit ?' : 'Pas encore de compte ?';
       document.getElementById('auth-lien-bascule').textContent = inscription ? 'Se connecter' : 'Créer un compte';

@@ -74,8 +74,17 @@ const elBtnSoumettreAuth = document.getElementById('btn-soumettre-auth');
 const elAuthLienBascule = document.getElementById('auth-lien-bascule');
 const elAuthTexteBascule = document.getElementById('auth-texte-bascule');
 const elBtnRenvoyerConfirmation = document.getElementById('btn-renvoyer-confirmation');
+const elBtnMotDePasseOublie = document.getElementById('btn-mot-de-passe-oublie');
+const elModalResetPassword = document.getElementById('modal-reset-password');
+const elFormResetPassword = document.getElementById('form-reset-password');
+const elResetPasswordNouveau = document.getElementById('reset-password-nouveau');
+const elResetPasswordConfirmation = document.getElementById('reset-password-confirmation');
+const elResetPasswordMessage = document.getElementById('reset-password-message');
+const elBtnResetPasswordSubmit = document.getElementById('btn-reset-password-submit');
+const elBtnResetPasswordContinuer = document.getElementById('btn-reset-password-continuer');
 
 let modeInscription = false;
+let retourRecuperationDetecte = false;
 
 function afficherErreurAuth(message, succes = false, afficherRenvoi = false) {
   elAuthErreur.textContent = message;
@@ -105,6 +114,86 @@ async function renvoyerEmailConfirmation() {
     afficherErreurAuth(err.message || "Impossible de renvoyer l'email de confirmation.");
   } finally {
     elBtnRenvoyerConfirmation.disabled = false;
+  }
+}
+
+function afficherMessageReinitialisation(message, succes = false) {
+  elResetPasswordMessage.textContent = message;
+  elResetPasswordMessage.classList.toggle('auth-succes', succes);
+  elResetPasswordMessage.classList.remove('cache');
+}
+
+function ouvrirModalReinitialisation(lienInvalide = false) {
+  elModalAuth.classList.add('cache');
+  elModalResetPassword.classList.remove('cache');
+  elResetPasswordMessage.classList.add('cache');
+  elResetPasswordMessage.classList.remove('auth-succes');
+  elFormResetPassword.reset();
+  elFormResetPassword.classList.remove('cache');
+  elBtnResetPasswordSubmit.classList.remove('cache');
+  elBtnResetPasswordSubmit.disabled = false;
+  elBtnResetPasswordContinuer.classList.add('cache');
+
+  if (lienInvalide) {
+    elFormResetPassword.classList.add('cache');
+    afficherMessageReinitialisation('Ce lien est invalide ou expiré. Demandez-en un nouveau depuis la connexion.', false);
+    elBtnResetPasswordContinuer.textContent = 'Retour à la connexion';
+    elBtnResetPasswordContinuer.dataset.action = 'login';
+    elBtnResetPasswordContinuer.classList.remove('cache');
+    return;
+  }
+
+  elBtnResetPasswordContinuer.textContent = 'Continuer';
+  elBtnResetPasswordContinuer.dataset.action = 'continue';
+  window.setTimeout(() => elResetPasswordNouveau.focus(), 0);
+}
+
+async function demanderReinitialisationMotDePasse() {
+  const email = elAuthEmail.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    afficherErreurAuth('Saisissez votre adresse email pour recevoir un lien de réinitialisation.');
+    elAuthEmail.focus();
+    return;
+  }
+  if (!supabase) {
+    afficherErreurAuth('Le service de récupération est momentanément indisponible.');
+    return;
+  }
+
+  elBtnMotDePasseOublie.disabled = true;
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/?auth=recovery`
+    });
+    if (error) throw error;
+    afficherErreurAuth('Si cette adresse correspond à un compte, un lien de réinitialisation vient d’être envoyé. Vérifiez aussi vos courriers indésirables.', true);
+  } catch (err) {
+    console.error('Erreur lors de la demande de réinitialisation :', err);
+    afficherErreurAuth(err.message || 'Impossible d’envoyer le lien pour le moment. Réessayez plus tard.');
+  } finally {
+    elBtnMotDePasseOublie.disabled = false;
+  }
+}
+
+function estRetourRecuperation() {
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+  const query = new URLSearchParams(window.location.search);
+  return hash.get('type') === 'recovery'
+    || query.get('type') === 'recovery'
+    || query.get('auth') === 'recovery';
+}
+
+async function verifierLienRecuperationAuRetour() {
+  if (!supabase || !estRetourRecuperation()) return;
+  try {
+    const { data, error } = await supabase.auth.getSession();
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+    const query = new URLSearchParams(window.location.search);
+    const callbackInvalide = ['error', 'error_code', 'error_description'].some(cle => hash.has(cle) || query.has(cle));
+    ouvrirModalReinitialisation(Boolean(callbackInvalide || error || !data.session));
+  } catch (error) {
+    console.error('Impossible de vérifier le lien de récupération :', error);
+    ouvrirModalReinitialisation(true);
   }
 }
 
@@ -362,6 +451,74 @@ elFormAuth.addEventListener('submit', async (e) => {
 });
 
 elBtnRenvoyerConfirmation.addEventListener('click', renvoyerEmailConfirmation);
+elBtnMotDePasseOublie.addEventListener('click', demanderReinitialisationMotDePasse);
+
+elFormResetPassword.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  elResetPasswordMessage.classList.add('cache');
+  elResetPasswordMessage.classList.remove('auth-succes');
+
+  const nouveau = elResetPasswordNouveau.value;
+  const confirmation = elResetPasswordConfirmation.value;
+  if (nouveau.length < 6) {
+    afficherMessageReinitialisation('Le mot de passe doit contenir au moins 6 caractères.');
+    elResetPasswordNouveau.focus();
+    return;
+  }
+  if (nouveau !== confirmation) {
+    afficherMessageReinitialisation('Les deux mots de passe ne correspondent pas.');
+    elResetPasswordConfirmation.focus();
+    return;
+  }
+  if (!supabase) {
+    afficherMessageReinitialisation('Le service de mise à jour est momentanément indisponible.');
+    return;
+  }
+
+  elBtnResetPasswordSubmit.disabled = true;
+  try {
+    const { error } = await supabase.auth.updateUser({ password: nouveau });
+    if (error) throw error;
+
+    elResetPasswordNouveau.value = '';
+    elResetPasswordConfirmation.value = '';
+    window.history.replaceState({}, document.title, window.location.pathname);
+    elFormResetPassword.classList.add('cache');
+    elBtnResetPasswordSubmit.classList.add('cache');
+    elBtnResetPasswordContinuer.dataset.action = 'continue';
+    elBtnResetPasswordContinuer.textContent = 'Continuer';
+    elBtnResetPasswordContinuer.classList.remove('cache');
+    afficherMessageReinitialisation('Votre mot de passe a été mis à jour. Vous pouvez continuer.', true);
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du mot de passe :', error);
+    afficherMessageReinitialisation(error.message || 'Impossible de mettre à jour le mot de passe. Vérifiez le lien et réessayez.');
+  } finally {
+    elBtnResetPasswordSubmit.disabled = false;
+  }
+});
+
+elBtnResetPasswordContinuer.addEventListener('click', async () => {
+  const action = elBtnResetPasswordContinuer.dataset.action;
+  elModalResetPassword.classList.add('cache');
+  if (action === 'login') {
+    window.history.replaceState({}, document.title, window.location.pathname);
+    elModalAuth.classList.remove('cache');
+    elAuthEmail.focus();
+    return;
+  }
+  await verifierSessionUtilisateur();
+});
+
+if (supabase) {
+  supabase.auth.onAuthStateChange((event) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      retourRecuperationDetecte = true;
+      window.setTimeout(() => {
+        if (elModalResetPassword.classList.contains('cache')) ouvrirModalReinitialisation(false);
+      }, 0);
+    }
+  });
+}
 
 // Déconnexion
 elBtnDeconnexion.addEventListener('click', async () => {
@@ -1139,6 +1296,9 @@ window.addEventListener('DOMContentLoaded', async () => {
   mettreAJourStatutReseau();
   await initialiserCatalogueQuestions();
   await mettreAJourDashboard();
-  await verifierSessionUtilisateur();
+  await verifierLienRecuperationAuRetour();
+  if (!retourRecuperationDetecte && elModalResetPassword.classList.contains('cache')) {
+    await verifierSessionUtilisateur();
+  }
 });
 }
