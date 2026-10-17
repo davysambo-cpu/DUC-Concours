@@ -414,6 +414,10 @@ button.carte-action:hover .mode-arrow { transform: translate(2px, -2px); }
 .modal-boite textarea { min-height: 106px; resize: vertical; }
 .modal-boite #btn-soumettre-auth { width: 100%; margin-top: 5px; }
 .modal-boite #btn-renvoyer-confirmation { width: 100%; margin-top: 9px; }
+.modal-boite #btn-reset-password-submit, .modal-boite #btn-reset-password-continuer { width: 100%; margin-top: 5px; }
+.auth-password-actions { display: flex; justify-content: flex-end; margin: -7px 0 13px; }
+.auth-forgot-link { padding: 2px 0; border: 0; background: transparent; color: var(--forest-mid); font-size: .66rem; font-weight: 720; cursor: pointer; }
+.auth-forgot-link:hover { color: var(--forest-deep); text-decoration: underline; text-underline-offset: 3px; }
 .modal-signalement-boite { width: min(100%, 475px); }
 .actions-modal { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
 .actions-modal .btn { min-width: 118px; }
