@@ -3,13 +3,14 @@
  * Stratégie Network-First : Priorité aux fichiers frais, secours hors-ligne immédiat
  */
 
-const CACHE_NAME = 'duc-concours-v23';
+const CACHE_NAME = 'duc-concours-v24';
 
 const FICHIERS_ESSENTIELS = [
   './',
   './index.html',
   './style.css',
   './app.js',
+  './adminDashboard.js',
   './db.js',
   './supabaseClient.js',
   './questions_prod.json',
