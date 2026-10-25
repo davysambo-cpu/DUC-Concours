@@ -569,6 +569,7 @@ function afficherEcran(nomEcran) {
     }
   }
   window.scrollTo(0, 0);
+  if (nomEcran === 'dashboard') actualiserNavigationDashboard('#top');
 }
 
 // NOTE: L'ancienne fonction chargerEspaceAdmin() a été remplacée par adminDashboard.js
@@ -577,6 +578,53 @@ async function chargerEspaceAdmin() {
   // Le nouveau dashboard admin est géré par adminDashboard.js
   // Cette fonction est désactivée temporairement
   console.log("⚠️ chargerEspaceAdmin() désactivé - Utilisez adminDashboard.js");
+}
+
+function actualiserNavigationDashboard(hash = window.location.hash || '#top') {
+  const liens = document.querySelectorAll('.dashboard-rail-link');
+  const lienActif = [...liens].find(lien => lien.hash === hash) || [...liens].find(lien => lien.hash === '#top');
+  liens.forEach(lien => {
+    const actif = lien === lienActif;
+    lien.classList.toggle('is-active', actif);
+    if (actif) lien.setAttribute('aria-current', 'location');
+    else lien.removeAttribute('aria-current');
+  });
+}
+
+function initialiserNavigationDashboard() {
+  const date = document.getElementById('dashboard-date');
+  if (date) {
+    const maintenant = new Date();
+    date.dateTime = maintenant.toISOString().slice(0, 10);
+    date.textContent = maintenant.toLocaleDateString('fr-FR', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short'
+    });
+  }
+
+  const liens = [...document.querySelectorAll('.dashboard-rail-link')];
+  liens.forEach(lien => lien.addEventListener('click', () => actualiserNavigationDashboard(lien.hash)));
+  window.addEventListener('hashchange', () => actualiserNavigationDashboard());
+
+  if ('IntersectionObserver' in window) {
+    const cibles = liens.map(lien => lien.hash === '#top'
+      ? document.getElementById('titre-accueil')
+      : document.getElementById(lien.hash.slice(1))
+    ).filter(Boolean);
+    const observateur = new IntersectionObserver(entrees => {
+      const visible = entrees
+        .filter(entree => entree.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (visible) {
+        const hash = visible.target.id === 'titre-accueil' ? '#top' : `#${visible.target.id}`;
+        actualiserNavigationDashboard(hash);
+      }
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+    cibles.forEach(cible => observateur.observe(cible));
+  }
+
+  actualiserNavigationDashboard();
 }
 
 async function mettreAJourDashboard() {
@@ -1293,6 +1341,7 @@ document.getElementById('btn-retour-dashboard-admin').addEventListener('click', 
 
 // INITIALISATION AU DÉMARRAGE
 window.addEventListener('DOMContentLoaded', async () => {
+  initialiserNavigationDashboard();
   mettreAJourStatutReseau();
   await initialiserCatalogueQuestions();
   await mettreAJourDashboard();

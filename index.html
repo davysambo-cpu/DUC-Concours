@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=26">
+  <link rel="stylesheet" href="style.css?v=27">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -55,144 +55,185 @@
 
   <main id="top" class="app-main">
     <section id="ecran-dashboard" class="ecran actif" aria-labelledby="titre-accueil">
-      <div class="banniere-bienvenue">
-        <div class="hero-copy">
-          <div class="hero-meta">
-            <span class="hero-eyebrow">CAMPUS DE PRÉPARATION · 2027</span>
-            <span class="hero-edition">Édition candidate</span>
-          </div>
-          <h1 id="titre-accueil">Votre parcours commence ici.</h1>
-          <p>Une préparation claire, régulière et à votre rythme. Chaque séance vous rapproche du concours.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primaire hero-cta" href="#section-formats">
-              Choisir une séance
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5"/></svg>
+      <div class="dashboard-shell">
+        <aside class="dashboard-rail" aria-label="Navigation de l’espace candidat">
+          <a class="dashboard-rail-brand" href="#top" aria-label="DUC Concours — accueil">
+            <span class="dashboard-brand-mark" aria-hidden="true">D</span>
+            <span class="dashboard-brand-caption">DUC<br>CONCOURS</span>
+          </a>
+          <nav class="dashboard-rail-nav" aria-label="Sections du tableau de bord">
+            <a class="dashboard-rail-link is-active" href="#top" aria-label="Accueil" aria-current="location" title="Accueil">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10a1 1 0 0 1-1 1h-5.2v-6.4h-4.6V21H4.5a1 1 0 0 1-1-1V10Z"/></svg><span>Accueil</span>
             </a>
-            <a class="hero-lien" href="#section-progression">Voir ma progression <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-        <aside class="hero-embleme" aria-label="Progression dans le catalogue">
-          <div class="hero-embleme-top"><span>VOTRE CAP</span><span class="hero-embleme-dot" aria-hidden="true"></span></div>
-          <div class="hero-embleme-mark">DUC<span>·</span></div>
-          <div class="hero-embleme-rule"></div>
-          <p>La régularité fait la différence.</p>
-          <div class="hero-mini-progress">
-            <div><span>Questions étudiées</span><strong id="hero-question-count">0</strong></div>
-            <span class="hero-mini-total">sur <span id="hero-question-total">0</span> au catalogue</span>
-          </div>
+            <a class="dashboard-rail-link" href="#section-progression" aria-label="Ma progression" title="Ma progression">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V13m5 6.5V8m5 11.5V4m5 15.5v-9"/><path d="M2.5 21h19"/></svg><span>Progression</span>
+            </a>
+            <a class="dashboard-rail-link" href="#section-formats" aria-label="Concours et épreuves" title="Concours et épreuves">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a2 2 0 0 1 2 2v15l-8-4-8 4v-15a2 2 0 0 1 2-2Z"/><path d="M9 8h6m-6 4h6"/></svg><span>Concours</span>
+            </a>
+            <a class="dashboard-rail-link" href="#section-entrainement" aria-label="Séance libre" title="Séance libre">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/><path d="M4 4v16"/></svg><span>Séance libre</span>
+            </a>
+            <a class="dashboard-rail-link" href="#section-aide" aria-label="Aide et contact" title="Aide et contact">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.3 7.1L4 20l1.2-3.6a8.2 8.2 0 1 1 15-4.7Z"/><path d="M8.8 9.2c.6 2.2 2.7 4.3 5 5l1.2-1.2 2 .9c-.1 1-.8 1.7-1.8 1.8-3.5-.4-7.5-4.4-7.8-7.8.1-1 .8-1.7 1.8-1.8l.9 2-1.3 1.1Z"/></svg><span>Aide</span>
+            </a>
+          </nav>
+          <div class="dashboard-rail-footer"><span class="dashboard-rail-status" aria-hidden="true"></span><span>Votre espace</span></div>
         </aside>
-        <span class="hero-index" aria-hidden="true">01</span>
-      </div>
 
-      <div id="alerte-reprise" class="alerte-reprise cache" role="status">
-        <div class="alerte-reprise-copy">
-          <span class="alerte-icone" aria-hidden="true">↗</span>
-          <div><strong>Votre épreuve est en pause</strong><p>Reprenez là où vous vous êtes arrêté.</p></div>
-        </div>
-        <button id="btn-reprendre-quiz" class="btn btn-avertissement" type="button">Reprendre l’épreuve <span aria-hidden="true">→</span></button>
-      </div>
-
-      <section class="stats-section" aria-label="Résumé de votre activité">
-        <div class="stats-caption"><span class="section-kicker">EN UN COUP D’ŒIL</span><span class="stats-caption-note">Votre activité sur cet appareil</span></div>
-        <div class="grille-stats">
-          <article class="carte-stat">
-            <span class="stat-index">01</span>
-            <div class="stat-contenu"><span class="stat-libelle">Sessions terminées</span><strong class="stat-chiffre" id="stat-quiz-termines">0</strong></div>
-            <span class="stat-symbol" aria-hidden="true">↗</span>
-          </article>
-          <article class="carte-stat">
-            <span class="stat-index">02</span>
-            <div class="stat-contenu"><span class="stat-libelle">Score moyen</span><strong class="stat-chiffre" id="stat-taux-reussite">—</strong></div>
-            <span class="stat-symbol" aria-hidden="true">%</span>
-          </article>
-          <article class="carte-stat">
-            <span class="stat-index">03</span>
-            <div class="stat-contenu"><span class="stat-libelle">Questions étudiées</span><strong class="stat-chiffre" id="stat-questions-etudiees">0</strong></div>
-            <span class="stat-symbol" aria-hidden="true">✓</span>
-          </article>
-          <article class="carte-stat">
-            <span class="stat-index">04</span>
-            <div class="stat-contenu"><span class="stat-libelle">Série de révision</span><strong class="stat-chiffre" id="stat-serie-active">0 j</strong></div>
-            <span class="stat-symbol" aria-hidden="true">✳</span>
-          </article>
-        </div>
-      </section>
-
-      <section id="section-formats" class="section-block" aria-labelledby="titre-formats">
-        <div class="section-heading">
-          <div class="section-title-group"><span class="section-kicker">01 / CHOISIR SON FORMAT</span><h2 class="titre-section" id="titre-formats">Quelle séance vous convient aujourd’hui&nbsp;?</h2></div>
-          <p class="section-description">Un examen blanc pour vous situer, ou une séance ciblée pour progresser.</p>
-        </div>
-
-        <div class="grille-actions-principales">
-          <button id="btn-mode-standard" class="carte-action carte-action-primaire" type="button">
-            <span class="mode-card-top"><span class="mode-index">01</span><span class="mode-tag">FORMAT CONCOURS</span></span>
-            <span class="mode-card-content"><span class="mode-eyebrow">SIMULATION COMPLÈTE</span><span class="carte-action-title">Concours blanc</span><span class="carte-action-description">Une épreuve mixte pour vous entraîner dans les conditions du jour J.</span></span>
-            <span class="mode-meta"><span>60 questions</span><span class="mode-separator" aria-hidden="true">·</span><span>60 minutes</span><span class="mode-arrow" aria-hidden="true">↗</span></span>
-          </button>
-
-          <article class="carte-action carte-action-secondaire">
-            <div class="mode-card-top"><span class="mode-index">02</span><span class="mode-tag">FOCUS DISCIPLINAIRE</span></div>
-            <div class="mode-card-content"><span class="mode-eyebrow">APPROFONDIR UNE MATIÈRE</span><h3 class="carte-action-title">Épreuve ciblée</h3><p class="carte-action-description">Choisissez une matière et concentrez votre effort là où il compte.</p></div>
-            <div class="form-groupe">
-              <label for="select-matiere-unidisciplinaire">Matière de l’épreuve</label>
-              <select id="select-matiere-unidisciplinaire"><option value="">Choisir une matière…</option></select>
+        <div class="dashboard-canvas">
+          <div class="dashboard-topbar">
+            <div>
+              <p class="dashboard-breadcrumb">ESPACE CANDIDAT <span aria-hidden="true">/</span> TABLEAU DE BORD</p>
+              <p class="dashboard-topline-caption">Votre préparation, à portée de main.</p>
             </div>
-            <button id="btn-mode-unidisciplinaire" class="btn-action-uni" type="button">Démarrer l’épreuve <span aria-hidden="true">→</span></button>
-          </article>
-        </div>
-      </section>
+            <div class="dashboard-date-chip">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="13" rx="2"/><path d="M6.5 2.5v4m7-4v4M3 8h14"/></svg>
+              <span><small>Aujourd’hui</small><time id="dashboard-date"></time></span>
+            </div>
+          </div>
 
-      <section id="section-entrainement" class="section-block section-block-training" aria-labelledby="titre-entrainement">
-        <div class="section-heading">
-          <div class="section-title-group"><span class="section-kicker">02 / À VOTRE RYTHME</span><h2 class="titre-section" id="titre-entrainement">Composer une séance libre</h2></div>
-          <p class="section-description">Révisez sans chronomètre et obtenez une explication après chaque réponse.</p>
-        </div>
-        <div class="dashboard-lower-grid">
-          <section class="entrainement-panel" aria-label="Réglages de l’entraînement libre">
-            <div class="carte-entrainement">
-              <div class="training-fields">
-                <div class="form-groupe"><label for="select-matiere-libre">Matière</label><select id="select-matiere-libre"><option value="toutes">Toutes les matières</option></select></div>
-                <div class="form-groupe"><label for="select-nombre-libre">Longueur de la séance</label><select id="select-nombre-libre"><option value="10">10 questions · Express</option><option value="20" selected>20 questions · Approfondie</option><option value="all">Tout le catalogue</option></select></div>
+          <div class="banniere-bienvenue">
+            <div class="hero-copy">
+              <div class="hero-meta">
+                <span class="hero-eyebrow">CAMPUS DE PRÉPARATION · 2027</span>
+                <span class="hero-edition">Édition candidate</span>
               </div>
-              <label class="form-case-a-cocher" for="check-leitner">
-                <input type="checkbox" id="check-leitner" checked>
-                <span><strong>Prioriser mes points à renforcer</strong><small>Les questions inédites et celles souvent manquées passent en premier.</small></span>
-              </label>
-              <button id="btn-lancer-entrainement" class="btn btn-primaire btn-entrainement" type="button">Commencer la séance <span aria-hidden="true">→</span></button>
-              <p class="note-locale"><span aria-hidden="true">●</span> Votre progression est conservée sur cet appareil.</p>
+              <h1 id="titre-accueil">Votre parcours commence ici.</h1>
+              <p>Une préparation claire, régulière et à votre rythme. Chaque séance vous rapproche du concours.</p>
+              <div class="hero-actions">
+                <a class="btn btn-primaire hero-cta" href="#section-formats">
+                  Choisir une séance
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5"/></svg>
+                </a>
+                <a class="hero-lien" href="#section-progression">Voir ma progression <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <aside class="hero-embleme" aria-label="Progression dans le catalogue">
+              <div class="hero-embleme-top"><span>VOTRE CAP</span><span class="hero-embleme-dot" aria-hidden="true"></span></div>
+              <div class="hero-embleme-mark">DUC<span>·</span></div>
+              <div class="hero-embleme-rule"></div>
+              <p>La régularité fait la différence.</p>
+              <div class="hero-mini-progress">
+                <div><span>Questions étudiées</span><strong id="hero-question-count">0</strong></div>
+                <span class="hero-mini-total">sur <span id="hero-question-total">0</span> au catalogue</span>
+              </div>
+            </aside>
+            <span class="hero-index" aria-hidden="true">01</span>
+          </div>
+
+          <div id="alerte-reprise" class="alerte-reprise cache" role="status">
+            <div class="alerte-reprise-copy">
+              <span class="alerte-icone" aria-hidden="true">↗</span>
+              <div><strong>Votre épreuve est en pause</strong><p>Reprenez là où vous vous êtes arrêté.</p></div>
+            </div>
+            <button id="btn-reprendre-quiz" class="btn btn-avertissement" type="button">Reprendre l’épreuve <span aria-hidden="true">→</span></button>
+          </div>
+
+          <section class="stats-section" aria-label="Résumé de votre activité">
+            <div class="stats-caption"><span class="section-kicker">EN UN COUP D’ŒIL</span><span class="stats-caption-note">Votre activité sur cet appareil</span></div>
+            <div class="grille-stats">
+              <article class="carte-stat">
+                <span class="stat-index">01</span>
+                <div class="stat-contenu"><span class="stat-libelle">Sessions terminées</span><strong class="stat-chiffre" id="stat-quiz-termines">0</strong></div>
+                <span class="stat-symbol" aria-hidden="true">↗</span>
+              </article>
+              <article class="carte-stat">
+                <span class="stat-index">02</span>
+                <div class="stat-contenu"><span class="stat-libelle">Score moyen</span><strong class="stat-chiffre" id="stat-taux-reussite">—</strong></div>
+                <span class="stat-symbol" aria-hidden="true">%</span>
+              </article>
+              <article class="carte-stat">
+                <span class="stat-index">03</span>
+                <div class="stat-contenu"><span class="stat-libelle">Questions étudiées</span><strong class="stat-chiffre" id="stat-questions-etudiees">0</strong></div>
+                <span class="stat-symbol" aria-hidden="true">✓</span>
+              </article>
+              <article class="carte-stat">
+                <span class="stat-index">04</span>
+                <div class="stat-contenu"><span class="stat-libelle">Série de révision</span><strong class="stat-chiffre" id="stat-serie-active">0 j</strong></div>
+                <span class="stat-symbol" aria-hidden="true">✳</span>
+              </article>
             </div>
           </section>
-          <aside class="carte-support-whatsapp">
-            <span class="support-overline">UN CONSEIL POUR LA SUITE</span>
-            <div class="support-mark" aria-hidden="true">DUC</div>
-            <div class="whatsapp-texte"><h3>Un concours se prépare aussi ensemble.</h3><p>Besoin d’un renseignement sur les épreuves ou votre préparation&nbsp;? Écrivez à l’équipe DUC Concours.</p></div>
-            <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question." target="_blank" rel="noopener noreferrer" class="btn-whatsapp">Contacter l’équipe <span aria-hidden="true">↗</span></a>
-          </aside>
-        </div>
-      </section>
 
-      <section id="section-progression" class="section-block section-block-progress" aria-labelledby="titre-progression">
-        <div class="section-heading">
-          <div class="section-title-group"><span class="section-kicker">03 / MES REPÈRES</span><h2 class="titre-section" id="titre-progression">La progression, concrètement.</h2></div>
-          <p class="section-description">Un aperçu de ce que vous avez déjà travaillé et de vos dernières séances.</p>
-        </div>
-        <div class="progress-layout">
-          <article class="progress-card progress-card-main">
-            <div class="progress-card-heading"><div><span class="progress-overline">VOTRE COUVERTURE</span><h3>Le catalogue en perspective</h3></div><div class="progress-ring-label"><strong id="progression-pourcentage">0%</strong><span>exploré</span></div></div>
-            <div class="progression-barre-fond" role="progressbar" aria-label="Questions du catalogue étudiées" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progression-barre-catalogue" class="progression-barre-remplissage"></div></div>
-            <p class="progress-summary"><strong id="progression-questions-vues">0</strong> question(s) travaillée(s) sur <strong id="progression-total">0</strong> dans votre catalogue.</p>
-            <div class="subject-progress-heading"><span>PAR MATIÈRE</span><span>QUESTIONS VUES</span></div>
-            <div id="progression-matieres" class="progression-matieres"><p class="empty-state">Vos matières apparaîtront ici après vos premières révisions.</p></div>
-          </article>
+          <section id="section-progression" class="section-block section-block-progress" aria-labelledby="titre-progression">
+            <div class="section-heading">
+              <div class="section-title-group"><span class="section-kicker">01 / VOTRE PROGRESSION</span><h2 class="titre-section" id="titre-progression">La progression, concrètement.</h2></div>
+              <p class="section-description">Un aperçu de ce que vous avez déjà travaillé et de vos dernières séances.</p>
+            </div>
+            <div class="progress-layout">
+              <article class="progress-card progress-card-main">
+                <div class="progress-card-heading"><div><span class="progress-overline">VOTRE COUVERTURE</span><h3>Le catalogue en perspective</h3></div><div class="progress-ring-label"><strong id="progression-pourcentage">0%</strong><span>exploré</span></div></div>
+                <div class="progression-barre-fond" role="progressbar" aria-label="Questions du catalogue étudiées" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progression-barre-catalogue" class="progression-barre-remplissage"></div></div>
+                <p class="progress-summary"><strong id="progression-questions-vues">0</strong> question(s) travaillée(s) sur <strong id="progression-total">0</strong> dans votre catalogue.</p>
+                <div class="subject-progress-heading"><span>PAR MATIÈRE</span><span>QUESTIONS VUES</span></div>
+                <div id="progression-matieres" class="progression-matieres"><p class="empty-state">Vos matières apparaîtront ici après vos premières révisions.</p></div>
+              </article>
 
-          <article class="progress-card progress-card-history">
-            <div class="progress-card-heading"><div><span class="progress-overline">VOTRE PARCOURS</span><h3>Dernières séances</h3></div><span class="history-stamp" aria-hidden="true">HIST.</span></div>
-            <div id="historique-sessions" class="historique-sessions"><p class="empty-state">Vos séances terminées apparaîtront ici.</p></div>
-            <p class="history-footnote">Historique conservé sur cet appareil.</p>
-          </article>
+              <article class="progress-card progress-card-history">
+                <div class="progress-card-heading"><div><span class="progress-overline">VOTRE PARCOURS</span><h3>Dernières séances</h3></div><span class="history-stamp" aria-hidden="true">HIST.</span></div>
+                <div id="historique-sessions" class="historique-sessions"><p class="empty-state">Vos séances terminées apparaîtront ici.</p></div>
+                <p class="history-footnote">Historique conservé sur cet appareil.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="section-formats" class="section-block" aria-labelledby="titre-formats">
+            <div class="section-heading">
+              <div class="section-title-group"><span class="section-kicker">02 / CHOISIR SON FORMAT</span><h2 class="titre-section" id="titre-formats">Quelle séance vous convient aujourd’hui&nbsp;?</h2></div>
+              <p class="section-description">Un examen blanc pour vous situer, ou une séance ciblée pour progresser.</p>
+            </div>
+
+            <div class="grille-actions-principales">
+              <button id="btn-mode-standard" class="carte-action carte-action-primaire" type="button">
+                <span class="mode-card-top"><span class="mode-index">01</span><span class="mode-tag">FORMAT CONCOURS</span></span>
+                <span class="mode-card-content"><span class="mode-eyebrow">SIMULATION COMPLÈTE</span><span class="carte-action-title">Concours blanc</span><span class="carte-action-description">Une épreuve mixte pour vous entraîner dans les conditions du jour J.</span></span>
+                <span class="mode-meta"><span>60 questions</span><span class="mode-separator" aria-hidden="true">·</span><span>60 minutes</span><span class="mode-arrow" aria-hidden="true">↗</span></span>
+              </button>
+
+              <article class="carte-action carte-action-secondaire">
+                <div class="mode-card-top"><span class="mode-index">02</span><span class="mode-tag">FOCUS DISCIPLINAIRE</span></div>
+                <div class="mode-card-content"><span class="mode-eyebrow">APPROFONDIR UNE MATIÈRE</span><h3 class="carte-action-title">Épreuve ciblée</h3><p class="carte-action-description">Choisissez une matière et concentrez votre effort là où il compte.</p></div>
+                <div class="form-groupe">
+                  <label for="select-matiere-unidisciplinaire">Matière de l’épreuve</label>
+                  <select id="select-matiere-unidisciplinaire"><option value="">Choisir une matière…</option></select>
+                </div>
+                <button id="btn-mode-unidisciplinaire" class="btn-action-uni" type="button">Démarrer l’épreuve <span aria-hidden="true">→</span></button>
+              </article>
+            </div>
+          </section>
+
+          <section id="section-entrainement" class="section-block section-block-training" aria-labelledby="titre-entrainement">
+            <div class="section-heading">
+              <div class="section-title-group"><span class="section-kicker">03 / À VOTRE RYTHME</span><h2 class="titre-section" id="titre-entrainement">Composer une séance libre</h2></div>
+              <p class="section-description">Révisez sans chronomètre et obtenez une explication après chaque réponse.</p>
+            </div>
+            <div class="dashboard-lower-grid">
+              <section class="entrainement-panel" aria-label="Réglages de l’entraînement libre">
+                <div class="carte-entrainement">
+                  <div class="training-fields">
+                    <div class="form-groupe"><label for="select-matiere-libre">Matière</label><select id="select-matiere-libre"><option value="toutes">Toutes les matières</option></select></div>
+                    <div class="form-groupe"><label for="select-nombre-libre">Longueur de la séance</label><select id="select-nombre-libre"><option value="10">10 questions · Express</option><option value="20" selected>20 questions · Approfondie</option><option value="all">Tout le catalogue</option></select></div>
+                  </div>
+                  <label class="form-case-a-cocher" for="check-leitner">
+                    <input type="checkbox" id="check-leitner" checked>
+                    <span><strong>Prioriser mes points à renforcer</strong><small>Les questions inédites et celles souvent manquées passent en premier.</small></span>
+                  </label>
+                  <button id="btn-lancer-entrainement" class="btn btn-primaire btn-entrainement" type="button">Commencer la séance <span aria-hidden="true">→</span></button>
+                  <p class="note-locale"><span aria-hidden="true">●</span> Votre progression est conservée sur cet appareil.</p>
+                </div>
+              </section>
+              <aside id="section-aide" class="carte-support-whatsapp" aria-labelledby="titre-aide">
+                <span class="support-overline">UN CONSEIL POUR LA SUITE</span>
+                <div class="support-mark" aria-hidden="true">DUC</div>
+                <div class="whatsapp-texte"><h3 id="titre-aide">Un concours se prépare aussi ensemble.</h3><p>Besoin d’un renseignement sur les épreuves ou votre préparation&nbsp;? Écrivez à l’équipe DUC Concours.</p></div>
+                <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question." target="_blank" rel="noopener noreferrer" class="btn-whatsapp">Contacter l’équipe <span aria-hidden="true">↗</span></a>
+              </aside>
+            </div>
+          </section>
+
         </div>
-      </section>
+      </div>
     </section>
 
     <section id="ecran-admin" class="ecran" aria-labelledby="admin-titre">
@@ -296,7 +337,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="supabaseClient.js?v=21"></script>
   <script src="db.js?v=21"></script>
-  <script src="app.js?v=25"></script>
+  <script src="app.js?v=26"></script>
   <script src="adminDashboard.js?v=24"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {
