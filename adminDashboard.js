@@ -445,7 +445,7 @@ function animerNombre(elementId, valeurCible, suffixe = '') {
   animationsKpi.set(elementId, requestAnimationFrame(animer));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function connecterEvenementsDashboardAdmin() {
   const filtre = document.getElementById('admin-filtre-moderation');
   filtre?.addEventListener('input', dessinerTableModeration);
   const actualiser = document.getElementById('admin-actualiser');
@@ -455,4 +455,10 @@ document.addEventListener('DOMContentLoaded', () => {
     try { await initialiserDashboardAdmin(); }
     finally { actualiser.disabled = false; actualiser.removeAttribute('aria-busy'); }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', connecterEvenementsDashboardAdmin, { once: true });
+} else {
+  connecterEvenementsDashboardAdmin();
+}

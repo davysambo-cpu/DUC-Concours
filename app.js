@@ -14,6 +14,7 @@ if (!supabase) {
 
 let utilisateurActuel = null;
 let utilisateurEstAdmin = false;
+let promesseChargementDashboardAdmin = null;
 
 let sessionActuelle = {
   mode: null,
@@ -572,12 +573,78 @@ function afficherEcran(nomEcran) {
   if (nomEcran === 'dashboard') actualiserNavigationDashboard('#top');
 }
 
-// NOTE: L'ancienne fonction chargerEspaceAdmin() a été remplacée par adminDashboard.js
-// Cette fonction est conservée pour compatibilité mais n'est plus utilisée
-async function chargerEspaceAdmin() {
-  // Le nouveau dashboard admin est géré par adminDashboard.js
-  // Cette fonction est désactivée temporairement
-  console.log("⚠️ chargerEspaceAdmin() désactivé - Utilisez adminDashboard.js");
+// Repli visible et chargement à la demande si le script admin principal n'a pas démarré.
+function afficherErreurChargementDashboardAdmin(message) {
+  const badgeComptes = document.getElementById('admin-badge-moderation');
+  const badgeSignalements = document.getElementById('admin-signalements-badge');
+  if (badgeComptes) badgeComptes.textContent = 'Administration indisponible';
+  if (badgeSignalements) badgeSignalements.textContent = 'Administration indisponible';
+
+  ['admin-moderation-table', 'admin-signalements-table'].forEach(id => {
+    const tbody = document.getElementById(id);
+    if (!tbody) return;
+    tbody.replaceChildren();
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = 4;
+    cell.className = 'table-empty';
+    cell.textContent = message;
+    row.appendChild(cell);
+    tbody.appendChild(row);
+  });
+
+  const feedback = document.getElementById('admin-feedback');
+  if (feedback) {
+    feedback.textContent = message;
+    feedback.classList.remove('cache');
+    feedback.classList.add('error');
+  }
+  console.error('Échec de démarrage du tableau admin :', message);
+}
+
+function chargerEspaceAdmin() {
+  if (typeof initialiserDashboardAdmin === 'function') {
+    initialiserDashboardAdmin();
+    return Promise.resolve();
+  }
+  if (promesseChargementDashboardAdmin) return promesseChargementDashboardAdmin;
+
+  const messageChargement = 'Chargement du module d’administration…';
+  ['admin-moderation-table', 'admin-signalements-table'].forEach(id => {
+    const tbody = document.getElementById(id);
+    if (!tbody) return;
+    tbody.replaceChildren();
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = 4;
+    cell.className = 'table-empty';
+    cell.textContent = messageChargement;
+    row.appendChild(cell);
+    tbody.appendChild(row);
+  });
+
+  promesseChargementDashboardAdmin = new Promise(resolve => {
+    const script = document.createElement('script');
+    script.src = `adminDashboard.js?v=26&retry=${Date.now()}`;
+    script.async = true;
+    script.onload = () => {
+      promesseChargementDashboardAdmin = null;
+      if (typeof initialiserDashboardAdmin === 'function') {
+        initialiserDashboardAdmin();
+      } else {
+        afficherErreurChargementDashboardAdmin('Le script admin a répondu sans démarrer. Rechargez la page ou vérifiez la console du navigateur.');
+      }
+      resolve();
+    };
+    script.onerror = () => {
+      promesseChargementDashboardAdmin = null;
+      afficherErreurChargementDashboardAdmin('Le navigateur ne parvient pas à charger le script admin. Vérifiez la connexion puis réessayez.');
+      resolve();
+    };
+    document.head.appendChild(script);
+  });
+
+  return promesseChargementDashboardAdmin;
 }
 
 function actualiserNavigationDashboard(hash = window.location.hash || '#top') {
