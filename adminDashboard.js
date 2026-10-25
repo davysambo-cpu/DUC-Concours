@@ -1,8 +1,18 @@
 /* DUC Concours — console d'administration (rôle vérifié par Supabase) */
 const supabase = window.supabaseClient;
 let activityChart = null;
-let profilsEnAttente = [];
+let profilsCandidats = [];
+let versionChargementProfils = 0;
 const animationsKpi = new Map();
+
+function attendreRequeteSupabase(requete, message, delaiMs = 15000) {
+  let temporisateur;
+  const delai = new Promise((_, reject) => {
+    temporisateur = window.setTimeout(() => reject(new Error(message)), delaiMs);
+  });
+  return Promise.race([Promise.resolve(requete), delai])
+    .finally(() => window.clearTimeout(temporisateur));
+}
 
 async function initialiserDashboardAdmin() {
   const resultats = await Promise.allSettled([
@@ -18,28 +28,44 @@ async function initialiserDashboardAdmin() {
 async function remplirTableModeration() {
   const tbody = document.getElementById('admin-moderation-table');
   if (!tbody) return;
+  const version = ++versionChargementProfils;
+
   if (!supabase) {
+    profilsCandidats = [];
     afficherLigneVide(tbody, 4, 'Connexion Supabase indisponible.');
-    mettreAJourBadgeModeration(0);
+    const badge = document.getElementById('admin-badge-moderation');
+    if (badge) badge.textContent = 'Indisponible';
     return;
   }
 
-  afficherLigneVide(tbody, 4, 'Chargement des demandes…');
+  afficherLigneVide(tbody, 4, 'Chargement des comptes…');
+  const badge = document.getElementById('admin-badge-moderation');
+  if (badge) badge.textContent = 'Chargement…';
   try {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('id, nom_complet, email, date_inscription')
-      .eq('est_autorise', false)
-      .order('date_inscription', { ascending: false });
+    const { data, error } = await attendreRequeteSupabase(
+      supabase
+        .from('profiles')
+        .select('id, nom_complet, email, role, est_autorise, date_inscription')
+        .order('date_inscription', { ascending: false }),
+      'La liste des comptes a dépassé le délai de réponse.'
+    );
+    if (version !== versionChargementProfils) return;
     if (error) throw error;
 
-    profilsEnAttente = Array.isArray(data) ? data : [];
-    mettreAJourBadgeModeration(profilsEnAttente.length);
+    profilsCandidats = Array.isArray(data) ? data : [];
+    const enAttente = profilsCandidats.filter(profil => profil.role !== 'admin' && profil.est_autorise !== true).length;
+    mettreAJourBadgeModeration(profilsCandidats.length, enAttente);
     dessinerTableModeration();
   } catch (error) {
-    console.error('Erreur de chargement des inscriptions :', error);
-    afficherLigneVide(tbody, 4, 'Les demandes ne peuvent pas être chargées pour le moment.');
-    afficherAdminFeedback('Impossible de charger les demandes d’inscription.', true);
+    if (version !== versionChargementProfils) return;
+    console.error('Erreur de chargement des comptes :', error);
+    profilsCandidats = [];
+    if (badge) {
+      badge.textContent = 'Chargement impossible';
+      badge.classList.remove('admin-badge-orange');
+    }
+    afficherLigneVide(tbody, 4, 'Impossible de charger les comptes. Réessayez dans quelques instants.');
+    afficherAdminFeedback(`Impossible de charger les comptes : ${error.message || 'erreur inconnue'}`, true);
   }
 }
 
@@ -47,39 +73,59 @@ function dessinerTableModeration() {
   const tbody = document.getElementById('admin-moderation-table');
   if (!tbody) return;
   const filtre = (document.getElementById('admin-filtre-moderation')?.value || '').trim().toLocaleLowerCase('fr-FR');
-  const filtres = profilsEnAttente.filter(profil =>
-    `${profil.nom_complet || ''} ${profil.email || ''}`.toLocaleLowerCase('fr-FR').includes(filtre)
+  const comptesFiltres = profilsCandidats.filter(profil =>
+    `${profil.nom_complet || ''} ${profil.email || ''} ${profil.role || ''}`.toLocaleLowerCase('fr-FR').includes(filtre)
   );
   tbody.replaceChildren();
 
-  if (filtres.length === 0) {
-    afficherLigneVide(tbody, 4, profilsEnAttente.length ? 'Aucun résultat pour cette recherche.' : 'Aucune demande en attente.');
+  if (comptesFiltres.length === 0) {
+    afficherLigneVide(tbody, 4, profilsCandidats.length ? 'Aucun compte ne correspond à cette recherche.' : 'Aucun compte enregistré.');
     return;
   }
 
-  filtres.forEach(profil => {
+  comptesFiltres.forEach(profil => {
     const row = document.createElement('tr');
     const nameCell = document.createElement('td');
+    nameCell.className = 'admin-account-identity-cell';
     const name = document.createElement('strong');
+    name.className = 'admin-account-name';
     name.textContent = profil.nom_complet || 'Nom non renseigné';
-    nameCell.appendChild(name);
+    const email = document.createElement('span');
+    email.className = 'admin-account-email';
+    email.textContent = profil.email || 'Adresse email non renseignée';
+    nameCell.append(name, email);
 
-    const emailCell = document.createElement('td');
-    emailCell.textContent = profil.email || '—';
+    const roleCell = document.createElement('td');
+    const estAdmin = profil.role === 'admin';
+    const role = document.createElement('span');
+    role.className = estAdmin ? 'admin-account-role admin-account-role-admin' : 'admin-account-role';
+    role.textContent = estAdmin ? 'Administrateur' : 'Candidat';
+    roleCell.appendChild(role);
+
     const dateCell = document.createElement('td');
     dateCell.textContent = formaterDate(profil.date_inscription);
-    const actionCell = document.createElement('td');
-    const actionGroup = document.createElement('div');
-    actionGroup.className = 'admin-table-actions';
-    const acceptButton = document.createElement('button');
-    acceptButton.type = 'button';
-    acceptButton.className = 'btn-accepter';
-    acceptButton.textContent = 'Autoriser l’accès';
-    acceptButton.addEventListener('click', () => accepterEtudiant(profil.id, acceptButton));
-    actionGroup.appendChild(acceptButton);
-    actionCell.appendChild(actionGroup);
 
-    row.append(nameCell, emailCell, dateCell, actionCell);
+    const accessCell = document.createElement('td');
+    const accessGroup = document.createElement('div');
+    accessGroup.className = 'admin-account-access';
+    const autorise = profil.est_autorise === true;
+    const status = document.createElement('span');
+    status.className = autorise ? 'admin-account-status admin-account-status-authorized' : 'admin-account-status admin-account-status-pending';
+    status.textContent = autorise ? 'Accès autorisé' : 'En attente';
+    accessGroup.appendChild(status);
+
+    if (!estAdmin && !autorise) {
+      const acceptButton = document.createElement('button');
+      acceptButton.type = 'button';
+      acceptButton.className = 'btn-accepter';
+      acceptButton.textContent = 'Autoriser';
+      acceptButton.setAttribute('aria-label', `Autoriser l’accès à ${profil.nom_complet || profil.email || 'ce compte'}`);
+      acceptButton.addEventListener('click', () => accepterEtudiant(profil.id, acceptButton));
+      accessGroup.appendChild(acceptButton);
+    }
+
+    accessCell.appendChild(accessGroup);
+    row.append(nameCell, roleCell, dateCell, accessCell);
     tbody.appendChild(row);
   });
 }
@@ -88,9 +134,15 @@ async function accepterEtudiant(id, bouton) {
   if (!supabase || !id) return;
   if (bouton) bouton.disabled = true;
   try {
-    const { error } = await supabase.from('profiles').update({ est_autorise: true }).eq('id', id);
+    const { data, error } = await attendreRequeteSupabase(
+      supabase.from('profiles').update({ est_autorise: true }).eq('id', id).select('id, est_autorise').maybeSingle(),
+      'La demande d’autorisation a dépassé le délai de réponse.'
+    );
     if (error) throw error;
-    afficherAdminFeedback('Accès autorisé. La liste a été actualisée.', false);
+    if (!data || data.est_autorise !== true) {
+      throw new Error('Aucun compte n’a été modifié. Vérifiez vos droits administrateur.');
+    }
+    afficherAdminFeedback('Accès autorisé. Le statut du compte a été actualisé.', false);
     await Promise.all([remplirTableModeration(), mettreAJourKPIs()]);
   } catch (error) {
     console.error('Erreur lors de l’autorisation du compte :', error);
@@ -99,10 +151,12 @@ async function accepterEtudiant(id, bouton) {
   }
 }
 
-function mettreAJourBadgeModeration(nombre) {
+function mettreAJourBadgeModeration(total, enAttente) {
   const badge = document.getElementById('admin-badge-moderation');
   if (!badge) return;
-  badge.textContent = nombre === 1 ? '1 en attente' : `${nombre} en attente`;
+  const libelleComptes = `${total} compte${total === 1 ? '' : 's'}`;
+  badge.textContent = `${libelleComptes} · ${enAttente === 0 ? 'aucun en attente' : `${enAttente} en attente`}`;
+  badge.classList.toggle('admin-badge-orange', enAttente > 0);
 }
 
 async function chargerSignalements() {
@@ -117,11 +171,14 @@ async function chargerSignalements() {
 
   afficherLigneVide(tbody, 4, 'Chargement des retours…');
   try {
-    const { data, error } = await supabase
-      .from('question_reports')
-      .select('id, question_id, commentaire, statut, date_signalement')
-      .order('date_signalement', { ascending: false })
-      .limit(100);
+    const { data, error } = await attendreRequeteSupabase(
+      supabase
+        .from('question_reports')
+        .select('id, question_id, commentaire, statut, date_signalement')
+        .order('date_signalement', { ascending: false })
+        .limit(100),
+      'Le chargement des signalements a dépassé le délai de réponse.'
+    );
     if (error) throw error;
 
     const rapports = Array.isArray(data) ? data : [];
@@ -232,10 +289,13 @@ async function initialiserGraphiqueActivite() {
   try {
     const maintenant = Date.now();
     const ilYa24h = new Date(maintenant - 24 * 60 * 60 * 1000).toISOString();
-    const { data: sessions, error } = await supabase
-      .from('exam_sessions')
-      .select('date_passage')
-      .gte('date_passage', ilYa24h);
+    const { data: sessions, error } = await attendreRequeteSupabase(
+      supabase
+        .from('exam_sessions')
+        .select('date_passage')
+        .gte('date_passage', ilYa24h),
+      'Le chargement de l’activité a dépassé le délai de réponse.'
+    );
     if (error) throw error;
 
     canvas.classList.remove('cache');
@@ -303,9 +363,18 @@ async function mettreAJourKPIs() {
     const debutJournee = new Date();
     debutJournee.setHours(0, 0, 0, 0);
     const [resultatProfils, resultatSessionsJour, resultatToutesSessions] = await Promise.all([
-      supabase.from('profiles').select('id').eq('est_autorise', true),
-      supabase.from('exam_sessions').select('user_id').gte('date_passage', debutJournee.toISOString()),
-      supabase.from('exam_sessions').select('score_total, total_questions')
+      attendreRequeteSupabase(
+        supabase.from('profiles').select('id').eq('est_autorise', true),
+        'Le comptage des comptes a dépassé le délai de réponse.'
+      ),
+      attendreRequeteSupabase(
+        supabase.from('exam_sessions').select('user_id').gte('date_passage', debutJournee.toISOString()),
+        'Le chargement des sessions du jour a dépassé le délai de réponse.'
+      ),
+      attendreRequeteSupabase(
+        supabase.from('exam_sessions').select('score_total, total_questions'),
+        'Le chargement des résultats a dépassé le délai de réponse.'
+      )
     ]);
     if (resultatProfils.error) throw resultatProfils.error;
     if (resultatSessionsJour.error) throw resultatSessionsJour.error;

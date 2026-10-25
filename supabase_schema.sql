@@ -76,13 +76,14 @@ security definer set search_path = public
 as $$
   select exists (
     select 1 from public.profiles
-    where id = auth.uid() and role = 'admin'
+    where id = auth.uid() and role = 'admin' and est_autorise is true
   );
 $$;
 
 -- La fonction est appelée par les politiques RLS pour les utilisateurs connectés,
 -- mais ne doit pas être accessible aux visiteurs anonymes.
 revoke execute on function public.est_admin() from public, anon;
+grant execute on function public.est_admin() to authenticated;
 
 alter table public.profiles enable row level security;
 alter table public.exam_sessions enable row level security;
@@ -95,7 +96,14 @@ create policy profiles_select_own_or_admin
   using (id = (select auth.uid()) or (select public.est_admin()));
 
 drop policy if exists "Les utilisateurs modifient leur propre profil" on public.profiles;
+drop policy if exists profiles_admin_update_access on public.profiles;
 revoke update on public.profiles from anon, authenticated;
+revoke update (est_autorise) on public.profiles from anon, authenticated;
+grant update (est_autorise) on public.profiles to authenticated;
+create policy profiles_admin_update_access
+  on public.profiles for update to authenticated
+  using ((select public.est_admin()))
+  with check ((select public.est_admin()));
 
 drop policy if exists "Les etudiants lisent leurs propres sessions" on public.exam_sessions;
 drop policy if exists "Les etudiants creent leurs propres sessions" on public.exam_sessions;

@@ -389,6 +389,15 @@ button.carte-action:hover .mode-arrow { transform: translate(2px, -2px); }
 .admin-table tbody td { padding: 10px; color: #4e5a51; font-size: .68rem; vertical-align: middle; }
 .admin-table .table-empty { padding: 18px 10px; color: #92958c; text-align: center; }
 .admin-table-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.admin-account-identity-cell { min-width: 190px; }
+.admin-account-name { display: block; color: var(--ink); font-size: .7rem; font-weight: 720; }
+.admin-account-email { display: block; max-width: 260px; margin-top: 3px; overflow-wrap: anywhere; color: var(--ink-muted); font-size: .59rem; }
+.admin-account-role { display: inline-flex; min-height: 25px; align-items: center; padding: 4px 8px; border: 1px solid #dce5dc; border-radius: 999px; background: #eef4ee; color: #4c7257; font-size: .56rem; font-weight: 750; white-space: nowrap; }
+.admin-account-role-admin { border-color: #eadfc7; background: #faf4e7; color: #8a6a32; }
+.admin-account-access { display: flex; min-width: 142px; align-items: center; flex-wrap: wrap; gap: 6px; }
+.admin-account-status { display: inline-flex; min-height: 25px; align-items: center; padding: 4px 8px; border: 1px solid transparent; border-radius: 999px; font-size: .55rem; font-weight: 750; white-space: nowrap; }
+.admin-account-status-authorized { border-color: #d4e4d4; background: #eef5ed; color: #3d704b; }
+.admin-account-status-pending { border-color: #eadcb9; background: #fbf5e7; color: #896322; }
 .btn-accepter, .btn-bloquer { min-height: 29px; padding: 6px 9px; border: 1px solid transparent; border-radius: 4px 7px 4px 7px; font-size: .62rem; font-weight: 720; cursor: pointer; }
 .btn-accepter { border-color: #cee0d1; background: #eef4ed; color: #2c6845; }
 .btn-accepter:hover { background: #e3eee2; }
