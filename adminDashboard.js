@@ -1,8 +1,11 @@
 /* DUC Concours — console d'administration (rôle vérifié par Supabase) */
+(() => {
 const supabase = window.supabaseClient;
 let activityChart = null;
 let profilsCandidats = [];
 let versionChargementProfils = 0;
+let versionChargementActivite = 0;
+let boutonActiviteDeclencheur = null;
 const animationsKpi = new Map();
 
 function attendreRequeteSupabase(requete, message, delaiMs = 15000) {
@@ -32,13 +35,13 @@ async function remplirTableModeration() {
 
   if (!supabase) {
     profilsCandidats = [];
-    afficherLigneVide(tbody, 4, 'Connexion Supabase indisponible.');
+    afficherLigneVide(tbody, 5, 'Connexion Supabase indisponible.');
     const badge = document.getElementById('admin-badge-moderation');
     if (badge) badge.textContent = 'Indisponible';
     return;
   }
 
-  afficherLigneVide(tbody, 4, 'Chargement des comptes…');
+  afficherLigneVide(tbody, 5, 'Chargement des comptes…');
   const badge = document.getElementById('admin-badge-moderation');
   if (badge) badge.textContent = 'Chargement…';
   try {
@@ -64,7 +67,7 @@ async function remplirTableModeration() {
       badge.textContent = 'Chargement impossible';
       badge.classList.remove('admin-badge-orange');
     }
-    afficherLigneVide(tbody, 4, 'Impossible de charger les comptes. Réessayez dans quelques instants.');
+    afficherLigneVide(tbody, 5, 'Impossible de charger les comptes. Réessayez dans quelques instants.');
     afficherAdminFeedback(`Impossible de charger les comptes : ${error.message || 'erreur inconnue'}`, true);
   }
 }
@@ -79,7 +82,7 @@ function dessinerTableModeration() {
   tbody.replaceChildren();
 
   if (comptesFiltres.length === 0) {
-    afficherLigneVide(tbody, 4, profilsCandidats.length ? 'Aucun compte ne correspond à cette recherche.' : 'Aucun compte enregistré.');
+    afficherLigneVide(tbody, 5, profilsCandidats.length ? 'Aucun compte ne correspond à cette recherche.' : 'Aucun compte enregistré.');
     return;
   }
 
@@ -105,6 +108,19 @@ function dessinerTableModeration() {
     const dateCell = document.createElement('td');
     dateCell.textContent = formaterDate(profil.date_inscription);
 
+    const activityCell = document.createElement('td');
+    activityCell.className = 'admin-account-activity-cell';
+    const activityButton = document.createElement('button');
+    activityButton.type = 'button';
+    activityButton.className = 'btn-voir-activite';
+    activityButton.setAttribute('aria-label', `Voir l’activité de ${profil.nom_complet || profil.email || 'ce membre'}`);
+    const eyeIcon = creerIconeOeil();
+    const activityLabel = document.createElement('span');
+    activityLabel.textContent = 'Voir';
+    activityButton.append(eyeIcon, activityLabel);
+    activityButton.addEventListener('click', () => ouvrirActiviteMembre(profil, activityButton));
+    activityCell.appendChild(activityButton);
+
     const accessCell = document.createElement('td');
     const accessGroup = document.createElement('div');
     accessGroup.className = 'admin-account-access';
@@ -125,9 +141,152 @@ function dessinerTableModeration() {
     }
 
     accessCell.appendChild(accessGroup);
-    row.append(nameCell, roleCell, dateCell, accessCell);
+    row.append(nameCell, roleCell, dateCell, activityCell, accessCell);
     tbody.appendChild(row);
   });
+}
+
+function creerIconeOeil() {
+  const espaceSvg = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(espaceSvg, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  const contour = document.createElementNS(espaceSvg, 'path');
+  contour.setAttribute('d', 'M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z');
+  const pupille = document.createElementNS(espaceSvg, 'circle');
+  pupille.setAttribute('cx', '12');
+  pupille.setAttribute('cy', '12');
+  pupille.setAttribute('r', '3');
+  svg.append(contour, pupille);
+  return svg;
+}
+
+function creerStatActivite(libelle, valeur) {
+  const carte = document.createElement('div');
+  carte.className = 'admin-activity-stat';
+  const label = document.createElement('span');
+  label.textContent = libelle;
+  const contenu = document.createElement('strong');
+  contenu.textContent = valeur;
+  carte.append(label, contenu);
+  return carte;
+}
+
+function formaterDateHeure(dateStr) {
+  if (!dateStr) return '—';
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleString('fr-FR', {
+    day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+}
+
+function formaterDuree(secondes) {
+  const total = Math.max(0, Number(secondes) || 0);
+  const minutes = Math.floor(total / 60);
+  const reste = total % 60;
+  return minutes ? `${minutes} min ${String(reste).padStart(2, '0')} s` : `${reste} s`;
+}
+
+function fermerModalActivite() {
+  const modal = document.getElementById('admin-activity-modal');
+  if (modal) modal.classList.add('cache');
+  versionChargementActivite += 1;
+  boutonActiviteDeclencheur?.focus();
+  boutonActiviteDeclencheur = null;
+}
+
+async function ouvrirActiviteMembre(profil, bouton) {
+  const modal = document.getElementById('admin-activity-modal');
+  const title = document.getElementById('admin-activity-title');
+  const subtitle = document.getElementById('admin-activity-subtitle');
+  const summary = document.getElementById('admin-activity-summary');
+  const note = document.getElementById('admin-activity-note');
+  const tbody = document.getElementById('admin-activity-table');
+  if (!modal || !title || !summary || !tbody) return;
+
+  const version = ++versionChargementActivite;
+  boutonActiviteDeclencheur = bouton || null;
+  title.textContent = profil.nom_complet || 'Activité du membre';
+  if (subtitle) subtitle.textContent = profil.email || 'Séances de préparation enregistrées sur la plateforme.';
+  summary.replaceChildren();
+  summary.textContent = 'Chargement de l’activité…';
+  if (note) note.textContent = '';
+  afficherLigneVide(tbody, 5, 'Chargement des séances…');
+  modal.classList.remove('cache');
+
+  if (!supabase || !profil.id) {
+    summary.textContent = 'La connexion aux données d’activité est indisponible.';
+    afficherLigneVide(tbody, 5, 'Impossible de charger les séances de ce membre.');
+    return;
+  }
+
+  if (bouton) bouton.disabled = true;
+  try {
+    const { data, error, count } = await attendreRequeteSupabase(
+      supabase
+        .from('exam_sessions')
+        .select('id, mode, matiere, score_total, total_questions, duree_secondes, date_passage', { count: 'exact' })
+        .eq('user_id', profil.id)
+        .order('date_passage', { ascending: false })
+        .limit(50),
+      'Le chargement de l’activité du membre a dépassé le délai de réponse.'
+    );
+    if (version !== versionChargementActivite) return;
+    if (error) throw error;
+
+    const sessions = Array.isArray(data) ? data : [];
+    const totalSessions = Number.isFinite(count) ? count : sessions.length;
+    const totalQuestions = sessions.reduce((somme, session) => somme + (Number(session.total_questions) || 0), 0);
+    const totalReponsesJustes = sessions.reduce((somme, session) => somme + (Number(session.score_total) || 0), 0);
+    const scoreMoyen = totalQuestions ? `${Math.round(totalReponsesJustes / totalQuestions * 100)} %` : '—';
+    const derniereActivite = sessions[0] ? formaterDateHeure(sessions[0].date_passage) : 'Aucune séance';
+
+    summary.replaceChildren(
+      creerStatActivite('Séances enregistrées', String(totalSessions)),
+      creerStatActivite(totalSessions > sessions.length ? 'Score moyen récent' : 'Score moyen', scoreMoyen),
+      creerStatActivite('Dernière activité', derniereActivite)
+    );
+    if (note) {
+      note.textContent = totalSessions > sessions.length
+        ? `Affichage des ${sessions.length} séances les plus récentes sur ${totalSessions}.`
+        : 'Activité calculée à partir des séances de préparation enregistrées.';
+    }
+
+    tbody.replaceChildren();
+    if (sessions.length === 0) {
+      afficherLigneVide(tbody, 5, 'Aucune séance de préparation enregistrée pour ce membre.');
+      return;
+    }
+
+    sessions.forEach(session => {
+      const row = document.createElement('tr');
+      const dateCell = document.createElement('td');
+      dateCell.textContent = formaterDateHeure(session.date_passage);
+      const modeCell = document.createElement('td');
+      modeCell.textContent = session.mode === 'unidisciplinaire' ? 'Matière unique' : session.mode === 'standard' ? 'Concours' : session.mode || '—';
+      const subjectCell = document.createElement('td');
+      subjectCell.textContent = session.matiere || 'Toutes matières';
+      const scoreCell = document.createElement('td');
+      const score = Number(session.score_total) || 0;
+      const questions = Number(session.total_questions) || 0;
+      const pourcentage = questions ? ` · ${Math.round(score / questions * 100)} %` : '';
+      scoreCell.textContent = `${score} / ${questions}${pourcentage}`;
+      const durationCell = document.createElement('td');
+      durationCell.textContent = formaterDuree(session.duree_secondes);
+      row.append(dateCell, modeCell, subjectCell, scoreCell, durationCell);
+      tbody.appendChild(row);
+    });
+  } catch (error) {
+    if (version !== versionChargementActivite) return;
+    console.error('Erreur de chargement de l’activité du membre :', error);
+    summary.textContent = `Impossible de charger l’activité : ${error.message || 'erreur inconnue'}`;
+    if (note) note.textContent = 'Réessayez plus tard ou vérifiez les droits de connexion.';
+    afficherLigneVide(tbody, 5, 'Les séances de ce membre ne peuvent pas être chargées pour le moment.');
+  } finally {
+    if (bouton) bouton.disabled = false;
+  }
 }
 
 async function accepterEtudiant(id, bouton) {
@@ -455,6 +614,18 @@ function connecterEvenementsDashboardAdmin() {
     try { await initialiserDashboardAdmin(); }
     finally { actualiser.disabled = false; actualiser.removeAttribute('aria-busy'); }
   });
+
+  const modalActivite = document.getElementById('admin-activity-modal');
+  const boutonFermerActivite = document.getElementById('admin-activity-close');
+  boutonFermerActivite?.addEventListener('click', fermerModalActivite);
+  modalActivite?.addEventListener('click', event => {
+    if (event.target === modalActivite) fermerModalActivite();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modalActivite && !modalActivite.classList.contains('cache')) {
+      fermerModalActivite();
+    }
+  });
 }
 
 if (document.readyState === 'loading') {
@@ -462,3 +633,6 @@ if (document.readyState === 'loading') {
 } else {
   connecterEvenementsDashboardAdmin();
 }
+
+window.initialiserDashboardAdmin = initialiserDashboardAdmin;
+})();
