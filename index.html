@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=28">
+  <link rel="stylesheet" href="style.css?v=29">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -262,10 +262,22 @@
       </section>
 
       <section class="admin-card" aria-labelledby="admin-inscriptions-title">
-        <div class="admin-card-header"><div><span class="progress-overline">ACCÈS À LA PLATEFORME</span><h2 class="admin-card-title" id="admin-inscriptions-title">Comptes candidats</h2></div><span id="admin-badge-moderation" class="admin-card-badge">Chargement…</span></div>
+        <div class="admin-card-header"><div><span class="progress-overline">ACCÈS À LA PLATEFORME</span><h2 class="admin-card-title" id="admin-inscriptions-title">Comptes de la plateforme</h2></div><span id="admin-badge-moderation" class="admin-card-badge">Chargement…</span></div>
         <div class="admin-toolbar"><p class="admin-card-description">Tous les comptes apparaissent ici. Les nouveaux candidats doivent être autorisés par l’administration avant de se connecter.</p><label class="admin-search"><span class="sr-only">Filtrer les comptes</span><span aria-hidden="true">⌕</span><input id="admin-filtre-moderation" type="search" placeholder="Nom ou adresse email…" autocomplete="off"></label></div>
-        <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Compte</th><th>Type</th><th>Inscrit le</th><th>Accès</th></tr></thead><tbody id="admin-moderation-table"><tr><td colspan="4" class="table-empty">Chargement des comptes…</td></tr></tbody></table></div>
+        <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Compte</th><th>Type</th><th>Inscrit le</th><th>Activité</th><th>Accès</th></tr></thead><tbody id="admin-moderation-table"><tr><td colspan="5" class="table-empty">Chargement des comptes…</td></tr></tbody></table></div>
       </section>
+
+      <div id="admin-activity-modal" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="admin-activity-title">
+        <div class="modal-boite modal-admin-activity">
+          <div class="admin-activity-header">
+            <div><span class="progress-overline">ACTIVITÉ DE PRÉPARATION</span><h2 id="admin-activity-title">Activité du membre</h2><p id="admin-activity-subtitle" class="admin-activity-subtitle">Séances de préparation enregistrées sur la plateforme.</p></div>
+            <button id="admin-activity-close" class="admin-activity-close" type="button" aria-label="Fermer l’activité">×</button>
+          </div>
+          <div id="admin-activity-summary" class="admin-activity-summary" aria-live="polite"></div>
+          <p id="admin-activity-note" class="admin-activity-note"></p>
+          <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Date</th><th>Mode</th><th>Matière</th><th>Score</th><th>Durée</th></tr></thead><tbody id="admin-activity-table"><tr><td colspan="5" class="table-empty">Sélectionnez un membre pour consulter ses séances.</td></tr></tbody></table></div>
+        </div>
+      </div>
     </section>
 
     <section id="ecran-quiz" class="ecran" aria-labelledby="texte-question">
@@ -337,8 +349,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="supabaseClient.js?v=21"></script>
   <script src="db.js?v=21"></script>
-  <script src="app.js?v=27"></script>
-  <script src="adminDashboard.js?v=26"></script>
+  <script src="app.js?v=29"></script>
+  <script src="adminDashboard.js?v=28"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {
       const inscription = document.getElementById('auth-titre').textContent !== 'Inscription Candidat';

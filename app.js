@@ -563,8 +563,8 @@ function afficherEcran(nomEcran) {
     }
     elAdmin.classList.add('actif');
     // Utiliser la nouvelle fonction du dashboard admin si disponible
-    if (typeof initialiserDashboardAdmin === 'function') {
-      initialiserDashboardAdmin();
+    if (typeof window.initialiserDashboardAdmin === 'function') {
+      window.initialiserDashboardAdmin();
     } else {
       chargerEspaceAdmin();
     }
@@ -580,13 +580,13 @@ function afficherErreurChargementDashboardAdmin(message) {
   if (badgeComptes) badgeComptes.textContent = 'Administration indisponible';
   if (badgeSignalements) badgeSignalements.textContent = 'Administration indisponible';
 
-  ['admin-moderation-table', 'admin-signalements-table'].forEach(id => {
+  [['admin-moderation-table', 5], ['admin-signalements-table', 4]].forEach(([id, colspan]) => {
     const tbody = document.getElementById(id);
     if (!tbody) return;
     tbody.replaceChildren();
     const row = document.createElement('tr');
     const cell = document.createElement('td');
-    cell.colSpan = 4;
+    cell.colSpan = colspan;
     cell.className = 'table-empty';
     cell.textContent = message;
     row.appendChild(cell);
@@ -603,20 +603,20 @@ function afficherErreurChargementDashboardAdmin(message) {
 }
 
 function chargerEspaceAdmin() {
-  if (typeof initialiserDashboardAdmin === 'function') {
-    initialiserDashboardAdmin();
+  if (typeof window.initialiserDashboardAdmin === 'function') {
+    window.initialiserDashboardAdmin();
     return Promise.resolve();
   }
   if (promesseChargementDashboardAdmin) return promesseChargementDashboardAdmin;
 
   const messageChargement = 'Chargement du module d’administration…';
-  ['admin-moderation-table', 'admin-signalements-table'].forEach(id => {
+  [['admin-moderation-table', 5], ['admin-signalements-table', 4]].forEach(([id, colspan]) => {
     const tbody = document.getElementById(id);
     if (!tbody) return;
     tbody.replaceChildren();
     const row = document.createElement('tr');
     const cell = document.createElement('td');
-    cell.colSpan = 4;
+    cell.colSpan = colspan;
     cell.className = 'table-empty';
     cell.textContent = messageChargement;
     row.appendChild(cell);
@@ -625,12 +625,12 @@ function chargerEspaceAdmin() {
 
   promesseChargementDashboardAdmin = new Promise(resolve => {
     const script = document.createElement('script');
-    script.src = `adminDashboard.js?v=26&retry=${Date.now()}`;
+    script.src = `adminDashboard.js?v=28&retry=${Date.now()}`;
     script.async = true;
     script.onload = () => {
       promesseChargementDashboardAdmin = null;
-      if (typeof initialiserDashboardAdmin === 'function') {
-        initialiserDashboardAdmin();
+      if (typeof window.initialiserDashboardAdmin === 'function') {
+        window.initialiserDashboardAdmin();
       } else {
         afficherErreurChargementDashboardAdmin('Le script admin a répondu sans démarrer. Rechargez la page ou vérifiez la console du navigateur.');
       }
