@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=30">
+  <link rel="stylesheet" href="style.css?v=31">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -339,8 +339,7 @@
       <div class="quiz-barre-infos"><div><span class="progress-overline">VOTRE AVANCÉE</span><div class="progression-texte" id="compteur-questions">Question 1 / 60</div></div><div id="chrono-container" class="chrono-badge"><span class="chrono-caption">TEMPS RESTANT</span><strong id="chrono-temps">60:00</strong></div></div>
       <div class="barre-progression-fond" role="progressbar" aria-label="Avancement de la séance" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="barre-progression-remplissage" class="barre-progression-remplissage"></div></div>
       <article class="carte-question">
-        <div class="question-en-tete"><span id="badge-matiere" class="badge-matiere">MATIÈRE</span><span id="badge-type-reponse" class="badge-type">CHOIX UNIQUE</span></div>
-        <p class="question-instruction" id="question-instruction">Sélectionnez la réponse qui vous semble juste.</p>
+        <div class="question-en-tete"><span id="badge-matiere" class="badge-matiere">MATIÈRE</span></div>
         <h2 id="texte-question" class="texte-question" aria-live="polite">Chargement…</h2>
         <div id="liste-options" class="liste-options" role="group" aria-label="Propositions de réponse"></div>
         <div id="bloc-explication-directe" class="bloc-explication cache"><div class="explication-titre"><span aria-hidden="true">✦</span> À retenir</div><p id="texte-explication-directe"></p></div>
@@ -403,7 +402,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="supabaseClient.js?v=21"></script>
   <script src="db.js?v=21"></script>
-  <script src="app.js?v=30"></script>
+  <script src="app.js?v=31"></script>
   <script src="adminDashboard.js?v=29"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {

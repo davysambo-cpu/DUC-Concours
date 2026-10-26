@@ -46,7 +46,6 @@ const elCompteur = document.getElementById('compteur-questions');
 const elBarreRemplissage = document.getElementById('barre-progression-remplissage');
 
 const elBadgeMatiere = document.getElementById('badge-matiere');
-const elBadgeType = document.getElementById('badge-type-reponse');
 const elTexteQuestion = document.getElementById('texte-question');
 const elListeOptions = document.getElementById('liste-options');
 const elBlocExplication = document.getElementById('bloc-explication-directe');
@@ -1211,11 +1210,6 @@ function afficherQuestionCourante() {
   elBarreRemplissage.parentElement?.setAttribute('aria-valuenow', String(Math.round(pct)));
 
   elBadgeMatiere.textContent = (q.matiere || 'Quiz').toUpperCase();
-  elBadgeType.textContent = q.type === 'multiple' ? 'Choix multiples' : 'Choix unique';
-  const instruction = document.getElementById('question-instruction');
-  if (instruction) instruction.textContent = q.type === 'multiple'
-    ? 'Sélectionnez toutes les réponses exactes.'
-    : 'Sélectionnez la réponse qui vous semble juste.';
   elTexteQuestion.textContent = q.question;
 
   elListeOptions.innerHTML = '';
