@@ -15,6 +15,8 @@ if (!supabase) {
 let utilisateurActuel = null;
 let utilisateurEstAdmin = false;
 let promesseChargementDashboardAdmin = null;
+let synchronisationEnCours = false;
+let derniereSyncEnErreur = false;
 
 let sessionActuelle = {
   mode: null,
@@ -217,17 +219,20 @@ function decoderBase64Reponses(base64Str) {
 // 2. PROTOCOLE AUTO-SYNC SUPABASE (Section 3.5 & 3.6)
 // ========================================================
 async function synchroniserDonnees() {
+  if (synchronisationEnCours) return;
   if (!navigator.onLine || !utilisateurActuel || !supabase) {
     mettreAJourStatutReseau();
     return;
   }
 
+  synchronisationEnCours = true;
+  mettreAJourStatutReseau();
   try {
     const queue = await db.sync_queue.toArray();
     const reports = await db.questions_signalees.toArray();
 
     if (queue.length === 0 && reports.length === 0) {
-      mettreAJourStatutReseau();
+      derniereSyncEnErreur = false;
       return;
     }
 
@@ -273,10 +278,13 @@ async function synchroniserDonnees() {
     }
 
     console.log("✅ Auto-Sync terminée avec succès !");
-    mettreAJourStatutReseau();
+    derniereSyncEnErreur = false;
   } catch (err) {
     console.error("❌ Échec Auto-Sync :", err);
-    mettreAJourStatutReseau(true);
+    derniereSyncEnErreur = true;
+  } finally {
+    synchronisationEnCours = false;
+    mettreAJourStatutReseau();
   }
 }
 
@@ -293,18 +301,41 @@ async function mettreAJourStatutReseau(erreur = false) {
     erreur = true;
   }
 
-  if (erreur) {
-    elBadgeReseau.className = 'badge-statut statut-rouge';
-    elTexteStatut.textContent = 'Erreur Sync';
+  const enErreur = erreur || derniereSyncEnErreur;
+  let classeBadge = 'badge-statut statut-vert';
+  let texteStatut = 'En ligne';
+
+  if (synchronisationEnCours) {
+    classeBadge = 'badge-statut statut-vert';
+    texteStatut = 'Synchronisation…';
   } else if (!navigator.onLine) {
-    elBadgeReseau.className = 'badge-statut statut-jaune';
-    elTexteStatut.textContent = 'Hors-ligne';
+    classeBadge = 'badge-statut statut-jaune';
+    texteStatut = 'Hors-ligne';
+  } else if (enErreur) {
+    classeBadge = 'badge-statut statut-rouge';
+    texteStatut = fileAttente > 0 ? `Sync en échec (${fileAttente})` : 'Sync en échec';
   } else if (fileAttente > 0) {
-    elBadgeReseau.className = 'badge-statut statut-jaune';
-    elTexteStatut.textContent = 'Sync en attente';
-  } else {
-    elBadgeReseau.className = 'badge-statut statut-vert';
-    elTexteStatut.textContent = 'En ligne';
+    classeBadge = 'badge-statut statut-jaune';
+    texteStatut = `Sync en attente (${fileAttente})`;
+  }
+
+  elBadgeReseau.className = classeBadge;
+  elTexteStatut.textContent = texteStatut;
+
+  const boutonSync = document.getElementById('btn-sync-manuelle');
+  if (boutonSync) {
+    const relancable = !synchronisationEnCours && (enErreur || fileAttente > 0);
+    boutonSync.classList.toggle('cache', !relancable);
+    boutonSync.disabled = synchronisationEnCours;
+    const texteBouton = document.getElementById('btn-sync-manuelle-texte');
+    if (texteBouton) {
+      texteBouton.textContent = fileAttente > 0
+        ? `Sync (${fileAttente})`
+        : 'Réessayer';
+    }
+    boutonSync.title = enErreur
+      ? 'La dernière synchronisation a échoué : cliquez pour réessayer.'
+      : 'Relancer la synchronisation des données en attente.';
   }
 }
 
@@ -313,6 +344,9 @@ window.addEventListener('online', () => {
   synchroniserDonnees();
 });
 window.addEventListener('offline', () => mettreAJourStatutReseau());
+document.getElementById('btn-sync-manuelle')?.addEventListener('click', () => {
+  synchroniserDonnees();
+});
 
 // ========================================================
 // 3. AUTHENTIFICATION SUPABASE (Section 3.4)
@@ -625,7 +659,7 @@ function chargerEspaceAdmin() {
 
   promesseChargementDashboardAdmin = new Promise(resolve => {
     const script = document.createElement('script');
-    script.src = `adminDashboard.js?v=28&retry=${Date.now()}`;
+    script.src = `adminDashboard.js?v=29&retry=${Date.now()}`;
     script.async = true;
     script.onload = () => {
       promesseChargementDashboardAdmin = null;
@@ -753,6 +787,7 @@ async function mettreAJourDashboard() {
     remplirSelectMatiere(document.getElementById('select-matiere-unidisciplinaire'), listeMatieres, '', 'Choisir une matière…');
     afficherProgressionMatieres(questionsToutes, statistiques);
     afficherHistoriqueSessions(sessions);
+    afficherEvolutionEtConseils(sessions, questionsToutes, statistiques);
   } catch (e) {
     console.error("Erreur du tableau de bord :", e);
   }
@@ -892,6 +927,142 @@ function afficherHistoriqueSessions(sessions) {
     score.textContent = `${Number(session.score_total) || 0}/${Number(session.total_questions) || 0}`;
     ligne.append(marque, details, score);
     conteneur.appendChild(ligne);
+  });
+}
+
+function titreMatiere(matiere) {
+  const nom = String(matiere || 'Autre');
+  return nom.charAt(0).toLocaleUpperCase('fr-FR') + nom.slice(1);
+}
+
+function afficherEvolutionEtConseils(sessions, questions, statistiques) {
+  const conteneurEvolution = document.getElementById('progression-evolution');
+  const conteneurConseils = document.getElementById('progression-conseils');
+  if (!conteneurEvolution || !conteneurConseils) return;
+
+  // --- Évolution des scores par matière (épreuves ciblées uniquement) ---
+  const sessionsValides = [...sessions]
+    .filter(session =>
+      session.matiere &&
+      session.matiere !== 'toutes' &&
+      Number(session.total_questions) > 0 &&
+      session.date_passage &&
+      !Number.isNaN(new Date(session.date_passage).getTime()))
+    .sort((a, b) => new Date(a.date_passage) - new Date(b.date_passage));
+
+  const tauxParMatiere = new Map();
+  sessionsValides.forEach(session => {
+    const taux = Math.min(1, (Number(session.score_total) || 0) / Number(session.total_questions));
+    if (!tauxParMatiere.has(session.matiere)) tauxParMatiere.set(session.matiere, []);
+    tauxParMatiere.get(session.matiere).push(taux);
+  });
+
+  const lignesEvolution = [...tauxParMatiere.entries()]
+    .map(([matiere, taux]) => {
+      const moyenne = liste => liste.reduce((total, valeur) => total + valeur, 0) / liste.length;
+      const recents = taux.slice(-3);
+      const precedents = taux.slice(0, -3);
+      const moyenneRecente = moyenne(recents);
+      let tendance = 'stable';
+      if (precedents.length > 0) {
+        const delta = moyenneRecente - moyenne(precedents);
+        if (delta >= 0.05) tendance = 'hausse';
+        else if (delta <= -0.05) tendance = 'baisse';
+      }
+      return { matiere, moyenne: moyenneRecente, tendance, nb: taux.length };
+    })
+    .sort((a, b) => a.moyenne - b.moyenne);
+
+  conteneurEvolution.replaceChildren();
+  if (lignesEvolution.length === 0) {
+    const vide = document.createElement('p');
+    vide.className = 'empty-state';
+    vide.textContent = 'Terminez quelques épreuves ciblées pour voir l’évolution de vos scores par matière.';
+    conteneurEvolution.appendChild(vide);
+  } else {
+    const fleches = { hausse: '↗', baisse: '↘', stable: '→' };
+    const libellesTendance = { hausse: 'En hausse', baisse: 'En baisse', stable: 'Stable' };
+    lignesEvolution.forEach(ligne => {
+      const pourcent = Math.round(ligne.moyenne * 100);
+      const rang = document.createElement('div');
+      rang.className = 'evolution-row';
+      const nom = document.createElement('span');
+      nom.className = 'evolution-name';
+      nom.textContent = titreMatiere(ligne.matiere);
+      nom.title = nom.textContent;
+      const piste = document.createElement('span');
+      piste.className = 'evolution-track';
+      piste.setAttribute('role', 'progressbar');
+      piste.setAttribute('aria-valuemin', '0');
+      piste.setAttribute('aria-valuemax', '100');
+      piste.setAttribute('aria-valuenow', String(pourcent));
+      piste.setAttribute('aria-label', `Score moyen récent en ${ligne.matiere}`);
+      const remplissage = document.createElement('span');
+      remplissage.className = 'evolution-fill';
+      remplissage.style.width = `${pourcent}%`;
+      piste.appendChild(remplissage);
+      const valeur = document.createElement('span');
+      valeur.className = 'evolution-value';
+      const fleche = document.createElement('span');
+      fleche.className = `evolution-trend evolution-${ligne.tendance}`;
+      fleche.textContent = fleches[ligne.tendance];
+      const chiffre = document.createElement('span');
+      chiffre.textContent = `${pourcent} %`;
+      valeur.append(fleche, chiffre);
+      valeur.title = `${libellesTendance[ligne.tendance]} · ${ligne.nb} séance${ligne.nb === 1 ? '' : 's'} avec matière`;
+      rang.append(nom, piste, valeur);
+      conteneurEvolution.appendChild(rang);
+    });
+  }
+
+  // --- Recommandations de révision ---
+  const conseils = [];
+  const matieresDejaConseillees = new Set();
+
+  const prioritaireScore = lignesEvolution.find(ligne => ligne.moyenne < 0.6);
+  if (prioritaireScore) {
+    matieresDejaConseillees.add(prioritaireScore.matiere);
+    conseils.push(`Revoyez <strong>${titreMatiere(prioritaireScore.matiere)}</strong> en priorité : ${Math.round(prioritaireScore.moyenne * 100)} % de réussite sur vos ${prioritaireScore.nb} dernière${prioritaireScore.nb === 1 ? '' : 's'} épreuve(s) ciblée(s).`);
+  }
+
+  const statsParId = new Map(statistiques.map(stat => [stat.id, stat]));
+  const erreursParMatiere = new Map();
+  questions.forEach(question => {
+    const stat = statsParId.get(question.id);
+    const vues = Number(stat?.vues) || 0;
+    if (vues === 0) return;
+    const matiere = question.matiere || 'Autre';
+    const cumul = erreursParMatiere.get(matiere) || { vues: 0, echecs: 0 };
+    cumul.vues += vues;
+    cumul.echecs += Number(stat?.echecs) || 0;
+    erreursParMatiere.set(matiere, cumul);
+  });
+  const matiereErreur = [...erreursParMatiere.entries()]
+    .filter(([matiere, cumul]) => !matieresDejaConseillees.has(matiere) && cumul.vues >= 5 && cumul.echecs / cumul.vues >= 0.35)
+    .map(([matiere, cumul]) => ({ matiere, ...cumul, taux: cumul.echecs / cumul.vues }))
+    .sort((a, b) => b.taux - a.taux)[0];
+  if (matiereErreur) {
+    conseils.push(`Concentrez vos révisions sur <strong>${titreMatiere(matiereErreur.matiere)}</strong> : ${matiereErreur.echecs} réponse(s) manquée(s) sur ${matiereErreur.vues} question(s) déjà étudiée(s).`);
+  }
+
+  if (conseils.length === 0) {
+    conseils.push(sessions.length === 0
+      ? 'Commencez par un <strong>concours blanc</strong> pour situer votre niveau de départ.'
+      : 'Votre niveau est plutôt homogène : enchaînez avec un <strong>concours blanc</strong> pour mesurer vos progrès.');
+  }
+
+  conteneurConseils.replaceChildren();
+  conseils.slice(0, 3).forEach((conseil, index) => {
+    const item = document.createElement('div');
+    item.className = 'conseil-item';
+    const rang = document.createElement('span');
+    rang.className = 'conseil-index';
+    rang.setAttribute('aria-hidden', 'true');
+    rang.textContent = String(index + 1).padStart(2, '0');
+    const texte = document.createElement('p');
+    texte.innerHTML = conseil;
+    item.append(rang, texte);
+    conteneurConseils.appendChild(item);
   });
 }
 

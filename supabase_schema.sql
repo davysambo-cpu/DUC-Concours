@@ -38,6 +38,21 @@ create table if not exists public.question_reports (
 create index if not exists question_reports_user_id_idx
   on public.question_reports (user_id);
 
+-- Historique des décisions et notes de suivi prises par l'administration
+-- sur chaque signalement (statuts + notes).
+create table if not exists public.report_reviews (
+  id uuid primary key default gen_random_uuid(),
+  report_id uuid not null references public.question_reports(id) on delete cascade,
+  admin_id uuid not null references public.profiles(id) on delete cascade,
+  note text,
+  ancien_statut varchar(20),
+  nouveau_statut varchar(20) not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists report_reviews_report_id_idx
+  on public.report_reviews (report_id);
+
 create or replace function public.creer_profil_nouvel_utilisateur()
 returns trigger
 language plpgsql
@@ -135,6 +150,14 @@ create policy question_reports_update_admin
   using ((select public.est_admin()))
   with check ((select public.est_admin()));
 
-grant select on public.profiles, public.exam_sessions, public.question_reports to authenticated;
-grant insert on public.exam_sessions, public.question_reports to authenticated;
+alter table public.report_reviews enable row level security;
+
+drop policy if exists report_reviews_admin_all on public.report_reviews;
+create policy report_reviews_admin_all
+  on public.report_reviews for all to authenticated
+  using ((select public.est_admin()))
+  with check ((select public.est_admin()));
+
+grant select on public.profiles, public.exam_sessions, public.question_reports, public.report_reviews to authenticated;
+grant insert on public.exam_sessions, public.question_reports, public.report_reviews to authenticated;
 grant update on public.question_reports to authenticated;
