@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="style.css?v=30">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -37,6 +37,9 @@
           <span class="point-statut" aria-hidden="true"></span>
           <span id="texte-statut">En ligne</span>
         </div>
+        <button id="btn-sync-manuelle" class="btn-sync-manuelle cache" type="button" title="Relancer la synchronisation des données en attente">
+          <span aria-hidden="true">↻</span><span id="btn-sync-manuelle-texte">Sync</span>
+        </button>
         <button id="btn-ouvrir-connexion" class="btn-connexion-header" type="button">Connexion</button>
         <div id="menu-actions" class="menu-actions cache">
           <button id="btn-menu-actions" class="btn-menu-actions" type="button" aria-label="Ouvrir le menu du compte" aria-expanded="false">
@@ -175,6 +178,14 @@
                 <div id="historique-sessions" class="historique-sessions"><p class="empty-state">Vos séances terminées apparaîtront ici.</p></div>
                 <p class="history-footnote">Historique conservé sur cet appareil.</p>
               </article>
+
+              <article class="progress-card progress-card-evolution">
+                <div class="progress-card-heading"><div><span class="progress-overline">ÉVOLUTION &amp; CONSEILS</span><h3>Vos priorités de révision</h3></div><span class="history-stamp" aria-hidden="true">PLAN</span></div>
+                <div id="progression-evolution" class="evolution-matieres"><p class="empty-state">Terminez quelques épreuves ciblées pour voir l’évolution de vos scores par matière.</p></div>
+                <div class="priorite-heading"><span>À TRAVAILLER EN PRIORITÉ</span></div>
+                <div id="progression-conseils" class="priorite-conseils"><p class="empty-state">Vos recommandations apparaîtront ici après vos premières séances.</p></div>
+                <p class="history-footnote">Calculé à partir de vos séances terminées sur cet appareil.</p>
+              </article>
             </div>
           </section>
 
@@ -256,28 +267,71 @@
 
       <section class="admin-card" aria-labelledby="admin-signalements-title">
         <div class="admin-card-header"><div><span class="progress-overline">QUALITÉ DU CATALOGUE</span><h2 class="admin-card-title" id="admin-signalements-title">Retours sur les questions</h2></div><span id="admin-signalements-badge" class="admin-card-badge">Chargement…</span></div>
-        <p class="admin-card-description">Consultez les signalements et mettez à jour leur état de traitement.</p>
+        <div class="admin-toolbar">
+          <p class="admin-card-description">Consultez les signalements et mettez à jour leur état de traitement.</p>
+          <label class="admin-filter-select"><span class="sr-only">Filtrer les signalements par état</span>
+            <select id="admin-filtre-signalement">
+              <option value="tous">Tous les états</option>
+              <option value="nouveau">À traiter</option>
+              <option value="corrige">Corrigés</option>
+              <option value="rejete">Non retenus</option>
+            </select>
+          </label>
+        </div>
         <div id="admin-feedback" class="admin-feedback cache" role="status" aria-live="polite"></div>
         <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Question</th><th>Commentaire</th><th>Reçu le</th><th>État</th></tr></thead><tbody id="admin-signalements-table"><tr><td colspan="4" class="table-empty">Chargement des retours…</td></tr></tbody></table></div>
       </section>
 
       <section class="admin-card" aria-labelledby="admin-inscriptions-title">
         <div class="admin-card-header"><div><span class="progress-overline">ACCÈS À LA PLATEFORME</span><h2 class="admin-card-title" id="admin-inscriptions-title">Comptes de la plateforme</h2></div><span id="admin-badge-moderation" class="admin-card-badge">Chargement…</span></div>
-        <div class="admin-toolbar"><p class="admin-card-description">Tous les comptes apparaissent ici. Les nouveaux candidats doivent être autorisés par l’administration avant de se connecter.</p><label class="admin-search"><span class="sr-only">Filtrer les comptes</span><span aria-hidden="true">⌕</span><input id="admin-filtre-moderation" type="search" placeholder="Nom ou adresse email…" autocomplete="off"></label></div>
-        <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Compte</th><th>Type</th><th>Inscrit le</th><th>Activité</th><th>Accès</th></tr></thead><tbody id="admin-moderation-table"><tr><td colspan="5" class="table-empty">Chargement des comptes…</td></tr></tbody></table></div>
-      </section>
-
-      <div id="admin-activity-modal" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="admin-activity-title">
-        <div class="modal-boite modal-admin-activity">
-          <div class="admin-activity-header">
-            <div><span class="progress-overline">ACTIVITÉ DE PRÉPARATION</span><h2 id="admin-activity-title">Activité du membre</h2><p id="admin-activity-subtitle" class="admin-activity-subtitle">Séances de préparation enregistrées sur la plateforme.</p></div>
-            <button id="admin-activity-close" class="admin-activity-close" type="button" aria-label="Fermer l’activité">×</button>
+        <div class="admin-toolbar">
+          <p class="admin-card-description">Tous les comptes apparaissent ici. Les nouveaux candidats doivent être autorisés par l’administration avant de se connecter.</p>
+          <div class="admin-toolbar-actions">
+            <label class="admin-filter-select"><span class="sr-only">Filtrer les comptes par activité</span>
+              <select id="admin-filtre-activite">
+                <option value="tous">Toutes activités</option>
+                <option value="actifs">Actifs (30 jours)</option>
+                <option value="inactifs">Sans activité (30 jours)</option>
+                <option value="jamais">Jamais d’activité</option>
+              </select>
+            </label>
+            <label class="admin-search"><span class="sr-only">Filtrer les comptes</span><span aria-hidden="true">⌕</span><input id="admin-filtre-moderation" type="search" placeholder="Nom ou adresse email…" autocomplete="off"></label>
+            <button id="admin-export-csv" class="btn-export-csv" type="button"><span aria-hidden="true">⤓</span> Exporter CSV</button>
           </div>
-          <div id="admin-activity-summary" class="admin-activity-summary" aria-live="polite"></div>
-          <p id="admin-activity-note" class="admin-activity-note"></p>
-          <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Date</th><th>Mode</th><th>Matière</th><th>Score</th><th>Durée</th></tr></thead><tbody id="admin-activity-table"><tr><td colspan="5" class="table-empty">Sélectionnez un membre pour consulter ses séances.</td></tr></tbody></table></div>
         </div>
-      </div>
+          <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Compte</th><th>Type</th><th>Inscrit le</th><th>Activité</th><th>Accès</th></tr></thead><tbody id="admin-moderation-table"><tr><td colspan="5" class="table-empty">Chargement des comptes…</td></tr></tbody></table></div>
+        </section>
+
+        <div id="admin-activity-modal" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="admin-activity-title">
+          <div class="modal-boite modal-admin-activity">
+            <div class="admin-activity-header">
+              <div><span class="progress-overline">ACTIVITÉ DE PRÉPARATION</span><h2 id="admin-activity-title">Activité du membre</h2><p id="admin-activity-subtitle" class="admin-activity-subtitle">Séances de préparation enregistrées sur la plateforme.</p></div>
+              <button id="admin-activity-close" class="admin-activity-close" type="button" aria-label="Fermer l’activité">×</button>
+            </div>
+            <div id="admin-activity-summary" class="admin-activity-summary" aria-live="polite"></div>
+            <p id="admin-activity-note" class="admin-activity-note"></p>
+            <div class="admin-table-container"><table class="admin-table"><thead><tr><th>Date</th><th>Mode</th><th>Matière</th><th>Score</th><th>Durée</th></tr></thead><tbody id="admin-activity-table"><tr><td colspan="5" class="table-empty">Sélectionnez un membre pour consulter ses séances.</td></tr></tbody></table></div>
+          </div>
+        </div>
+
+        <div id="admin-report-modal" class="modal-fond cache" role="dialog" aria-modal="true" aria-labelledby="admin-report-title">
+          <div class="modal-boite modal-admin-report">
+            <div class="admin-activity-header">
+              <div><span class="progress-overline">SUIVI DU SIGNALEMENT</span><h2 id="admin-report-title">Signalement</h2><p id="admin-report-subtitle" class="admin-activity-subtitle">Décisions et notes enregistrées par l’administration.</p></div>
+              <button id="admin-report-close" class="admin-activity-close" type="button" aria-label="Fermer le suivi">×</button>
+            </div>
+            <div class="admin-report-question"><span id="admin-report-question-id" class="report-id"></span><p id="admin-report-question-texte"></p></div>
+            <div class="admin-report-comment"><span>COMMENTAIRE DU CANDIDAT</span><p id="admin-report-comment-texte"></p></div>
+            <div class="admin-report-statuts"><span class="sr-only">État actuel</span><span id="admin-report-statut-badge" class="admin-account-status admin-account-status-pending">À traiter</span></div>
+            <div class="priorite-heading"><span>HISTORIQUE DES DÉCISIONS</span></div>
+            <div id="admin-report-historique" class="report-historique"><p class="empty-state">Chargement du suivi…</p></div>
+            <div id="admin-report-message" class="admin-report-message cache" role="status" aria-live="polite"></div>
+            <form id="admin-report-form" class="admin-report-form" novalidate>
+              <div class="form-groupe"><label for="admin-report-note">Note de suivi</label><textarea id="admin-report-note" rows="3" maxlength="1000" placeholder="Ex. Vérifié avec l’équipe pédagogique, correction prévue."></textarea></div>
+              <button type="submit" id="admin-report-note-submit" class="btn btn-primaire">Ajouter la note au suivi</button>
+            </form>
+          </div>
+        </div>
     </section>
 
     <section id="ecran-quiz" class="ecran" aria-labelledby="texte-question">
@@ -349,8 +403,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="supabaseClient.js?v=21"></script>
   <script src="db.js?v=21"></script>
-  <script src="app.js?v=29"></script>
-  <script src="adminDashboard.js?v=28"></script>
+  <script src="app.js?v=30"></script>
+  <script src="adminDashboard.js?v=29"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {
       const inscription = document.getElementById('auth-titre').textContent !== 'Inscription Candidat';

@@ -3,10 +3,26 @@
 const supabase = window.supabaseClient;
 let activityChart = null;
 let profilsCandidats = [];
+let activiteParCompte = new Map();
+let signalementsCharges = [];
+let questionsParIdSignalements = new Map();
+let signalementSuiviActuel = null;
+let versionChargementSuivi = 0;
+let boutonSuiviDeclencheur = null;
 let versionChargementProfils = 0;
 let versionChargementActivite = 0;
 let boutonActiviteDeclencheur = null;
 const animationsKpi = new Map();
+
+const LIBELLES_STATUT_SIGNALEMENT = {
+  nouveau: 'À traiter',
+  corrige: 'Corrigé',
+  rejete: 'Non retenu'
+};
+
+function libelleStatutSignalement(statut) {
+  return LIBELLES_STATUT_SIGNALEMENT[statut] || LIBELLES_STATUT_SIGNALEMENT.nouveau;
+}
 
 function attendreRequeteSupabase(requete, message, delaiMs = 15000) {
   let temporisateur;
@@ -45,17 +61,47 @@ async function remplirTableModeration() {
   const badge = document.getElementById('admin-badge-moderation');
   if (badge) badge.textContent = 'Chargement…';
   try {
-    const { data, error } = await attendreRequeteSupabase(
-      supabase
-        .from('profiles')
-        .select('id, nom_complet, email, role, est_autorise, date_inscription')
-        .order('date_inscription', { ascending: false }),
-      'La liste des comptes a dépassé le délai de réponse.'
-    );
+    const [resultatComptes, resultatSessions] = await Promise.allSettled([
+      attendreRequeteSupabase(
+        supabase
+          .from('profiles')
+          .select('id, nom_complet, email, role, est_autorise, date_inscription')
+          .order('date_inscription', { ascending: false }),
+        'La liste des comptes a dépassé le délai de réponse.'
+      ),
+      attendreRequeteSupabase(
+        supabase
+          .from('exam_sessions')
+          .select('user_id, date_passage')
+          .order('date_passage', { ascending: false }),
+        'Le chargement de l’activité a dépassé le délai de réponse.'
+      )
+    ]);
     if (version !== versionChargementProfils) return;
+    if (resultatComptes.status === 'rejected') throw resultatComptes.reason;
+    const { data, error } = resultatComptes.value;
     if (error) throw error;
 
     profilsCandidats = Array.isArray(data) ? data : [];
+    activiteParCompte = new Map();
+    if (resultatSessions.status === 'fulfilled' && !resultatSessions.value.error) {
+      (resultatSessions.value.data || []).forEach(session => {
+        if (!session?.user_id) return;
+        const entree = activiteParCompte.get(session.user_id) || { total: 0, derniere: null };
+        entree.total += 1;
+        const horodatage = session.date_passage ? new Date(session.date_passage).getTime() : NaN;
+        if (!Number.isNaN(horodatage) && (entree.derniere === null || horodatage > entree.derniere)) {
+          entree.derniere = horodatage;
+        }
+        activiteParCompte.set(session.user_id, entree);
+      });
+    } else {
+      const raisonSessions = resultatSessions.status === 'rejected'
+        ? resultatSessions.reason
+        : resultatSessions.value.error;
+      console.warn('Activité des comptes indisponible :', raisonSessions);
+    }
+
     const enAttente = profilsCandidats.filter(profil => profil.role !== 'admin' && profil.est_autorise !== true).length;
     mettreAJourBadgeModeration(profilsCandidats.length, enAttente);
     dessinerTableModeration();
@@ -72,17 +118,36 @@ async function remplirTableModeration() {
   }
 }
 
+function filtrerComptes() {
+  const filtreTexte = (document.getElementById('admin-filtre-moderation')?.value || '').trim().toLocaleLowerCase('fr-FR');
+  const filtreActivite = document.getElementById('admin-filtre-activite')?.value || 'tous';
+  const seuil30Jours = Date.now() - 30 * 24 * 60 * 60 * 1000;
+
+  return profilsCandidats.filter(profil => {
+    const recherche = `${profil.nom_complet || ''} ${profil.email || ''} ${profil.role || ''}`.toLocaleLowerCase('fr-FR');
+    if (!recherche.includes(filtreTexte)) return false;
+    const activite = activiteParCompte.get(profil.id);
+    if (filtreActivite === 'actifs') return Boolean(activite && activite.derniere && activite.derniere >= seuil30Jours);
+    if (filtreActivite === 'inactifs') return Boolean(activite && activite.derniere && activite.derniere < seuil30Jours);
+    if (filtreActivite === 'jamais') return !activite;
+    return true;
+  });
+}
+
+function formaterDateCourte(horodatage) {
+  const date = new Date(horodatage);
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
 function dessinerTableModeration() {
   const tbody = document.getElementById('admin-moderation-table');
   if (!tbody) return;
-  const filtre = (document.getElementById('admin-filtre-moderation')?.value || '').trim().toLocaleLowerCase('fr-FR');
-  const comptesFiltres = profilsCandidats.filter(profil =>
-    `${profil.nom_complet || ''} ${profil.email || ''} ${profil.role || ''}`.toLocaleLowerCase('fr-FR').includes(filtre)
-  );
+  const comptesFiltres = filtrerComptes();
   tbody.replaceChildren();
 
   if (comptesFiltres.length === 0) {
-    afficherLigneVide(tbody, 5, profilsCandidats.length ? 'Aucun compte ne correspond à cette recherche.' : 'Aucun compte enregistré.');
+    afficherLigneVide(tbody, 5, profilsCandidats.length ? 'Aucun compte ne correspond à ces filtres.' : 'Aucun compte enregistré.');
     return;
   }
 
@@ -119,7 +184,16 @@ function dessinerTableModeration() {
     activityLabel.textContent = 'Voir';
     activityButton.append(eyeIcon, activityLabel);
     activityButton.addEventListener('click', () => ouvrirActiviteMembre(profil, activityButton));
-    activityCell.appendChild(activityButton);
+    const activite = activiteParCompte.get(profil.id);
+    const activityInfo = document.createElement('span');
+    activityInfo.className = 'admin-account-activity-info';
+    if (activite) {
+      const dateDerniere = activite.derniere !== null ? formaterDateCourte(activite.derniere) : 'date inconnue';
+      activityInfo.textContent = `${activite.total} séance${activite.total === 1 ? '' : 's'} · ${dateDerniere}`;
+    } else {
+      activityInfo.textContent = 'Aucune séance';
+    }
+    activityCell.append(activityButton, activityInfo);
 
     const accessCell = document.createElement('td');
     const accessGroup = document.createElement('div');
@@ -144,6 +218,38 @@ function dessinerTableModeration() {
     row.append(nameCell, roleCell, dateCell, activityCell, accessCell);
     tbody.appendChild(row);
   });
+}
+
+function exporterComptesCSV() {
+  const comptes = filtrerComptes();
+  if (comptes.length === 0) {
+    afficherAdminFeedback('Aucun compte à exporter avec les filtres actuels.', true);
+    return;
+  }
+
+  const echapper = valeur => `"${String(valeur ?? '').replace(/"/g, '""')}"`;
+  const entetes = ['Nom', 'Email', 'Type', 'Inscrit le', 'Séances', 'Dernière activité', 'Accès'];
+  const lignesComptes = comptes.map(profil => {
+    const activite = activiteParCompte.get(profil.id);
+    return [
+      profil.nom_complet || '',
+      profil.email || '',
+      profil.role === 'admin' ? 'Administrateur' : 'Candidat',
+      profil.date_inscription ? formaterDate(profil.date_inscription) : '',
+      activite ? activite.total : 0,
+      activite?.derniere ? formaterDateCourte(activite.derniere) : '',
+      profil.est_autorise === true ? 'Accès autorisé' : 'En attente'
+    ].map(echapper).join(';');
+  });
+  const csv = `\uFEFF${[entetes.map(echapper).join(';'), ...lignesComptes].join('\r\n')}`;
+  const lien = document.createElement('a');
+  lien.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+  lien.download = `comptes-duc-concours-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(lien);
+  lien.click();
+  lien.remove();
+  URL.revokeObjectURL(lien.href);
+  afficherAdminFeedback(`${comptes.length} compte${comptes.length === 1 ? '' : 's'} exporté${comptes.length === 1 ? '' : 's'} en CSV.`, false);
 }
 
 function creerIconeOeil() {
@@ -323,6 +429,7 @@ async function chargerSignalements() {
   const badge = document.getElementById('admin-signalements-badge');
   if (!tbody) return;
   if (!supabase) {
+    signalementsCharges = [];
     afficherLigneVide(tbody, 4, 'Connexion Supabase indisponible.');
     if (badge) badge.textContent = 'Indisponible';
     return;
@@ -340,73 +447,90 @@ async function chargerSignalements() {
     );
     if (error) throw error;
 
-    const rapports = Array.isArray(data) ? data : [];
-    const aTraiter = rapports.filter(rapport => rapport.statut === 'nouveau').length;
-    if (badge) badge.textContent = rapports.length
-      ? `${aTraiter} à traiter · ${rapports.length} au total`
+    signalementsCharges = Array.isArray(data) ? data : [];
+    const aTraiter = signalementsCharges.filter(rapport => (rapport.statut || 'nouveau') === 'nouveau').length;
+    if (badge) badge.textContent = signalementsCharges.length
+      ? `${aTraiter} à traiter · ${signalementsCharges.length} au total`
       : 'Aucun retour';
 
-    let questionsParId = new Map();
+    questionsParIdSignalements = new Map();
     try {
       const questions = await db.questions.toArray();
-      questionsParId = new Map(questions.map(question => [question.id, question]));
+      questionsParIdSignalements = new Map(questions.map(question => [question.id, question]));
     } catch (errorLecture) {
       console.warn('Le catalogue local ne peut pas enrichir les signalements :', errorLecture);
     }
 
-    tbody.replaceChildren();
-    if (rapports.length === 0) {
-      afficherLigneVide(tbody, 4, 'Aucun signalement reçu.');
-      return;
-    }
-
-    rapports.forEach(rapport => {
-      const row = document.createElement('tr');
-      const questionCell = document.createElement('td');
-      const questionLabel = document.createElement('span');
-      questionLabel.className = 'report-question';
-      const question = questionsParId.get(rapport.question_id);
-      questionLabel.textContent = question?.question || 'Question du catalogue';
-      questionLabel.title = questionLabel.textContent;
-      const questionId = document.createElement('span');
-      questionId.className = 'report-id';
-      questionId.textContent = rapport.question_id || 'ID inconnu';
-      questionCell.append(questionLabel, questionId);
-
-      const commentCell = document.createElement('td');
-      const comment = document.createElement('span');
-      comment.className = 'report-comment';
-      comment.textContent = rapport.commentaire?.trim() || 'Aucun commentaire ajouté.';
-      comment.title = comment.textContent;
-      commentCell.appendChild(comment);
-
-      const dateCell = document.createElement('td');
-      dateCell.textContent = formaterDate(rapport.date_signalement);
-      const statusCell = document.createElement('td');
-      const select = document.createElement('select');
-      select.className = 'report-state-select';
-      select.setAttribute('aria-label', `État du signalement ${rapport.question_id || ''}`);
-      [
-        ['nouveau', 'À traiter'],
-        ['corrige', 'Corrigé'],
-        ['rejete', 'Non retenu']
-      ].forEach(([value, label]) => {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = label;
-        select.appendChild(option);
-      });
-      select.value = ['nouveau', 'corrige', 'rejete'].includes(rapport.statut) ? rapport.statut : 'nouveau';
-      select.addEventListener('change', () => mettreAJourStatutSignalement(rapport, select));
-      statusCell.appendChild(select);
-      row.append(questionCell, commentCell, dateCell, statusCell);
-      tbody.appendChild(row);
-    });
+    dessinerSignalements();
   } catch (error) {
     console.error('Erreur de chargement des signalements :', error);
+    signalementsCharges = [];
     afficherLigneVide(tbody, 4, 'Les signalements ne peuvent pas être chargés pour le moment.');
     if (badge) badge.textContent = 'Erreur de chargement';
   }
+}
+
+function dessinerSignalements() {
+  const tbody = document.getElementById('admin-signalements-table');
+  if (!tbody) return;
+  const filtreEtat = document.getElementById('admin-filtre-signalement')?.value || 'tous';
+  const rapports = filtreEtat === 'tous'
+    ? signalementsCharges
+    : signalementsCharges.filter(rapport => (rapport.statut || 'nouveau') === filtreEtat);
+
+  tbody.replaceChildren();
+  if (rapports.length === 0) {
+    afficherLigneVide(tbody, 4, signalementsCharges.length
+      ? 'Aucun signalement ne correspond à cet état.'
+      : 'Aucun signalement reçu.');
+    return;
+  }
+
+  rapports.forEach(rapport => {
+    const row = document.createElement('tr');
+    const questionCell = document.createElement('td');
+    const questionLabel = document.createElement('span');
+    questionLabel.className = 'report-question';
+    const question = questionsParIdSignalements.get(rapport.question_id);
+    questionLabel.textContent = question?.question || 'Question du catalogue';
+    questionLabel.title = questionLabel.textContent;
+    const questionId = document.createElement('span');
+    questionId.className = 'report-id';
+    questionId.textContent = rapport.question_id || 'ID inconnu';
+    questionCell.append(questionLabel, questionId);
+
+    const commentCell = document.createElement('td');
+    const comment = document.createElement('span');
+    comment.className = 'report-comment';
+    comment.textContent = rapport.commentaire?.trim() || 'Aucun commentaire ajouté.';
+    comment.title = comment.textContent;
+    commentCell.appendChild(comment);
+
+    const dateCell = document.createElement('td');
+    dateCell.textContent = formaterDate(rapport.date_signalement);
+    const statusCell = document.createElement('td');
+    statusCell.className = 'report-state-cell';
+    const select = document.createElement('select');
+    select.className = 'report-state-select';
+    select.setAttribute('aria-label', `État du signalement ${rapport.question_id || ''}`);
+    Object.entries(LIBELLES_STATUT_SIGNALEMENT).forEach(([value, label]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      select.appendChild(option);
+    });
+    select.value = LIBELLES_STATUT_SIGNALEMENT[rapport.statut] ? rapport.statut : 'nouveau';
+    select.addEventListener('change', () => mettreAJourStatutSignalement(rapport, select));
+    const suiviButton = document.createElement('button');
+    suiviButton.type = 'button';
+    suiviButton.className = 'btn-suivi-signalement';
+    suiviButton.textContent = 'Suivi';
+    suiviButton.setAttribute('aria-label', `Ouvrir le suivi du signalement ${rapport.question_id || ''}`);
+    suiviButton.addEventListener('click', () => ouvrirSuiviSignalement(rapport, suiviButton));
+    statusCell.append(select, suiviButton);
+    row.append(questionCell, commentCell, dateCell, statusCell);
+    tbody.appendChild(row);
+  });
 }
 
 async function mettreAJourStatutSignalement(rapport, select) {
@@ -418,7 +542,10 @@ async function mettreAJourStatutSignalement(rapport, select) {
     const { error } = await supabase.from('question_reports').update({ statut: nouveauStatut }).eq('id', rapport.id);
     if (error) throw error;
     rapport.statut = nouveauStatut;
-    afficherAdminFeedback('État du signalement mis à jour.', false);
+    const suiviEnregistre = await enregistrerSuiviSignalement(rapport, nouveauStatut, ancienStatut, null);
+    afficherAdminFeedback(suiviEnregistre
+      ? 'État du signalement mis à jour et décision ajoutée au suivi.'
+      : 'État du signalement mis à jour.', false);
     await chargerSignalements();
   } catch (error) {
     console.error('Erreur de mise à jour du signalement :', error);
@@ -426,6 +553,165 @@ async function mettreAJourStatutSignalement(rapport, select) {
     select.disabled = false;
     afficherAdminFeedback(`Impossible de modifier ce signalement : ${error.message || 'erreur inconnue'}`, true);
   }
+}
+
+async function enregistrerSuiviSignalement(rapport, nouveauStatut, ancienStatut, note) {
+  if (!supabase || !rapport?.id) return false;
+  try {
+    const { data: reponse, error: erreurAuth } = await supabase.auth.getUser();
+    if (erreurAuth) throw erreurAuth;
+    const adminId = reponse?.user?.id;
+    if (!adminId) throw new Error('Administrateur non identifié.');
+    const { error } = await attendreRequeteSupabase(
+      supabase.from('report_reviews').insert({
+        report_id: rapport.id,
+        admin_id: adminId,
+        note: note || null,
+        ancien_statut: ancienStatut || null,
+        nouveau_statut: nouveauStatut
+      }),
+      'L’enregistrement du suivi a dépassé le délai de réponse.'
+    );
+    if (error) throw error;
+    return true;
+  } catch (error) {
+    console.warn('Suivi du signalement non enregistré :', error);
+    return false;
+  }
+}
+
+function afficherMessageSuivi(message, erreur = false) {
+  const element = document.getElementById('admin-report-message');
+  if (!element) return;
+  element.textContent = message;
+  element.classList.toggle('error', erreur);
+  element.classList.remove('cache');
+}
+
+function majBadgeStatutRapport(rapport) {
+  const badge = document.getElementById('admin-report-statut-badge');
+  if (!badge) return;
+  const statut = LIBELLES_STATUT_SIGNALEMENT[rapport?.statut] ? rapport.statut : 'nouveau';
+  badge.textContent = libelleStatutSignalement(statut);
+  badge.classList.toggle('admin-account-status-authorized', statut !== 'nouveau');
+  badge.classList.toggle('admin-account-status-pending', statut === 'nouveau');
+}
+
+function formaterDateHeureCourte(dateStr) {
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleString('fr-FR', {
+    day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+}
+
+function dessinerHistoriqueSuivi(entrees) {
+  const conteneur = document.getElementById('admin-report-historique');
+  if (!conteneur) return;
+  conteneur.replaceChildren();
+
+  if (entrees.length === 0) {
+    const vide = document.createElement('p');
+    vide.className = 'empty-state';
+    vide.textContent = 'Aucune décision ou note enregistrée pour le moment.';
+    conteneur.appendChild(vide);
+    return;
+  }
+
+  entrees.forEach(entree => {
+    const item = document.createElement('div');
+    item.className = 'report-historique-item';
+    const date = document.createElement('span');
+    date.className = 'report-historique-date';
+    date.textContent = formaterDateHeureCourte(entree.created_at);
+    const texte = document.createElement('span');
+    texte.className = 'report-historique-texte';
+    const ligneStatut = document.createElement('strong');
+    if (entree.ancien_statut && entree.ancien_statut !== entree.nouveau_statut) {
+      ligneStatut.textContent = `Statut : ${libelleStatutSignalement(entree.ancien_statut)} → ${libelleStatutSignalement(entree.nouveau_statut)}`;
+    } else {
+      ligneStatut.textContent = `Statut : ${libelleStatutSignalement(entree.nouveau_statut)}`;
+    }
+    texte.appendChild(ligneStatut);
+    if (entree.note?.trim()) {
+      const note = document.createElement('span');
+      note.className = 'report-historique-note';
+      note.textContent = entree.note.trim();
+      texte.appendChild(note);
+    }
+    item.append(date, texte);
+    conteneur.appendChild(item);
+  });
+}
+
+async function chargerHistoriqueSuivi(rapport) {
+  const conteneur = document.getElementById('admin-report-historique');
+  if (!conteneur || !rapport?.id) return;
+  const version = ++versionChargementSuivi;
+  conteneur.replaceChildren();
+  const chargement = document.createElement('p');
+  chargement.className = 'empty-state';
+  chargement.textContent = 'Chargement du suivi…';
+  conteneur.appendChild(chargement);
+
+  try {
+    const { data, error } = await attendreRequeteSupabase(
+      supabase
+        .from('report_reviews')
+        .select('id, note, ancien_statut, nouveau_statut, created_at')
+        .eq('report_id', rapport.id)
+        .order('created_at', { ascending: true }),
+      'Le chargement du suivi a dépassé le délai de réponse.'
+    );
+    if (version !== versionChargementSuivi) return;
+    if (error) throw error;
+    dessinerHistoriqueSuivi(Array.isArray(data) ? data : []);
+  } catch (error) {
+    if (version !== versionChargementSuivi) return;
+    console.error('Erreur de chargement du suivi du signalement :', error);
+    conteneur.replaceChildren();
+    const echec = document.createElement('p');
+    echec.className = 'empty-state';
+    echec.textContent = `Historique indisponible : ${error.message || 'erreur inconnue'}`;
+    conteneur.appendChild(echec);
+  }
+}
+
+async function ouvrirSuiviSignalement(rapport, bouton) {
+  const modal = document.getElementById('admin-report-modal');
+  if (!modal || !rapport?.id) return;
+  signalementSuiviActuel = rapport;
+  boutonSuiviDeclencheur = bouton || null;
+  const question = questionsParIdSignalements.get(rapport.question_id);
+  const titre = document.getElementById('admin-report-title');
+  const questionId = document.getElementById('admin-report-question-id');
+  const questionTexte = document.getElementById('admin-report-question-texte');
+  const commentaire = document.getElementById('admin-report-comment-texte');
+  const message = document.getElementById('admin-report-message');
+  if (titre) titre.textContent = question?.question || 'Signalement';
+  if (questionId) questionId.textContent = rapport.question_id || 'ID inconnu';
+  if (questionTexte) questionTexte.textContent = question?.question || 'Question du catalogue non disponible sur cet appareil.';
+  if (commentaire) commentaire.textContent = rapport.commentaire?.trim() || 'Aucun commentaire ajouté.';
+  if (message) message.classList.add('cache');
+  const note = document.getElementById('admin-report-note');
+  if (note) note.value = '';
+  majBadgeStatutRapport(rapport);
+  modal.classList.remove('cache');
+  if (bouton) bouton.disabled = true;
+  try {
+    await chargerHistoriqueSuivi(rapport);
+  } finally {
+    if (bouton) bouton.disabled = false;
+  }
+}
+
+function fermerModalSuivi() {
+  const modal = document.getElementById('admin-report-modal');
+  if (modal) modal.classList.add('cache');
+  versionChargementSuivi += 1;
+  signalementSuiviActuel = null;
+  boutonSuiviDeclencheur?.focus();
+  boutonSuiviDeclencheur = null;
 }
 
 async function initialiserGraphiqueActivite() {
@@ -607,6 +893,9 @@ function animerNombre(elementId, valeurCible, suffixe = '') {
 function connecterEvenementsDashboardAdmin() {
   const filtre = document.getElementById('admin-filtre-moderation');
   filtre?.addEventListener('input', dessinerTableModeration);
+  document.getElementById('admin-filtre-activite')?.addEventListener('change', dessinerTableModeration);
+  document.getElementById('admin-export-csv')?.addEventListener('click', exporterComptesCSV);
+  document.getElementById('admin-filtre-signalement')?.addEventListener('change', dessinerSignalements);
   const actualiser = document.getElementById('admin-actualiser');
   actualiser?.addEventListener('click', async () => {
     actualiser.disabled = true;
@@ -621,8 +910,49 @@ function connecterEvenementsDashboardAdmin() {
   modalActivite?.addEventListener('click', event => {
     if (event.target === modalActivite) fermerModalActivite();
   });
+
+  const modalSuivi = document.getElementById('admin-report-modal');
+  const boutonFermerSuivi = document.getElementById('admin-report-close');
+  boutonFermerSuivi?.addEventListener('click', fermerModalSuivi);
+  modalSuivi?.addEventListener('click', event => {
+    if (event.target === modalSuivi) fermerModalSuivi();
+  });
+  document.getElementById('admin-report-form')?.addEventListener('submit', async event => {
+    event.preventDefault();
+    const rapport = signalementSuiviActuel;
+    const zoneNote = document.getElementById('admin-report-note');
+    const boutonEnvoyer = document.getElementById('admin-report-note-submit');
+    const message = document.getElementById('admin-report-message');
+    const note = zoneNote?.value.trim() || '';
+    if (!rapport?.id) return;
+    if (!note) {
+      afficherMessageSuivi('Saisissez une note avant de l’ajouter au suivi.', true);
+      zoneNote?.focus();
+      return;
+    }
+    if (boutonEnvoyer) boutonEnvoyer.disabled = true;
+    try {
+      const enregistre = await enregistrerSuiviSignalement(rapport, rapport.statut || 'nouveau', null, note);
+      if (!enregistre) {
+        afficherMessageSuivi('La note n’a pas pu être enregistrée. Réessayez plus tard.', true);
+        return;
+      }
+      if (zoneNote) zoneNote.value = '';
+      if (message) message.classList.add('cache');
+      afficherMessageSuivi('Note ajoutée au suivi de ce signalement.', false);
+      await chargerHistoriqueSuivi(rapport);
+    } finally {
+      if (boutonEnvoyer) boutonEnvoyer.disabled = false;
+    }
+  });
+
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && modalActivite && !modalActivite.classList.contains('cache')) {
+    if (event.key !== 'Escape') return;
+    if (modalSuivi && !modalSuivi.classList.contains('cache')) {
+      fermerModalSuivi();
+      return;
+    }
+    if (modalActivite && !modalActivite.classList.contains('cache')) {
       fermerModalActivite();
     }
   });
