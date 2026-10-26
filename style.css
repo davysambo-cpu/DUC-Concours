@@ -321,9 +321,7 @@ button.carte-action:hover .mode-arrow { transform: translate(2px, -2px); }
 .barre-progression-remplissage { width: 0; height: 100%; border-radius: inherit; background: var(--clay); transition: width .28s ease; }
 .carte-question { padding: clamp(25px, 4.5vw, 42px); border: 1px solid var(--line); border-radius: 5px 18px 5px 18px; background: var(--surface); box-shadow: var(--shadow-soft); }
 .question-en-tete { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 19px; }
-.badge-matiere, .badge-type { display: inline-flex; min-height: 25px; align-items: center; padding: 5px 8px; border: 1px solid #d7e0d5; border-radius: 2px 7px 2px 7px; background: #eef2e9; color: var(--forest); font-size: .55rem; font-weight: 790; letter-spacing: .105em; }
-.badge-type { border-color: #e4e1d7; background: #f6f4ee; color: #71766e; }
-.question-instruction { margin-bottom: 9px; color: var(--clay); font-size: .61rem; font-weight: 780; letter-spacing: .1em; text-transform: uppercase; }
+.badge-matiere { display: inline-flex; min-height: 25px; align-items: center; padding: 5px 8px; border: 1px solid #d7e0d5; border-radius: 2px 7px 2px 7px; background: #eef2e9; color: var(--forest); font-size: .55rem; font-weight: 790; letter-spacing: .105em; }
 .texte-question { margin-bottom: 23px; color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.25rem, 2.5vw, 1.68rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.42; text-wrap: pretty; }
 .liste-options { display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; }
 .option-item { display: flex; width: 100%; min-height: 57px; align-items: center; gap: 13px; padding: 10px 13px; border: 1px solid #e2e2da; border-radius: 5px 10px 5px 10px; background: #fff; color: #3c4840; text-align: left; font-size: .82rem; line-height: 1.55; cursor: pointer; transition: border-color .14s ease, background .14s ease, transform .14s ease; }
