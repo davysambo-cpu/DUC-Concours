@@ -1137,12 +1137,50 @@ async function selectionnerQuestions({ matiere, quantite, utiliserLeitner }) {
     }
   }
 
-  if (quantite === 'all' || quantite >= catalogue.length) return catalogue;
-  return catalogue.slice(0, quantite);
+  let questionsChoisies;
+  if (quantite === 'all' || quantite >= catalogue.length) {
+    questionsChoisies = catalogue;
+  } else {
+    questionsChoisies = catalogue.slice(0, quantite);
+  }
+  return questionsChoisies.map(q => melangerOptionsQuestion(q));
+}
+
+function encoderBase64Reponses(tab) {
+  try {
+    return btoa(JSON.stringify(tab));
+  } catch (e) {
+    return tab;
+  }
+}
+
+function melangerOptionsQuestion(questionOriginale) {
+  if (!questionOriginale || !Array.isArray(questionOriginale.options) || questionOriginale.options.length <= 1) {
+    return questionOriginale;
+  }
+  const q = { ...questionOriginale };
+  const bonnesReponses = decoderBase64Reponses(q.reponses_correctes);
+  const optionsAvecStatut = q.options.map((opt, idx) => ({
+    texte: opt,
+    estCorrecte: bonnesReponses.includes(idx)
+  }));
+
+  for (let i = optionsAvecStatut.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [optionsAvecStatut[i], optionsAvecStatut[j]] = [optionsAvecStatut[j], optionsAvecStatut[i]];
+  }
+
+  q.options = optionsAvecStatut.map(o => o.texte);
+  const nouvellesBonnes = [];
+  optionsAvecStatut.forEach((o, idx) => {
+    if (o.estCorrecte) nouvellesBonnes.push(idx);
+  });
+  q.reponses_correctes = encoderBase64Reponses(nouvellesBonnes);
+  return q;
 }
 
 function melangerQuestions(questions) {
-  const resultat = [...questions];
+  const resultat = questions.map(q => melangerOptionsQuestion(q));
   for (let i = resultat.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [resultat[i], resultat[j]] = [resultat[j], resultat[i]];
