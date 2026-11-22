@@ -3,7 +3,7 @@
  * Stratégie Network-First : Priorité aux fichiers frais, secours hors-ligne immédiat
  */
 
-const CACHE_NAME = 'duc-concours-v35';
+const CACHE_NAME = 'duc-concours-v36';
 
 const FICHIERS_ESSENTIELS = [
   './',
@@ -37,6 +37,22 @@ self.addEventListener('activate', (event) => {
 // Réseau en priorité, cache en secours si hors-ligne
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) {
+    return;
+  }
+
+  // Pour questions_prod.json : toujours aller chercher la version fraîche sur le réseau
+  if (event.request.url.includes('questions_prod.json')) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.ok) {
+            const clone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request))
+    );
     return;
   }
 
