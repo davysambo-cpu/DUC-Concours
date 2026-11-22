@@ -49,16 +49,12 @@ async function initialiserCatalogueQuestions() {
       throw new Error("Le catalogue reçu n'est pas une liste de questions valide");
     }
 
-    if (nombreQuestions !== questions.length) {
-      await db.questions.clear();
-      await db.questions.bulkPut(questions);
-      console.log(`🚀 Catalogue synchronisé : ${questions.length} questions enregistrées dans Dexie.js.`);
-      if (typeof window.mettreAJourDashboard === 'function') {
-        window.mettreAJourDashboard();
-      }
-    } else {
-      await db.questions.bulkPut(questions);
-      console.log(`✅ ${questions.length} questions à jour dans Dexie.js.`);
+    // Forcer la synchronisation intégrale du nouveau catalogue équilibré
+    await db.questions.clear();
+    await db.questions.bulkPut(questions);
+    console.log(`🚀 Catalogue synchronisé : ${questions.length} questions enregistrées dans Dexie.js.`);
+    if (typeof window.mettreAJourDashboard === 'function') {
+      window.mettreAJourDashboard();
     }
   } catch (erreur) {
     if (nombreQuestions === 0) {
