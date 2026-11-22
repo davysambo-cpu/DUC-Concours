@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=32">
+  <link rel="stylesheet" href="style.css?v=33">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -66,19 +66,28 @@
           </a>
           <nav class="dashboard-rail-nav" aria-label="Sections du tableau de bord">
             <a class="dashboard-rail-link is-active" href="#top" aria-label="Accueil" aria-current="location" title="Accueil">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10a1 1 0 0 1-1 1h-5.2v-6.4h-4.6V21H4.5a1 1 0 0 1-1-1V10Z"/></svg><span>Accueil</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10a1 1 0 0 1-1 1h-5.2v-6.4h-4.6V21H4.5a1 1 0 0 1-1-1V10Z"/></svg>
+              <span>Accueil</span>
             </a>
             <a class="dashboard-rail-link" href="#section-progression" aria-label="Ma progression" title="Ma progression">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V13m5 6.5V8m5 11.5V4m5 15.5v-9"/><path d="M2.5 21h19"/></svg><span>Progression</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V13m5 6.5V8m5 11.5V4m5 15.5v-9"/><path d="M2.5 21h19"/></svg>
+              <span>Progression</span>
             </a>
-            <a class="dashboard-rail-link" href="#section-formats" aria-label="Concours et épreuves" title="Concours et épreuves">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a2 2 0 0 1 2 2v15l-8-4-8 4v-15a2 2 0 0 1 2-2Z"/><path d="M9 8h6m-6 4h6"/></svg><span>Concours</span>
+            <a class="dashboard-rail-link" href="#section-formats" aria-label="Concours blanc" title="Concours blanc">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a2 2 0 0 1 2 2v15l-8-4-8 4v-15a2 2 0 0 1 2-2Z"/><path d="M9 8h6m-6 4h6"/></svg>
+              <span>Concours</span>
             </a>
-            <a class="dashboard-rail-link" href="#section-entrainement" aria-label="Séance libre" title="Séance libre">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/><path d="M4 4v16"/></svg><span>Séance libre</span>
+            <a class="dashboard-rail-link" href="#section-formats" aria-label="Entraînement par matière" title="Entraînement par matière">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span>Matières</span>
             </a>
-            <a class="dashboard-rail-link" href="#section-aide" aria-label="Aide et contact" title="Aide et contact">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.3 7.1L4 20l1.2-3.6a8.2 8.2 0 1 1 15-4.7Z"/><path d="M8.8 9.2c.6 2.2 2.7 4.3 5 5l1.2-1.2 2 .9c-.1 1-.8 1.7-1.8 1.8-3.5-.4-7.5-4.4-7.8-7.8.1-1 .8-1.7 1.8-1.8l.9 2-1.3 1.1Z"/></svg><span>Aide</span>
+            <a class="dashboard-rail-link" href="#section-entrainement" aria-label="Révision libre" title="Révision libre">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/><path d="M4 4v16"/></svg>
+              <span>Révision libre</span>
+            </a>
+            <a class="dashboard-rail-link" href="#section-aide" aria-label="Aide & Méthode" title="Aide & Méthode">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.3 7.1L4 20l1.2-3.6a8.2 8.2 0 1 1 15-4.7Z"/><path d="M8.8 9.2c.6 2.2 2.7 4.3 5 5l1.2-1.2 2 .9c-.1 1-.8 1.7-1.8 1.8-3.5-.4-7.5-4.4-7.8-7.8.1-1 .8-1.7 1.8-1.8l.9 2-1.3 1.1Z"/></svg>
+              <span>Aide</span>
             </a>
           </nav>
           <div class="dashboard-rail-footer"><span class="dashboard-rail-status" aria-hidden="true"></span><span>Votre espace</span></div>
@@ -103,26 +112,25 @@
                 <span class="hero-edition">Édition candidate</span>
               </div>
               <h1 id="titre-accueil">Votre parcours commence ici.</h1>
-              <p>Une préparation claire, régulière et à votre rythme. Chaque séance vous rapproche du concours.</p>
+              <p id="hero-sous-titre">Une préparation claire, régulière et à votre rythme. Chaque séance vous rapproche du concours.</p>
               <div class="hero-actions">
-                <a class="btn btn-primaire hero-cta" href="#section-formats">
-                  Choisir une séance
+                <button id="btn-hero-action-principale" class="btn btn-primaire hero-cta" type="button">
+                  <span id="texte-hero-action-principale">Commencer mon premier concours blanc</span>
                   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5"/></svg>
-                </a>
+                </button>
                 <a class="hero-lien" href="#section-progression">Voir ma progression <span aria-hidden="true">↗</span></a>
               </div>
             </div>
             <aside class="hero-embleme" aria-label="Progression dans le catalogue">
-              <div class="hero-embleme-top"><span>VOTRE CAP</span><span class="hero-embleme-dot" aria-hidden="true"></span></div>
+              <div class="hero-embleme-top"><span>VOTRE AVANCÉE</span><span class="hero-embleme-dot" aria-hidden="true"></span></div>
               <div class="hero-embleme-mark">DUC<span>·</span></div>
               <div class="hero-embleme-rule"></div>
-              <p>La régularité fait la différence.</p>
+              <p>Régularité et méthode.</p>
               <div class="hero-mini-progress">
                 <div><span>Questions étudiées</span><strong id="hero-question-count">0</strong></div>
                 <span class="hero-mini-total">sur <span id="hero-question-total">0</span> au catalogue</span>
               </div>
             </aside>
-            <span class="hero-index" aria-hidden="true">01</span>
           </div>
 
           <div id="alerte-reprise" class="alerte-reprise cache" role="status">
@@ -134,27 +142,47 @@
           </div>
 
           <section class="stats-section" aria-label="Résumé de votre activité">
-            <div class="stats-caption"><span class="section-kicker">EN UN COUP D’ŒIL</span><span class="stats-caption-note">Votre activité sur cet appareil</span></div>
+            <div class="stats-caption"><span class="section-kicker">EN UN COUP D’ŒIL</span><span class="stats-caption-note">Activité enregistrée sur cet appareil</span></div>
             <div class="grille-stats">
               <article class="carte-stat">
-                <span class="stat-index">01</span>
-                <div class="stat-contenu"><span class="stat-libelle">Sessions terminées</span><strong class="stat-chiffre" id="stat-quiz-termines">0</strong></div>
-                <span class="stat-symbol" aria-hidden="true">↗</span>
+                <div class="stat-icone-wrapper" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M6 3.5h12a2 2 0 0 1 2 2v15l-8-4-8 4v-15a2 2 0 0 1 2-2Z"/></svg>
+                </div>
+                <div class="stat-contenu">
+                  <span class="stat-libelle">Séances terminées</span>
+                  <strong class="stat-chiffre" id="stat-quiz-termines">0</strong>
+                  <span class="stat-sous-texte">Concours et entraînements</span>
+                </div>
               </article>
               <article class="carte-stat">
-                <span class="stat-index">02</span>
-                <div class="stat-contenu"><span class="stat-libelle">Score moyen</span><strong class="stat-chiffre" id="stat-taux-reussite">—</strong></div>
-                <span class="stat-symbol" aria-hidden="true">%</span>
+                <div class="stat-icone-wrapper" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="stat-contenu">
+                  <span class="stat-libelle">Score moyen</span>
+                  <strong class="stat-chiffre" id="stat-taux-reussite">—</strong>
+                  <span class="stat-sous-texte">Sur l'ensemble des épreuves</span>
+                </div>
               </article>
               <article class="carte-stat">
-                <span class="stat-index">03</span>
-                <div class="stat-contenu"><span class="stat-libelle">Questions étudiées</span><strong class="stat-chiffre" id="stat-questions-etudiees">0</strong></div>
-                <span class="stat-symbol" aria-hidden="true">✓</span>
+                <div class="stat-icone-wrapper" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 19.5V13m5 6.5V8m5 11.5V4m5 15.5v-9"/><path d="M2.5 21h19"/></svg>
+                </div>
+                <div class="stat-contenu">
+                  <span class="stat-libelle">Questions étudiées</span>
+                  <strong class="stat-chiffre" id="stat-questions-etudiees">0</strong>
+                  <span class="stat-sous-texte">Questions uniques abordées</span>
+                </div>
               </article>
               <article class="carte-stat">
-                <span class="stat-index">04</span>
-                <div class="stat-contenu"><span class="stat-libelle">Série de révision</span><strong class="stat-chiffre" id="stat-serie-active">0 j</strong></div>
-                <span class="stat-symbol" aria-hidden="true">✳</span>
+                <div class="stat-icone-wrapper" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                </div>
+                <div class="stat-contenu">
+                  <span class="stat-libelle">Série de révision</span>
+                  <strong class="stat-chiffre" id="stat-serie-active">0 j</strong>
+                  <span class="stat-sous-texte">Jours consécutifs d'affilée</span>
+                </div>
               </article>
             </div>
           </section>
@@ -191,55 +219,121 @@
 
           <section id="section-formats" class="section-block" aria-labelledby="titre-formats">
             <div class="section-heading">
-              <div class="section-title-group"><span class="section-kicker">02 / CHOISIR SON FORMAT</span><h2 class="titre-section" id="titre-formats">Quelle séance vous convient aujourd’hui&nbsp;?</h2></div>
-              <p class="section-description">Un examen blanc pour vous situer, ou une séance ciblée pour progresser.</p>
+              <div class="section-title-group"><span class="section-kicker">LES 3 MODES DE PRÉPARATION</span><h2 class="titre-section" id="titre-formats">Choisissez votre séance</h2></div>
+              <p class="section-description">Trois manières complémentaires de vous entraîner selon votre objectif du jour.</p>
             </div>
 
-            <div class="grille-actions-principales">
-              <button id="btn-mode-standard" class="carte-action carte-action-primaire" type="button">
-                <span class="mode-card-top"><span class="mode-index">01</span><span class="mode-tag">FORMAT CONCOURS</span></span>
-                <span class="mode-card-content"><span class="mode-eyebrow">SIMULATION COMPLÈTE</span><span class="carte-action-title">Concours blanc</span><span class="carte-action-description">Une épreuve mixte pour vous entraîner dans les conditions du jour J.</span></span>
-                <span class="mode-meta"><span>60 questions</span><span class="mode-separator" aria-hidden="true">·</span><span>60 minutes</span><span class="mode-arrow" aria-hidden="true">↗</span></span>
-              </button>
+            <div class="grille-trois-modes">
+              <!-- MODE 1 : CONCOURS BLANC -->
+              <article class="carte-mode-unifie carte-mode-concours">
+                <div class="mode-badge-duree">60 questions · 60 min</div>
+                <div class="mode-icone-flottante" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M6 3.5h12a2 2 0 0 1 2 2v15l-8-4-8 4v-15a2 2 0 0 1 2-2Z"/><path d="M9 8h6m-6 4h6"/></svg>
+                </div>
+                <div class="mode-contenu-texte">
+                  <span class="mode-surtitre">SIMULATION COMPLÈTE</span>
+                  <h3 class="mode-titre-principal">Concours blanc</h3>
+                  <p class="mode-description-courte">Toutes les matières mélangées en conditions réelles d'examen avec chronomètre.</p>
+                </div>
+                <button id="btn-mode-standard" class="btn btn-primaire btn-mode-action" type="button">
+                  Commencer le concours blanc <span aria-hidden="true">→</span>
+                </button>
+              </article>
 
-              <article class="carte-action carte-action-secondaire">
-                <div class="mode-card-top"><span class="mode-index">02</span><span class="mode-tag">FOCUS DISCIPLINAIRE</span></div>
-                <div class="mode-card-content"><span class="mode-eyebrow">APPROFONDIR UNE MATIÈRE</span><h3 class="carte-action-title">Épreuve ciblée</h3><p class="carte-action-description">Choisissez une matière et concentrez votre effort là où il compte.</p></div>
-                <div class="form-groupe">
-                  <label for="select-matiere-unidisciplinaire">Matière de l’épreuve</label>
+              <!-- MODE 2 : ENTRAÎNEMENT PAR MATIÈRE -->
+              <article class="carte-mode-unifie carte-mode-matiere">
+                <div class="mode-badge-duree">Chronométré · Au choix</div>
+                <div class="mode-icone-flottante" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="mode-contenu-texte">
+                  <span class="mode-surtitre">FOCUS DISCIPLINAIRE</span>
+                  <h3 class="mode-titre-principal">Entraînement par matière</h3>
+                  <p class="mode-description-courte">Concentrez votre révision sur une discipline précise avec gestion du temps.</p>
+                </div>
+                <div class="form-groupe-matiere">
+                  <label for="select-matiere-unidisciplinaire">Discipline à travailler</label>
                   <select id="select-matiere-unidisciplinaire"><option value="">Choisir une matière…</option></select>
                 </div>
-                <button id="btn-mode-unidisciplinaire" class="btn-action-uni" type="button">Démarrer l’épreuve <span aria-hidden="true">→</span></button>
+                <button id="btn-mode-unidisciplinaire" class="btn btn-secondaire btn-mode-action" type="button">
+                  Démarrer l’entraînement <span aria-hidden="true">→</span>
+                </button>
+              </article>
+
+              <!-- MODE 3 : RÉVISION LIBRE -->
+              <article class="carte-mode-unifie carte-mode-libre">
+                <div class="mode-badge-duree">Sans chrono · Explications directes</div>
+                <div class="mode-icone-flottante" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/><path d="M4 4v16"/></svg>
+                </div>
+                <div class="mode-contenu-texte">
+                  <span class="mode-surtitre">À VOTRE RYTHME</span>
+                  <h3 class="mode-titre-principal">Révision libre</h3>
+                  <p class="mode-description-courte">Apprenez sereinement sans pression avec corrigé immédiat à chaque question.</p>
+                </div>
+                <div class="form-champs-reviser">
+                  <div class="form-groupe-matiere">
+                    <label for="select-matiere-libre">Matière</label>
+                    <select id="select-matiere-libre"><option value="toutes">Toutes les matières</option></select>
+                  </div>
+                  <div class="form-groupe-matiere">
+                    <label for="select-nombre-libre">Longueur</label>
+                    <select id="select-nombre-libre">
+                      <option value="10">Rapide · 10 questions (~10 min)</option>
+                      <option value="20" selected>Standard · 20 questions (~20 min)</option>
+                      <option value="30">Approfondie · 30 questions (~30 min)</option>
+                      <option value="40">Complète · 40 questions (~40 min)</option>
+                    </select>
+                  </div>
+                </div>
+                <label class="form-case-a-cocher form-case-libre" for="check-leitner">
+                  <input type="checkbox" id="check-leitner" checked>
+                  <span>Proposer en priorité les questions jamais vues ou ratées</span>
+                </label>
+                <button id="btn-lancer-entrainement" class="btn btn-tertiaire btn-mode-action" type="button">
+                  Commencer la révision <span aria-hidden="true">→</span>
+                </button>
               </article>
             </div>
           </section>
 
-          <section id="section-entrainement" class="section-block section-block-training" aria-labelledby="titre-entrainement">
+          <!-- SECTION 4 : AIDE & MÉTHODE CONCOURS -->
+          <section id="section-aide" class="section-block section-aide-candidat" aria-labelledby="titre-section-aide">
             <div class="section-heading">
-              <div class="section-title-group"><span class="section-kicker">03 / À VOTRE RYTHME</span><h2 class="titre-section" id="titre-entrainement">Composer une séance libre</h2></div>
-              <p class="section-description">Révisez sans chronomètre et obtenez une explication après chaque réponse.</p>
+              <div class="section-title-group"><span class="section-kicker">AIDE &amp; MÉTHODE</span><h2 class="titre-section" id="titre-section-aide">Votre feuille de route pour réussir</h2></div>
+              <p class="section-description">La méthode recommandée par l’Institut DUC Concours en 3 étapes simples.</p>
             </div>
-            <div class="dashboard-lower-grid">
-              <section class="entrainement-panel" aria-label="Réglages de l’entraînement libre">
-                <div class="carte-entrainement">
-                  <div class="training-fields">
-                    <div class="form-groupe"><label for="select-matiere-libre">Matière</label><select id="select-matiere-libre"><option value="toutes">Toutes les matières</option></select></div>
-                    <div class="form-groupe"><label for="select-nombre-libre">Longueur de la séance</label><select id="select-nombre-libre"><option value="10">10 questions · Express</option><option value="20" selected>20 questions · Approfondie</option><option value="all">Tout le catalogue</option></select></div>
-                  </div>
-                  <label class="form-case-a-cocher" for="check-leitner">
-                    <input type="checkbox" id="check-leitner" checked>
-                    <span><strong>Prioriser mes points à renforcer</strong><small>Les questions inédites et celles souvent manquées passent en premier.</small></span>
-                  </label>
-                  <button id="btn-lancer-entrainement" class="btn btn-primaire btn-entrainement" type="button">Commencer la séance <span aria-hidden="true">→</span></button>
-                  <p class="note-locale"><span aria-hidden="true">●</span> Votre progression est conservée sur cet appareil.</p>
+
+            <div class="grille-aide-candidat">
+              <article class="carte-etape-methode">
+                <div class="etape-numero">1</div>
+                <h4>Faire un concours blanc</h4>
+                <p>Mesurez votre niveau réel sur une épreuve mixte de 60 questions en 60 minutes.</p>
+              </article>
+              <article class="carte-etape-methode">
+                <div class="etape-numero">2</div>
+                <h4>Repérer vos points faibles</h4>
+                <p>Consultez votre tableau de progression pour cibler les matières où votre score est inférieur à 60 %.</p>
+              </article>
+              <article class="carte-etape-methode">
+                <div class="etape-numero">3</div>
+                <h4>S’entraîner et réviser</h4>
+                <p>Enchaînez les séances par matière et les révisions libres pour consolider les explications.</p>
+              </article>
+            </div>
+
+            <div class="aide-contact-box">
+              <div class="aide-contact-info">
+                <h3>Besoin d’aide ou d’un conseil personnalisé&nbsp;?</h3>
+                <p>L’équipe pédagogique de DUC Concours vous accompagne tout au long de votre préparation.</p>
+                <div class="aide-garantie-locale">
+                  <span class="pastille-sauvegarde" aria-hidden="true">●</span>
+                  <small>Vos révisions fonctionnent hors-ligne et sont synchronisées en continu avec votre compte.</small>
                 </div>
-              </section>
-              <aside id="section-aide" class="carte-support-whatsapp" aria-labelledby="titre-aide">
-                <span class="support-overline">UN CONSEIL POUR LA SUITE</span>
-                <div class="support-mark" aria-hidden="true">DUC</div>
-                <div class="whatsapp-texte"><h3 id="titre-aide">Un concours se prépare aussi ensemble.</h3><p>Besoin d’un renseignement sur les épreuves ou votre préparation&nbsp;? Écrivez à l’équipe DUC Concours.</p></div>
-                <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question." target="_blank" rel="noopener noreferrer" class="btn-whatsapp">Contacter l’équipe <span aria-hidden="true">↗</span></a>
-              </aside>
+              </div>
+              <a href="https://wa.me/22666419045?text=Bonjour%20DUC%20CONCOURS%2C%20j%27ai%20une%20question%20concernant%20ma%20pr%C3%A9paration." target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                Écrire sur WhatsApp <span aria-hidden="true">↗</span>
+              </a>
             </div>
           </section>
 
@@ -400,10 +494,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.4/dexie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="supabaseClient.js?v=23"></script>
-  <script src="db.js?v=23"></script>
-  <script src="app.js?v=33"></script>
-  <script src="adminDashboard.js?v=31"></script>
+  <script src="constants.js?v=2"></script>
+  <script src="supabaseClient.js?v=24"></script>
+  <script src="db.js?v=24"></script>
+  <script src="app.js?v=34"></script>
+  <script src="adminDashboard.js?v=32"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {
       const inscription = document.getElementById('auth-titre').textContent !== 'Inscription Candidat';

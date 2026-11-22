@@ -781,6 +781,47 @@ async function mettreAJourDashboard() {
     if (elHeroQuestions) elHeroQuestions.textContent = nbEtudiees.toLocaleString('fr-FR');
     if (elHeroTotal) elHeroTotal.textContent = totalQuestions.toLocaleString('fr-FR');
 
+    // Mise à jour de la recommandation de l'action principale "Que faire maintenant ?"
+    const elBtnHeroAction = document.getElementById('btn-hero-action-principale');
+    const elTexteHeroAction = document.getElementById('texte-hero-action-principale');
+    const elHeroSousTitre = document.getElementById('hero-sous-titre');
+    if (elBtnHeroAction && elTexteHeroAction) {
+      if (nbSessions === 0) {
+        elTexteHeroAction.textContent = 'Faire mon premier concours blanc (60 min)';
+        if (elHeroSousTitre) elHeroSousTitre.textContent = 'Commencez par situer votre niveau initial grâce à une simulation complète.';
+        elBtnHeroAction.onclick = () => demarrerConcoursBlanc();
+      } else {
+        // Déterminer la matière avec le score le plus faible
+        const matieresScore = new Map();
+        sessions.filter(s => s.matiere && s.matiere !== 'toutes' && s.total_questions > 0).forEach(s => {
+          const stats = matieresScore.get(s.matiere) || { total: 0, score: 0 };
+          stats.total += Number(s.total_questions) || 0;
+          stats.score += Number(s.score_total) || 0;
+          matieresScore.set(s.matiere, stats);
+        });
+        const plusFaible = [...matieresScore.entries()]
+          .map(([m, st]) => ({ matiere: m, pct: st.total ? st.score / st.total : 0 }))
+          .sort((a, b) => a.pct - b.pct)[0];
+
+        if (plusFaible && plusFaible.pct < 0.7) {
+          const nomMatiere = typeof window.formaterMatiere === 'function' ? window.formaterMatiere(plusFaible.matiere) : plusFaible.matiere;
+          elTexteHeroAction.textContent = `Continuer : réviser ${nomMatiere}`;
+          if (elHeroSousTitre) elHeroSousTitre.textContent = `Votre priorité actuelle : renforcer vos résultats en ${nomMatiere}.`;
+          elBtnHeroAction.onclick = () => {
+            const selectUni = document.getElementById('select-matiere-unidisciplinaire');
+            if (selectUni) {
+              selectUni.value = plusFaible.matiere;
+              demarrerEpreuveCiblee();
+            }
+          };
+        } else {
+          elTexteHeroAction.textContent = 'Lancer un nouveau concours blanc';
+          if (elHeroSousTitre) elHeroSousTitre.textContent = 'Mesurez vos progrès récents avec une nouvelle simulation chronométrée.';
+          elBtnHeroAction.onclick = () => demarrerConcoursBlanc();
+        }
+      }
+    }
+
     const listeMatieres = [...new Set(questionsToutes.map(question => question.matiere).filter(Boolean))]
       .sort((a, b) => a.localeCompare(b, 'fr'));
     remplirSelectMatiere(document.getElementById('select-matiere-libre'), listeMatieres, 'toutes', 'Toutes les matières');
@@ -805,7 +846,7 @@ function remplirSelectMatiere(select, matieres, valeurInitiale, texteInitial) {
   matieres.forEach(matiere => {
     const option = document.createElement('option');
     option.value = matiere;
-    option.textContent = matiere.charAt(0).toLocaleUpperCase('fr-FR') + matiere.slice(1);
+    option.textContent = typeof window.formaterMatiere === 'function' ? window.formaterMatiere(matiere) : (matiere.charAt(0).toLocaleUpperCase('fr-FR') + matiere.slice(1));
     select.appendChild(option);
   });
   if ([...select.options].some(option => option.value === valeurPrecedente)) select.value = valeurPrecedente;
@@ -862,7 +903,7 @@ function afficherProgressionMatieres(questions, statistiques) {
       ligne.className = 'subject-progress-row';
       const nom = document.createElement('span');
       nom.className = 'subject-progress-name';
-      nom.textContent = groupe.matiere.charAt(0).toLocaleUpperCase('fr-FR') + groupe.matiere.slice(1);
+      nom.textContent = typeof window.formaterMatiere === 'function' ? window.formaterMatiere(groupe.matiere) : (groupe.matiere.charAt(0).toLocaleUpperCase('fr-FR') + groupe.matiere.slice(1));
       nom.title = nom.textContent;
       const piste = document.createElement('span');
       piste.className = 'subject-progress-track';
@@ -914,8 +955,8 @@ function afficherHistoriqueSessions(sessions) {
     titre.textContent = session.mode === 'standard'
       ? 'Concours blanc'
       : session.mode === 'unidisciplinaire'
-        ? `Épreuve · ${session.matiere || 'Matière'}`
-        : `Révision libre${session.matiere && session.matiere !== 'toutes' ? ` · ${session.matiere}` : ''}`;
+        ? `Entraînement · ${typeof window.formaterMatiere === 'function' ? window.formaterMatiere(session.matiere) : (session.matiere || 'Matière')}`
+        : `Révision libre${session.matiere && session.matiere !== 'toutes' ? ` · ${typeof window.formaterMatiere === 'function' ? window.formaterMatiere(session.matiere) : session.matiere}` : ''}`;
     const date = new Date(session.date_passage);
     const meta = document.createElement('div');
     meta.className = 'history-row-meta';
@@ -931,6 +972,9 @@ function afficherHistoriqueSessions(sessions) {
 }
 
 function titreMatiere(matiere) {
+  if (typeof window.formaterMatiere === 'function') {
+    return window.formaterMatiere(matiere);
+  }
   const nom = String(matiere || 'Autre');
   return nom.charAt(0).toLocaleUpperCase('fr-FR') + nom.slice(1);
 }

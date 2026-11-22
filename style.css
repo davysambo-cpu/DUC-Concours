@@ -874,3 +874,468 @@ body[data-ecran="dashboard"] .app-footer strong { color: #4a4160; }
   .dashboard-canvas .history-row { grid-template-columns: 30px minmax(0, 1fr) auto; gap: 8px; }
   .dashboard-canvas .history-row-mark { width: 29px; height: 29px; }
 }
+
+/* ========================================================
+   REFONTE UX/UI DU TABLEAU DE BORD (gemini-code)
+   - Barre de navigation clarifiée (Desktop & Mobile 360px)
+   - Cartes statistiques lisibles avec icônes explicites
+   - Les 3 modes unifiés avec boutons 100% visibles
+   - Section Aide & Méthode concours
+======================================================== */
+
+/* 1. Navigation latérale avec libellés lisibles */
+.dashboard-rail {
+  width: 90px;
+  min-width: 90px;
+  background-color: #122b24;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 0.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 40;
+}
+
+.dashboard-rail-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  align-items: center;
+}
+
+.dashboard-rail-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.6rem 0.25rem;
+  border-radius: 10px;
+  color: #a4beba;
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  min-height: 48px;
+}
+
+.dashboard-rail-link svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.dashboard-rail-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.dashboard-rail-link.is-active {
+  background: #183b32;
+  color: #d1b46a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* 2. Cartes de statistiques repensées */
+.carte-stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e5eae8;
+  box-shadow: 0 2px 6px rgba(18, 43, 36, 0.04);
+}
+
+.stat-icone-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: #f0f5f3;
+  color: #183b32;
+}
+
+.stat-icone-wrapper svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.stat-contenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-libelle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #556b66;
+  margin-bottom: 0.2rem;
+}
+
+.stat-chiffre {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #183b32;
+  line-height: 1.1;
+  font-family: var(--police-titre, Georgia, serif);
+}
+
+.stat-sous-texte {
+  font-size: 0.72rem;
+  color: #728782;
+  margin-top: 0.25rem;
+}
+
+/* 3. Les 3 modes unifiés */
+.grille-trois-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.carte-mode-unifie {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #dce4e1;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 4px 14px rgba(18, 43, 36, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carte-mode-unifie:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(18, 43, 36, 0.09);
+}
+
+.carte-mode-concours {
+  background: linear-gradient(145deg, #183b32 0%, #102722 100%);
+  color: #ffffff;
+  border-color: #245447;
+}
+
+.mode-badge-duree {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  background: #eef4f2;
+  color: #183b32;
+  margin-bottom: 1.25rem;
+}
+
+.carte-mode-concours .mode-badge-duree {
+  background: rgba(209, 180, 106, 0.2);
+  color: #f7e7be;
+  border: 1px solid rgba(209, 180, 106, 0.4);
+}
+
+.mode-icone-flottante {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 36px;
+  height: 36px;
+  opacity: 0.25;
+}
+
+.mode-icone-flottante svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  fill: none;
+}
+
+.carte-mode-concours .mode-icone-flottante {
+  color: #ffffff;
+}
+
+.mode-surtitre {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #728782;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.carte-mode-concours .mode-surtitre {
+  color: #d1b46a;
+}
+
+.mode-titre-principal {
+  font-size: 1.4rem;
+  font-family: var(--police-titre, Georgia, serif);
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: #183b32;
+}
+
+.carte-mode-concours .mode-titre-principal {
+  color: #ffffff;
+}
+
+.mode-description-courte {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #4f635f;
+  margin: 0 0 1.25rem 0;
+}
+
+.carte-mode-concours .mode-description-courte {
+  color: #cbdad7;
+}
+
+.form-groupe-matiere {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.form-groupe-matiere label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4a5d59;
+}
+
+.form-groupe-matiere select {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #c7d4d0;
+  background: #fbfdfc;
+  font-size: 0.9rem;
+  color: #183b32;
+}
+
+.form-champs-reviser {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-case-libre {
+  margin: 0.25rem 0 1.25rem 0;
+  font-size: 0.8rem;
+  color: #4a5d59;
+}
+
+.btn-mode-action {
+  width: 100%;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.carte-mode-concours .btn-mode-action {
+  background: #d1b46a;
+  color: #183b32;
+}
+
+.carte-mode-concours .btn-mode-action:hover {
+  background: #dfc889;
+}
+
+.carte-mode-matiere .btn-mode-action {
+  background: #183b32;
+  color: #ffffff;
+}
+
+.carte-mode-matiere .btn-mode-action:hover {
+  background: #235447;
+}
+
+.carte-mode-libre .btn-mode-action {
+  background: #2d5a4e;
+  color: #ffffff;
+}
+
+.carte-mode-libre .btn-mode-action:hover {
+  background: #397062;
+}
+
+/* 4. Section Aide & Méthode */
+.section-aide-candidat {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e1e8e5;
+}
+
+.grille-aide-candidat {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.carte-etape-methode {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e0e7e4;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(18, 43, 36, 0.03);
+}
+
+.etape-numero {
+  width: 32px;
+  height: 32px;
+  background: #183b32;
+  color: #d1b46a;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.carte-etape-methode h4 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #183b32;
+}
+
+.carte-etape-methode p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #556b66;
+}
+
+.aide-contact-box {
+  margin-top: 1.5rem;
+  background: #f1f6f4;
+  border: 1px solid #d4dfdb;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.aide-contact-info h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.15rem;
+  color: #183b32;
+  font-family: var(--police-titre, Georgia, serif);
+}
+
+.aide-contact-info p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.88rem;
+  color: #4a5d59;
+}
+
+.aide-garantie-locale {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #2e6255;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.pastille-sauvegarde {
+  color: #278869;
+  font-size: 0.7rem;
+}
+
+/* 5. Adaptation Mobile stricte (360px - 768px) */
+@media (max-width: 768px) {
+  .dashboard-shell {
+    padding-bottom: 75px; /* Dégager la barre basse fixe */
+  }
+
+  .dashboard-rail {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 100%;
+    min-width: 100%;
+    height: 64px;
+    background: #122b24;
+    padding: 0 0.5rem;
+    flex-direction: row;
+    justify-content: space-around;
+    border-right: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+  }
+
+  .dashboard-rail-brand,
+  .dashboard-rail-footer {
+    display: none;
+  }
+
+  .dashboard-rail-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    gap: 0;
+  }
+
+  .dashboard-rail-link {
+    min-height: 52px;
+    padding: 0.25rem 0.4rem;
+    font-size: 0.65rem;
+  }
+
+  .dashboard-rail-link svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .form-champs-reviser {
+    grid-template-columns: 1fr;
+  }
+
+  .aide-contact-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-whatsapp {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
