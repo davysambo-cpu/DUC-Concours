@@ -1,0 +1,51 @@
+name: Security & Quality Audit (ECC)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  security-audit:
+    name: Security & Integrity Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit dependencies for known vulnerabilities
+        run: npm audit --audit-level=high
+
+      - name: Verify JavaScript syntax
+        run: node --check app.js adminDashboard.js sw.js db.js supabaseClient.js
+
+      - name: Verify no private service_role key leaked
+        run: |
+          if grep -rn "service_role" --exclude="*.md" --exclude=".git/*" .; then
+            echo "::error::Found forbidden service_role reference in codebase"
+            exit 1
+          fi
+
+      - name: Verify vercel.json format and security headers
+        run: |
+          node -e "
+            const cfg = require('./vercel.json');
+            if (!cfg.headers || !Array.isArray(cfg.headers)) throw new Error('Missing headers in vercel.json');
+            const globalRule = cfg.headers.find(h => h.source === '/(.*)');
+            if (!globalRule) throw new Error('Missing global header rule in vercel.json');
+            const keys = globalRule.headers.map(h => h.key);
+            ['X-Content-Type-Options', 'X-Frame-Options', 'Content-Security-Policy'].forEach(k => {
+              if (!keys.includes(k)) throw new Error('Missing critical security header: ' + k);
+            });
+            console.log('✅ vercel.json security headers validated successfully');
+          "
