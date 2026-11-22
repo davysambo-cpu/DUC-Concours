@@ -727,6 +727,7 @@ function initialiserNavigationDashboard() {
   actualiserNavigationDashboard();
 }
 
+window.mettreAJourDashboard = mettreAJourDashboard;
 async function mettreAJourDashboard() {
   try {
     const [sessions, questionsToutes, statistiques, quizEnCours] = await Promise.all([

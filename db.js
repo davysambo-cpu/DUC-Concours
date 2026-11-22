@@ -3,8 +3,8 @@
  * Conforme à la section 2.2 du cahier des charges
  */
 
-// Initialisation de la base IndexedDB "PrepaConcoursDB"
-const db = new Dexie('PrepaConcoursDB');
+// Initialisation de la base IndexedDB "PrepaConcoursDB_v2"
+const db = new Dexie('PrepaConcoursDB_v2');
 
 // Définition des schémas des 6 tables
 db.version(1).stores({
@@ -53,6 +53,9 @@ async function initialiserCatalogueQuestions() {
       await db.questions.clear();
       await db.questions.bulkPut(questions);
       console.log(`🚀 Catalogue synchronisé : ${questions.length} questions enregistrées dans Dexie.js.`);
+      if (typeof window.mettreAJourDashboard === 'function') {
+        window.mettreAJourDashboard();
+      }
     } else {
       await db.questions.bulkPut(questions);
       console.log(`✅ ${questions.length} questions à jour dans Dexie.js.`);
