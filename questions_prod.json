@@ -69298,5 +69298,545 @@
     "version": 1,
     "date_creation": "2026-11-22",
     "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0581",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle protéine riche en fer, présente dans les hématies, est responsable du transport de l'oxygène des poumons vers les tissus ?",
+    "options": [
+      "L'hémoglobine",
+      "L'albumine",
+      "La myoglobine",
+      "La ferritine"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdow6ltb2dsb2JpbmUgZXN0IHVuZSBtw6l0YWxsb3Byb3TDqWluZSB0w6l0cmFtw6lyaXF1ZSBjb250ZW51ZSBkYW5zIGxlcyBow6ltYXRpZXMgcXVpIGZpeGUgcsOpdmVyc2libGVtZW50IGxlIGRpb3h5Z8OobmUgZ3LDomNlIMOgIHNlcyBxdWF0cmUgZ3JvdXBlbWVudHMgaMOobWVzLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0582",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle hormone sécrétée par les cellules bêta des îlots de Langerhans du pancréas permet d'abaisser le taux de glucose dans le sang (effet hypoglycémiant) ?",
+    "options": [
+      "L'insuline",
+      "Le glucagon",
+      "Le cortisol",
+      "L'adrénaline"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdpbnN1bGluZSBlc3QgbGEgcHJpbmNpcGFsZSBob3Jtb25lIGh5cG9nbHljw6ltaWFudGUgZGUgbCdvcmdhbmlzbWUgOyBlbGxlIHN0aW11bGUgbCdlbnRyw6llIGR1IGdsdWNvc2UgZGFucyBsZXMgY2VsbHVsZXMgbXVzY3VsYWlyZXMgZXQgbGUgc3RvY2thZ2Ugc291cyBmb3JtZSBkZSBnbHljb2fDqG5lIGRhbnMgbGUgZm9pZS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0583",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel vaisseau sanguin quitte le ventricule gauche du cœur pour distribuer le sang riche en dioxygène à l'ensemble de l'organisme ?",
+    "options": [
+      "L'artère aorte",
+      "L'artère pulmonaire",
+      "La veine cave supérieure",
+      "La veine pulmonaire"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdhb3J0ZSBlc3QgbGEgcGx1cyBncm9zc2UgYXJ0w6hyZSBkZSBsJ29yZ2FuaXNtZSA7IGVsbGUgcGFydCBkdSB2ZW50cmljdWxlIGdhdWNoZSBldCBhbW9yY2UgbGEgZ3JhbmRlIGNpcmN1bGF0aW9uIChjaXJjdWxhdGlvbiBzeXN0w6ltaXF1ZSku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0584",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle enzyme digestive, principalement présente dans la salive et le suc pancréatique, assure l'hydrolyse de l'amidon en maltose ?",
+    "options": [
+      "L'amylase",
+      "La pepsine",
+      "La lipase",
+      "La trypsine"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdhbXlsYXNlIChzYWxpdmFpcmUgZXQgcGFuY3LDqWF0aXF1ZSkgY2F0YWx5c2UgbGEgY291cHVyZSBkZXMgbGlhaXNvbnMgb3NpZGlxdWVzIGRlIGwnYW1pZG9uIHBvdXIgcHJvZHVpcmUgZGVzIHN1Y3JlcyBwbHVzIHNpbXBsZXMgY29tbWUgbGUgbWFsdG9zZS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0585",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Comment appelle-t-on l'unité structurale et fonctionnelle microscopique du rein responsable de la filtration du sang et de la formation de l'urine ?",
+    "options": [
+      "Le néphron",
+      "Le neurone",
+      "Le glomérule seul",
+      "L'hépatocyte"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "Q2hhcXVlIHJlaW4gaHVtYWluIGNvbnRpZW50IGVudmlyb24gdW4gbWlsbGlvbiBkZSBuw6lwaHJvbnMsIGNvbXBvc8OpcyBkJ3VuIGNvcnB1c2N1bGUgcsOpbmFsIChnbG9tw6lydWxlKSBldCBkJ3VuIHN5c3TDqG1lIHR1YnVsYWlyZS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0586",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Comment appelle-t-on la zone de jonction spécialisée permettant la transmission de l'influx nerveux entre deux neurones ou entre un neurone et une cellule effectrice ?",
+    "options": [
+      "La synapse",
+      "L'axone",
+      "La dendrite",
+      "La gaine de myéline"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgc3luYXBzZSBlc3QgbCdlc3BhY2UgZGUgY29tbXVuaWNhdGlvbiBvw7kgbGVzIG5ldXJvdHJhbnNtZXR0ZXVycyBjaGltaXF1ZXMgc29udCBsaWLDqXLDqXMgcG91ciBwcm9wYWdlciBsZSBzaWduYWwgw6lsZWN0cmlxdWUgZCd1bmUgY2VsbHVsZSDDoCBsJ2F1dHJlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0587",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel agent pathogène microscopique est le parasite protozoaire responsable du paludisme chez l'être humain ?",
+    "options": [
+      "Plasmodium falciparum",
+      "Aedes aegypti",
+      "Vibrio cholerae",
+      "Mycobacterium tuberculosis"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgcGFsdWRpc21lIGVzdCBjYXVzw6kgcGFyIGRlcyBwcm90b3pvYWlyZXMgZHUgZ2VucmUgUGxhc21vZGl1bSAoZG9udCBQLiBmYWxjaXBhcnVtLCBsZSBwbHVzIHLDqXBhbmR1IGV0IGxlIHBsdXMgbW9ydGVsIGVuIEFmcmlxdWUgc3Vic2FoYXJpZW5uZSksIHRyYW5zbWlzIHBhciBsYSBwaXHDu3JlIGRlIGwnYW5vcGjDqGxlIGZlbWVsbGUu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0588",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel moustique diurne reconnaissable à ses rayures blanches sur les pattes est le principal vecteur de la dengue et du chikungunya ?",
+    "options": [
+      "Aedes aegypti",
+      "Anopheles gambiae",
+      "Culex quinquefasciatus",
+      "Simulium damnosum"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgbW91c3RpcXVlIHRpZ3JlIGV0IHVyYmFpbiBBZWRlcyBhZWd5cHRpIHRyYW5zbWV0IGxlcyB2aXJ1cyBkZSBsYSBkZW5ndWUsIGR1IGNoaWt1bmd1bnlhLCBkZSBsYSBmacOodnJlIGphdW5lIGV0IGRlIFppa2EgcGFyIHNlcyBwaXHDu3JlcyBkaXVybmVzLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0589",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel organite cellulaire est couramment désigné comme la « centrale énergétique » de la cellule eucaryote en raison de la production d'ATP par la respiration ?",
+    "options": [
+      "La mitochondrie",
+      "L'appareil de Golgi",
+      "Le réticulum endoplasmique",
+      "Le lysosome"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIG1pdG9jaG9uZHJpZXMgc29udCBsZSBzacOoZ2UgZHUgY3ljbGUgZGUgS3JlYnMgZXQgZGUgbGEgcGhvc3Bob3J5bGF0aW9uIG94eWRhdGl2ZSwgY29udmVydGlzc2FudCBsZXMgbnV0cmltZW50cyBlbiBhZMOpbm9zaW5lIHRyaXBob3NwaGF0ZSAoQVRQKS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0590",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel groupe sanguin est qualifié de « donneur universel » en matière de globules rouges (culots globulaires) ?",
+    "options": [
+      "Le groupe O rhésus négatif (O-)",
+      "Le groupe AB rhésus positif (AB+)",
+      "Le groupe A rhésus positif (A+)",
+      "Le groupe B rhésus négatif (B-)"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGjDqW1hdGllcyBkdSBncm91cGUgTyBuZSBwb3Nzw6hkZW50IG5pIGwnYW50aWfDqG5lIEEsIG5pIGwnYW50aWfDqG5lIEIsIG5pIGwnYW50aWfDqG5lIEQgKHJow6lzdXMgbsOpZ2F0aWYpLCDDqXZpdGFudCB0b3V0ZSByw6lhY3Rpb24gaMOpbW9seXRpcXVlIGltbXVuaXRhaXJlIGNoZXogbGUgcmVjZXZldXIu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0591",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quels globules blancs sont responsables de la production et de la sécrétion des anticorps (immunité humorale) après différenciation en plasmocytes ?",
+    "options": [
+      "Les lymphocytes B",
+      "Les lymphocytes T cytotoxiques",
+      "Les polynucléaires neutrophiles",
+      "Les macrophages"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGx5bXBob2N5dGVzIEIgcmVjb25uYWlzc2VudCBsZXMgYW50aWfDqG5lcyBzb2x1YmxlcyBvdSBtZW1icmFuYWlyZXMgZXQgc2UgZGlmZsOpcmVuY2llbnQgZW4gcGxhc21vY3l0ZXMgaHlwZXJzcMOpY2lhbGlzw6lzIGRhbnMgbGEgc8OpY3LDqXRpb24gbWFzc2l2ZSBkJ2FudGljb3Jwcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0592",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel est le rôle prépondérant des lymphocytes T dits « helpers » ou CD4+ dans la réponse immunitaire ?",
+    "options": [
+      "Coordonner et activer l'ensemble des réponses immunitaires par la sécrétion de cytokines",
+      "Transporter les gaz respiratoires dans le sang",
+      "Phagocyter directement les débris minéraux",
+      "Déclencher la coagulation plaquettaire"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGx5bXBob2N5dGVzIFQgQ0Q0KyBzb250IGxlcyByw6lndWxhdGV1cnMgY2VudHJhdXggZGUgbCdpbW11bml0w6kgOyBsZXVyIGRlc3RydWN0aW9uIHBhciBsZSBWSUggZXhwbGlxdWUgbCdlZmZvbmRyZW1lbnQgaW1tdW5pdGFpcmUgY2FyYWN0w6lyaXN0aXF1ZSBkdSBTSURBLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0593",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel type d'immunité est conféré par l'administration d'un vaccin contenant des antigènes atténués ou inactivés ?",
+    "options": [
+      "Une immunité active, acquise et durable grâce aux cellules mémoires",
+      "Une immunité passive et immédiate sans mémoire immunitaire",
+      "Une immunité innée non spécifique",
+      "Une tolérance immunitaire irréversible"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgdmFjY2luYXRpb24gc3RpbXVsZSBkaXJlY3RlbWVudCBsZSBzeXN0w6htZSBpbW11bml0YWlyZSBkZSBsJ2jDtHRlIHBvdXIgcXUnaWwgZmFicmlxdWUgc2VzIHByb3ByZXMgYW50aWNvcnBzIGV0IGNvbnNlcnZlIGRlcyBjZWxsdWxlcyBtw6ltb2lyZXMgcHLDqnRlcyDDoCByw6lhZ2lyIHJhcGlkZW1lbnQu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0594",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelles sont les étapes chronologiques correctes du processus de phagocytose réalisé par les macrophages ?",
+    "options": [
+      "Adhésion -> Ingestion (englobement) -> Digestion enzymatique -> Rejet des débris",
+      "Digestion -> Adhésion -> Multiplication -> Lyse",
+      "Sécrétion d'anticorps -> Fixation -> Libération",
+      "Synthèse d'ATP -> Fixation -> Excrétion"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgcGhhZ29jeXRvc2UgZMOpYnV0ZSBwYXIgbGEgcmVjb25uYWlzc2FuY2UgZXQgbCdhZGjDqXNpb24gYXUgY29ycHMgw6l0cmFuZ2VyLCBzdWl2aSBkZSBzb24gYWJzb3JwdGlvbiBkYW5zIHVuIHBoYWdvc29tZSwgc2EgZGVzdHJ1Y3Rpb24gcGFyIGxlcyBlbnp5bWVzIGx5c29zb21pYWxlcyBldCBsJ2V4cHVsc2lvbiBkZXMgcsOpc2lkdXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0595",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel composé protéique et bactéricide est présent dans les larmes, la salive et le mucus pour détruire la paroi des bactéries gram-positives ?",
+    "options": [
+      "Le lysozyme",
+      "L'interféron gamma",
+      "La thrombine",
+      "L'histamine"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgbHlzb3p5bWUgZXN0IHVuZSBlbnp5bWUgbmF0dXJlbGxlIHF1aSBjYXRhbHlzZSBsJ2h5ZHJvbHlzZSBkdSBwZXB0aWRvZ2x5Y2FuZSBkZSBsYSBwYXJvaSBiYWN0w6lyaWVubmUsIGZvcm1hbnQgdW5lIGJhcnJpw6hyZSBjaGltaXF1ZSBwcm90ZWN0cmljZS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0596",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Pourquoi les antibiotiques classiques sont-ils totalement inefficaces contre les infections virales comme la grippe ou la rougeole ?",
+    "options": [
+      "Les virus n'ont pas de métabolisme propre, de paroi ni de ribosomes ciblés par les antibiotiques",
+      "Les virus sont protégés par une épaisse couche de myéline",
+      "Les antibiotiques ne fonctionnent qu'en milieu strictement basique",
+      "Les virus absorbent les antibiotiques comme source d'énergie"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGFudGliaW90aXF1ZXMgY2libGVudCBkZXMgbcOpY2FuaXNtZXMgc3DDqWNpZmlxdWVzIGF1eCBiYWN0w6lyaWVzIChwYXJvaSBiYWN0w6lyaWVubmUsIHLDqXBsaWNhdGlvbiBiYWN0w6lyaWVubmUsIHJpYm9zb21lcyBiYWN0w6lyaWVucykgYWJzZW50cyBjaGV6IGxlcyB2aXJ1cy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0597",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle maladie infectieuse contagieuse touchant principalement les poumons est causée par la bactérie Mycobacterium tuberculosis ?",
+    "options": [
+      "La tuberculose",
+      "La typhoïde",
+      "La méningite cérébrospinale",
+      "Le tétanos"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgYmFjaWxsZSBkZSBLb2NoIChCSykgb3UgTXljb2JhY3Rlcml1bSB0dWJlcmN1bG9zaXMgZXN0IGwnYWdlbnQgcmVzcG9uc2FibGUgZGUgbGEgdHViZXJjdWxvc2UsIHRyYW5zbWlzZSBwYXIgdm9pZSBhw6lyaWVubmUgcGFyIGxlcyBnb3V0dGVsZXR0ZXMgZGUgdG91eC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0598",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Que prévient historiquement le vaccin obligatoire chez le nourrisson appelé BCG (Bacille de Calmette et Guérin) ?",
+    "options": [
+      "Les formes graves de la tuberculose (notamment méningite tuberculeuse)",
+      "Le tétanos néonatal",
+      "La poliomyélite aiguë",
+      "La fièvre jaune"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgdmFjY2luIEJDRyBlc3QgY29uc3RpdHXDqSBkJ3VuZSBzb3VjaGUgdml2YW50ZSBhdHTDqW51w6llIGRlIE15Y29iYWN0ZXJpdW0gYm92aXMgcHJvdMOpZ2VhbnQgbGVzIGpldW5lcyBlbmZhbnRzIGNvbnRyZSBsZXMgZGlzc8OpbWluYXRpb25zIGdyYXZlcyBkZSBsYSB0dWJlcmN1bG9zZS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0599",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelles sont les quatre bases azotées constitutives de la molécule d'ADN et leur appariement spécifique ?",
+    "options": [
+      "Adénine avec Thymine (A-T) et Guanine avec Cytosine (G-C)",
+      "Adénine avec Uracile (A-U) et Guanine avec Thymine (G-T)",
+      "Adénine avec Guanine (A-G) et Cytosine avec Thymine (C-T)",
+      "Uracile avec Cytosine (U-C) et Adénine avec Thymine (A-T)"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "RGFucyBsYSBkb3VibGUgaMOpbGljZSBkJ0FETiwgbGVzIGJhc2VzIGNvbXBsw6ltZW50YWlyZXMgc29udCByZWxpw6llcyBwYXIgZGVzIGxpYWlzb25zIGh5ZHJvZ8OobmUgOiBsJ0Fkw6luaW5lIHMnYXBwYXJpZSB0b3Vqb3VycyBhdmVjIGxhIFRoeW1pbmUgKDIgbGlhaXNvbnMpIGV0IGxhIEd1YW5pbmUgYXZlYyBsYSBDeXRvc2luZSAoMyBsaWFpc29ucyku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0600",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle base azotée caractéristique est présente dans la molécule d'ARN en remplacement de la thymine présente dans l'ADN ?",
+    "options": [
+      "L'uracile",
+      "L'adénine",
+      "L'adénosine",
+      "La guanosine"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdBUk4gY29udGllbnQgZGUgbCd1cmFjaWxlIChVKSDDoCBsYSBwbGFjZSBkZSBsYSB0aHltaW5lIChUKSwgZXQgc29uIHN1Y3JlIGVzdCB1biByaWJvc2UgYXUgbGlldSBkJ3VuIGTDqXNveHlyaWJvc2Uu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0601",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Combien de paires de chromosomes comporte le caryotype d'une cellule somatique humaine normale ?",
+    "options": [
+      "23 paires (soit 46 chromosomes au total)",
+      "46 paires (soit 92 chromosomes au total)",
+      "22 paires (soit 44 chromosomes au total)",
+      "24 paires (soit 48 chromosomes au total)"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGNlbGx1bGVzIGRpcGxvw69kZXMgaHVtYWluZXMgcG9zc8OoZGVudCA0NiBjaHJvbW9zb21lcyA6IDIyIHBhaXJlcyBkJ2F1dG9zb21lcyBldCAxIHBhaXJlIGRlIGNocm9tb3NvbWVzIHNleHVlbHMgKGdvbm9zb21lcyA6IFhYIGNoZXogbGEgZmVtbWUsIFhZIGNoZXogbCdob21tZSku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0602",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel est le résultat caractéristique de la méiose à partir d'une cellule mère diploïde à 2n chromosomes ?",
+    "options": [
+      "Quatre cellules filles haploïdes génétiquement différentes à n chromosomes (gamètes)",
+      "Deux cellules filles diploïdes identiques à 2n chromosomes",
+      "Deux cellules filles haploïdes identiques",
+      "Quatre cellules filles diploïdes identiques"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgbcOpaW9zZSBjb21wb3J0ZSBkZXV4IGRpdmlzaW9ucyBzdWNjZXNzaXZlcyByw6lkdWlzYW50IGxlIG5vbWJyZSBkZSBjaHJvbW9zb21lcyBkZSBtb2l0acOpICgybiAtPiBuKSBwb3VyIGfDqW7DqXJlciBsZXMgc3Blcm1hdG96b8OvZGVzIG91IGxlcyBvdm9jeXRlcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0603",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle anomalie génétique caractérise la drépanocytose (anémie falciforme) au niveau moléculaire ?",
+    "options": [
+      "La substitution de l'acide glutamique par la valine en position 6 de la chaîne bêta de la globine",
+      "L'absence complète de production de plaquettes sanguines",
+      "La duplication du chromosome 21",
+      "Une carence alimentaire exclusive en vitamine C"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgbXV0YXRpb24gcG9uY3R1ZWxsZSBlbnRyYcOubmUgbGEgZm9ybWF0aW9uIGQnaMOpbW9nbG9iaW5lIGFub3JtYWxlIChIYlMpIHF1aSBwb2x5bcOpcmlzZSBlbiBzaXR1YXRpb24gZGUgZMOpc294eWfDqW5hdGlvbiwgZMOpZm9ybWFudCBsZXMgaMOpbWF0aWVzIGVuIGZhdWNpbGxlcyAoZHLDqXBhbm9jeXRlcyku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0604",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Comment qualifie-t-on un individu qui possède deux allèles identiques pour un gène donné sur une paire de chromosomes homologues ?",
+    "options": [
+      "Homozygote",
+      "Hétérozygote",
+      "Hémizygote",
+      "Polyploïde"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "VW4gaW5kaXZpZHUgaG9tb3p5Z290ZSBwb3J0ZSBkZXV4IGFsbMOobGVzIGlkZW50aXF1ZXMgcG91ciBsZSBnw6huZSBjb25zaWTDqXLDqSAoZXg6IGFsbMOobGVzIFNTIG91IEFBKSwgdGFuZGlzIHF1J3VuIGjDqXTDqXJvenlnb3RlIHBvcnRlIGRldXggYWxsw6hsZXMgZGlzdGluY3RzIChleDogYWxsw6hsZXMgQVMpLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0605",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel gaz atmosphérique est absorbé et fixé par les plantes vertes chlorophylliennes au cours de la photosynthèse pour fabriquer de la matière organique ?",
+    "options": [
+      "Le dioxyde de carbone (CO2)",
+      "Le dioxygène (O2)",
+      "Le diazote (N2)",
+      "Le méthane (CH4)"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "QXUgY291cnMgZGUgbGEgcGhhc2Ugc29tYnJlIChjeWNsZSBkZSBDYWx2aW4pIGRlIGxhIHBob3Rvc3ludGjDqHNlLCBsZXMgdsOpZ8OpdGF1eCB1dGlsaXNlbnQgbCfDqW5lcmdpZSBzb2xhaXJlIHBvdXIgZml4ZXIgbGUgQ08yIGF0bW9zcGjDqXJpcXVlIGV0IHByb2R1aXJlIGRlcyBnbHVjaWRlcywgZW4gcmVqZXRhbnQgZHUgZGlveHlnw6huZS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0606",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel niveau trophique occupent les végétaux chlorophylliens autotrophes dans un écosystème naturel ?",
+    "options": [
+      "Les producteurs primaires",
+      "Les consommateurs primaires (herbivores)",
+      "Les consommateurs secondaires (carnivores)",
+      "Les décomposeurs stricts"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIG9yZ2FuaXNtZXMgYXV0b3Ryb3BoZXMgcHJvZHVpc2VudCBkZSBsYSBiaW9tYXNzZSDDoCBwYXJ0aXIgZGUgbWluw6lyYXV4IGV0IGQnw6luZXJnaWUgc29sYWlyZSA7IGlscyBmb3JtZW50IGxhIGJhc2UgZGUgdG91dGUgbGEgcHlyYW1pZGUgYWxpbWVudGFpcmUu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0607",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Comment qualifie-t-on les plantes particulièrement adaptées aux milieux arides présentant des adaptations morphologiques (feuilles réduites en épines, cuticule épaisse, stockage d'eau) ?",
+    "options": [
+      "Les plantes xérophytes",
+      "Les plantes hydrophytes",
+      "Les plantes halophytes",
+      "Les plantes sciaphiles"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIHjDqXJvcGh5dGVzIChjb21tZSBsZXMgYWNhY2lhcywgY2FjdMOpZXMsIGV1cGhvcmJlcykgc29udCBzcMOpY2lhbGVtZW50IGFkYXB0w6llcyBwb3VyIHN1cnZpdnJlIGVuIG1pbGlldSBzZWMgYXZlYyBkZSB0csOocyBmYWlibGVzIHJlc3NvdXJjZXMgaHlkcmlxdWVzLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0608",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Grâce à quelle symbiose biologique les plantes de la famille des Fabacées (légumineuses comme l'arachide et le niébé) enrichissent-elles le sol en azote ?",
+    "options": [
+      "Une symbiose au niveau des nodosités racinaires avec des bactéries du genre Rhizobium",
+      "Une symbiose foliaire avec des mousses épiphytes",
+      "Une association parasitaire avec des nématodes",
+      "L'absorption directe de l'azote gazeux par la sève brute"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGJhY3TDqXJpZXMgUmhpem9iaXVtIGjDqWJlcmfDqWVzIGRhbnMgbGVzIG5vZG9zaXTDqXMgZGVzIHJhY2luZXMgZml4ZW50IGxlIGRpYXpvdGUgYXRtb3NwaMOpcmlxdWUgZXQgbGUgdHJhbnNmb3JtZW50IGVuIGNvbXBvc8OpcyBhem90w6lzIGRpcmVjdGVtZW50IGFzc2ltaWxhYmxlcyBwYXIgbGEgcGxhbnRlIGV0IGZlcnRpbGlzYW50IGxlIHNvbC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0609",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel phénomène environnemental majeur désigne la dégradation persistante des terres dans les zones arides et subhumides sèches sous l'effet des variations climatiques et des activités humaines ?",
+    "options": [
+      "La désertification",
+      "L'eutrophisation",
+      "La salinisation marine",
+      "Le lessivage torrentiel"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgZMOpc2VydGlmaWNhdGlvbiBlc3QgbGEgZMOpZ3JhZGF0aW9uIGNvbnRpbnVlIGRlcyB0ZXJyZXMgYXJpZGVzIHLDqWR1aXNhbnQgbGEgZmVydGlsaXTDqSBiaW9sb2dpcXVlIGV0IGxhIGNhcGFjaXTDqSBkZSBzdWJzaXN0YW5jZSBkZXMgw6ljb3N5c3TDqG1lcyBzYWjDqWxpZW5zLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BIO_0610",
+    "matiere": "biologie",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel est l'objectif premier de l'initiative panafricaine de la « Grande Muraille Verte » traversant le Sahel de Dakar à Djibouti ?",
+    "options": [
+      "Lutter contre la désertification et restaurer les terres dégradées en créant une ceinture agroforestière",
+      "Construire un mur militaire de séparation frontalière",
+      "Remplacer toute l'agriculture céréalière par des plantations d'eucalyptus",
+      "Creuser un canal maritime transsaharien"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGFuY8OpZSBwYXIgbCdVbmlvbiBBZnJpY2FpbmUsIGxhIEdyYW5kZSBNdXJhaWxsZSBWZXJ0ZSB2aXNlIMOgIHJlc3RhdXJlciAxMDAgbWlsbGlvbnMgZCdoZWN0YXJlcyBkZSB0ZXJyZXMgZCdpY2kgMjAzMCDDoCB0cmF2ZXJzIHVuZSBtb3Nhw69xdWUgZCfDqWNvc3lzdMOobWVzIGR1cmFibGVzIGV0IHJlYm9pc8Opcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
   }
 ]
