@@ -666,7 +666,7 @@ body[data-ecran="dashboard"] .nav-principale { display: none; }
 body[data-ecran="dashboard"] .app-main { width: min(1440px, 100%); padding: 27px 26px 58px; }
 body[data-ecran="dashboard"] .app-footer { width: min(1440px, 100%); }
 #ecran-dashboard { width: 100%; }
-.dashboard-shell { display: grid; grid-template-columns: 64px minmax(0, 1fr); align-items: start; gap: 23px; }
+.dashboard-shell { display: grid; grid-template-columns: 90px minmax(0, 1fr); align-items: start; gap: 23px; }
 .dashboard-rail {
   position: sticky;
   z-index: 20;
@@ -778,7 +778,7 @@ body[data-ecran="dashboard"] .app-footer { border-top-color: #e7e4ec; color: #8b
 body[data-ecran="dashboard"] .app-footer strong { color: #4a4160; }
 
 @media (max-width: 1050px) {
-  .dashboard-shell { grid-template-columns: 58px minmax(0, 1fr); gap: 16px; }
+  .dashboard-shell { grid-template-columns: 90px minmax(0, 1fr); gap: 16px; }
   .dashboard-rail { padding-right: 5px; padding-left: 5px; }
   .dashboard-canvas .grille-stats { gap: 9px; }
   .dashboard-canvas .carte-stat { gap: 8px; padding-right: 11px; padding-left: 11px; }
