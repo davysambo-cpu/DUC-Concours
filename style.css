@@ -1339,3 +1339,26 @@ body[data-ecran="dashboard"] .app-footer strong { color: #4a4160; }
     justify-content: center;
   }
 }
+
+
+/* Parcours de spécialité en cours de constitution */
+.section-specialite-parcours { margin-top: 24px; }
+.specialite-parcours-card {
+  padding: 22px 24px;
+  border: 1px solid #e7e2ec;
+  border-radius: 17px;
+  background: linear-gradient(115deg, rgba(255,255,255,.96), rgba(242,239,248,.84));
+  box-shadow: 0 5px 17px rgba(46, 42, 65, .04);
+}
+.specialite-parcours-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.specialite-parcours-heading .titre-section { margin-top: 3px; font-size: 1.3rem; }
+.specialite-etat { flex: 0 0 auto; padding: 6px 10px; border: 1px solid #e8dfc8; border-radius: 999px; background: #f8f3e6; color: #7d693b; font-size: .68rem; font-weight: 700; }
+.specialite-parcours-intro { max-width: 780px; margin-top: 9px; color: #6f6d78; font-size: .82rem; }
+.specialite-domaines-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; list-style: none; }
+.specialite-domaine { padding: 7px 10px; border: 1px solid #e4e1e9; border-radius: 9px; background: #fff; color: #454250; font-size: .72rem; font-weight: 650; }
+.specialite-parcours-note { margin-top: 14px; padding-top: 12px; border-top: 1px solid #e9e6ed; color: #777481; font-size: .72rem; }
+@media (max-width: 600px) {
+  .specialite-parcours-card { padding: 17px 16px; }
+  .specialite-parcours-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .specialite-parcours-heading .titre-section { font-size: 1.12rem; }
+}

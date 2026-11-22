@@ -824,8 +824,9 @@ async function mettreAJourDashboard() {
 
     const listeMatieres = [...new Set(questionsToutes.map(question => question.matiere).filter(Boolean))]
       .sort((a, b) => a.localeCompare(b, 'fr'));
-    remplirSelectMatiere(document.getElementById('select-matiere-libre'), listeMatieres, 'toutes', 'Toutes les matières');
-    remplirSelectMatiere(document.getElementById('select-matiere-unidisciplinaire'), listeMatieres, '', 'Choisir une matière…');
+    const specialites = window.DUC_CONSTANTS?.SPECIALITES_CONCOURS || {};
+    remplirSelectMatiere(document.getElementById('select-matiere-libre'), listeMatieres, 'toutes', 'Toutes les matières', specialites);
+    remplirSelectMatiere(document.getElementById('select-matiere-unidisciplinaire'), listeMatieres, '', 'Choisir une matière…', specialites);
     afficherProgressionMatieres(questionsToutes, statistiques);
     afficherHistoriqueSessions(sessions);
     afficherEvolutionEtConseils(sessions, questionsToutes, statistiques);
@@ -834,9 +835,24 @@ async function mettreAJourDashboard() {
   }
 }
 
-function remplirSelectMatiere(select, matieres, valeurInitiale, texteInitial) {
+function afficherDomainesSpecialite() {
+  const liste = document.getElementById('liste-domaines-energie');
+  const specialite = window.DUC_CONSTANTS?.SPECIALITES_CONCOURS?.ingenieur_application_energie;
+  if (!liste || !specialite) return;
+
+  liste.replaceChildren();
+  specialite.domaines.forEach(cle => {
+    const element = document.createElement('li');
+    element.className = 'specialite-domaine';
+    element.textContent = window.formaterMatiere?.(cle) || cle;
+    liste.appendChild(element);
+  });
+}
+
+function remplirSelectMatiere(select, matieres, valeurInitiale, texteInitial, specialites = {}) {
   if (!select) return;
   const valeurPrecedente = select.value;
+  const matieresDisponibles = new Set(matieres);
   select.replaceChildren();
   const optionInitiale = document.createElement('option');
   optionInitiale.value = valeurInitiale;
@@ -849,7 +865,24 @@ function remplirSelectMatiere(select, matieres, valeurInitiale, texteInitial) {
     option.textContent = typeof window.formaterMatiere === 'function' ? window.formaterMatiere(matiere) : (matiere.charAt(0).toLocaleUpperCase('fr-FR') + matiere.slice(1));
     select.appendChild(option);
   });
-  if ([...select.options].some(option => option.value === valeurPrecedente)) select.value = valeurPrecedente;
+
+  Object.values(specialites).forEach(specialite => {
+    const domainesEnPreparation = (specialite.domaines || []).filter(matiere => !matieresDisponibles.has(matiere));
+    if (domainesEnPreparation.length === 0) return;
+
+    const groupe = document.createElement('optgroup');
+    groupe.label = `${specialite.nom} — en préparation`;
+    domainesEnPreparation.forEach(matiere => {
+      const option = document.createElement('option');
+      option.value = matiere;
+      option.disabled = true;
+      option.textContent = `${window.formaterMatiere?.(matiere) || matiere} — questions à venir`;
+      groupe.appendChild(option);
+    });
+    select.appendChild(groupe);
+  });
+
+  if ([...select.options].some(option => option.value === valeurPrecedente && !option.disabled)) select.value = valeurPrecedente;
 }
 
 function calculerSerieActive(sessions) {
@@ -1657,6 +1690,7 @@ document.getElementById('btn-retour-dashboard-admin').addEventListener('click', 
 // INITIALISATION AU DÉMARRAGE
 window.addEventListener('DOMContentLoaded', async () => {
   initialiserNavigationDashboard();
+  afficherDomainesSpecialite();
   mettreAJourStatutReseau();
   await initialiserCatalogueQuestions();
   await mettreAJourDashboard();
