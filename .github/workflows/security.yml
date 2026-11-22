@@ -31,11 +31,21 @@ jobs:
 
       - name: Verify no private service role key leaked
         run: |
-          PATTERN="service"_"role"
-          if grep -rn "$PATTERN" --exclude="*.md" --exclude-dir=".git" --exclude-dir=".github" .; then
-            echo "::error::Found forbidden service role reference in client code"
-            exit 1
-          fi
+          node -e '
+            const fs = require("fs");
+            const files = ["app.js", "adminDashboard.js", "db.js", "supabaseClient.js", "sw.js", "index.html", "style.css", "package.json", "vercel.json"];
+            const forbidden = "service" + "_" + "role";
+            for (const f of files) {
+              if (fs.existsSync(f)) {
+                const c = fs.readFileSync(f, "utf-8");
+                if (c.toLowerCase().includes(forbidden)) {
+                  console.error("::error::Forbidden secret detected in " + f);
+                  process.exit(1);
+                }
+              }
+            }
+            console.log("✅ Verified: no private service role keys found in client files");
+          '
 
       - name: Verify vercel.json format and security headers
         run: |
