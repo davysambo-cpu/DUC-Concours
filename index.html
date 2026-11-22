@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=34">
+  <link rel="stylesheet" href="style.css?v=35">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -297,6 +297,21 @@
             </div>
           </section>
 
+          <section class="section-block section-specialite-parcours" aria-labelledby="titre-specialite-parcours">
+            <div class="specialite-parcours-card">
+              <div class="specialite-parcours-heading">
+                <div>
+                  <span class="section-kicker">NOUVEAU PARCOURS REPÉRÉ</span>
+                  <h2 class="titre-section" id="titre-specialite-parcours">Ingénieur en application de l'énergie</h2>
+                </div>
+                <span class="specialite-etat">Matières en préparation</span>
+              </div>
+              <p class="specialite-parcours-intro">Nous préparons ce parcours avec vous. Les domaines apparaissent dès maintenant dans les menus, puis seront activés au fur et à mesure de la création et de la vérification des questions.</p>
+              <ul id="liste-domaines-energie" class="specialite-domaines-list" aria-label="Matières de la spécialité énergie"></ul>
+              <p class="specialite-parcours-note">Le catalogue contient déjà des questions de culture générale sur l’AES et de psychotechnique. Nous vérifierons ensemble leur adéquation à ce concours avant de les réutiliser.</p>
+            </div>
+          </section>
+
           <!-- SECTION 4 : AIDE & MÉTHODE CONCOURS -->
           <section id="section-aide" class="section-block section-aide-candidat" aria-labelledby="titre-section-aide">
             <div class="section-heading">
@@ -494,10 +509,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.4/dexie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="constants.js?v=3"></script>
+  <script src="constants.js?v=4"></script>
   <script src="supabaseClient.js?v=25"></script>
   <script src="db.js?v=25"></script>
-  <script src="app.js?v=35"></script>
+  <script src="app.js?v=36"></script>
   <script src="adminDashboard.js?v=33"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {

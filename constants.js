@@ -11,9 +11,33 @@ window.DUC_CONSTANTS = {
     'chimie': 'Chimie',
     'culture_generale': 'Culture générale',
     'general': 'Questions mixtes',
+    'technologie_generale': 'Technologie générale',
+    'electrotechnique': 'Électrotechnique',
+    'electronique': 'Électronique',
+    'energies_renouvelables': 'Énergies renouvelables',
+    'energie_photovoltaique': 'Énergie photovoltaïque',
+    'machines_industrielles': 'Moteurs et machines industrielles',
+    'transformateurs': 'Transformateurs',
     'mathematiques': 'Mathématiques',
     'physique': 'Physique',
     'svt': 'SVT'
+  },
+
+  // Parcours de concours et disciplines prévues. Les domaines restent verrouillés
+  // dans les menus tant que leur banque de questions n'a pas été préparée.
+  SPECIALITES_CONCOURS: {
+    ingenieur_application_energie: {
+      nom: "Ingénieur en application de l'énergie",
+      domaines: [
+        'technologie_generale',
+        'electrotechnique',
+        'electronique',
+        'energies_renouvelables',
+        'energie_photovoltaique',
+        'machines_industrielles',
+        'transformateurs'
+      ]
+    }
   },
 
   // Les 3 modes officiels unifiés
