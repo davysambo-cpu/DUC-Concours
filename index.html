@@ -8,7 +8,7 @@
   <title>DUC Concours — Votre préparation, avec méthode</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=31">
+  <link rel="stylesheet" href="style.css?v=32">
 </head>
 <body data-ecran="dashboard">
   <header class="app-header">
@@ -400,10 +400,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/3.2.4/dexie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="supabaseClient.js?v=21"></script>
-  <script src="db.js?v=21"></script>
-  <script src="app.js?v=31"></script>
-  <script src="adminDashboard.js?v=29"></script>
+  <script src="supabaseClient.js?v=22"></script>
+  <script src="db.js?v=22"></script>
+  <script src="app.js?v=32"></script>
+  <script src="adminDashboard.js?v=30"></script>
   <script>
     document.getElementById('auth-lien-bascule').addEventListener('click', () => {
       const inscription = document.getElementById('auth-titre').textContent !== 'Inscription Candidat';
@@ -422,7 +422,34 @@
       document.getElementById('auth-email').focus();
     });
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch((err) => console.warn('Service worker indisponible :', err)));
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((registration) => {
+          // Vérifier immédiatement si une nouvelle version est disponible sur le serveur
+          registration.update();
+
+          registration.addEventListener('updatefound', () => {
+            const installingWorker = registration.installing;
+            if (installingWorker) {
+              installingWorker.addEventListener('statechange', () => {
+                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('🔄 Nouvelle version détectée en arrière-plan : mise à jour automatique...');
+                  // Rechargement silencieux transparent pour afficher les nouveaux contenus
+                  window.location.reload();
+                }
+              });
+            }
+          });
+        }).catch((err) => console.warn('Service worker indisponible :', err));
+
+        // Détecter la prise de contrôle par le nouveau Service Worker
+        let rafraichissementEnCours = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!rafraichissementEnCours) {
+            rafraichissementEnCours = true;
+            window.location.reload();
+          }
+        });
+      });
     }
   </script>
 </body>

@@ -29,6 +29,7 @@ db.version(1).stores({
 
 /**
  * Charge les questions de production (Base64) dans Dexie.js au premier lancement
+ * et synchronise automatiquement le catalogue en arrière-plan dès qu'une mise à jour existe.
  */
 async function initialiserCatalogueQuestions() {
   const nombreQuestions = await db.questions.count();
@@ -39,10 +40,7 @@ async function initialiserCatalogueQuestions() {
   }
 
   try {
-    console.log(nombreQuestions === 0
-      ? "📥 Premier lancement : chargement du catalogue de questions..."
-      : "🔄 Vérification des mises à jour du catalogue...");
-    const reponse = await fetch('questions_prod.json', { cache: 'no-cache' });
+    const reponse = await fetch(`questions_prod.json?t=${Date.now()}`, { cache: 'no-store' });
     if (!reponse.ok) {
       throw new Error(`HTTP ${reponse.status} lors du chargement du catalogue`);
     }
@@ -51,8 +49,14 @@ async function initialiserCatalogueQuestions() {
       throw new Error("Le catalogue reçu n'est pas une liste de questions valide");
     }
 
-    await db.questions.bulkPut(questions);
-    console.log(`✅ ${questions.length} question(s) disponibles dans Dexie.js.`);
+    if (nombreQuestions !== questions.length) {
+      await db.questions.clear();
+      await db.questions.bulkPut(questions);
+      console.log(`🚀 Catalogue synchronisé : ${questions.length} questions enregistrées dans Dexie.js.`);
+    } else {
+      await db.questions.bulkPut(questions);
+      console.log(`✅ ${questions.length} questions à jour dans Dexie.js.`);
+    }
   } catch (erreur) {
     if (nombreQuestions === 0) {
       console.error("❌ Impossible de charger le catalogue :", erreur);
