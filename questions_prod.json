@@ -67498,5 +67498,1805 @@
     "version": 1,
     "date_creation": "2026-10-07",
     "date_derniere_modification": "2026-10-07"
+  },
+  {
+    "id": "NEW_BUR_0601",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "En quelle date la Charte du Liptako-Gourma instituant l'Alliance des États du Sahel (AES) a-t-elle été signée ?",
+    "options": [
+      "16 septembre 2023",
+      "28 janvier 2024",
+      "6 juillet 2024",
+      "15 octobre 2023"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgQ2hhcnRlIGR1IExpcHRha28tR291cm1hIGEgw6l0w6kgc2lnbsOpZSBsZSAxNiBzZXB0ZW1icmUgMjAyMyBwYXIgbGUgQnVya2luYSBGYXNvLCBsZSBNYWxpIGV0IGxlIE5pZ2VyIHBvdXIgw6l0YWJsaXIgdW5lIGFyY2hpdGVjdHVyZSBkZSBkw6lmZW5zZSBjb2xsZWN0aXZlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0602",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Où s'est tenu le premier sommet des chefs d'État de l'Alliance des États du Sahel (AES) le 6 juillet 2024 ?",
+    "options": [
+      "Niamey (Niger)",
+      "Ouagadougou (Burkina Faso)",
+      "Bamako (Mali)",
+      "Bobo-Dioulasso (Burkina Faso)"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgcHJlbWllciBzb21tZXQgb2ZmaWNpZWwgZGVzIGNoZWZzIGQnw4l0YXQgZGUgbCdBRVMgcydlc3QgdGVudSDDoCBOaWFtZXksIGNhcGl0YWxlIGRlIGxhIFLDqXB1YmxpcXVlIGR1IE5pZ2VyLCBsZSA2IGp1aWxsZXQgMjAyNC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0603",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel traité historique a été adopté lors du sommet de Niamey le 6 juillet 2024 ?",
+    "options": [
+      "Le traité portant création de la Confédération des États du Sahel",
+      "Le pacte de non-agression de l'Afrique de l'Ouest",
+      "L'accord de libre-échange transsaharien",
+      "Le protocole monétaire sahélien"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGNoZWZzIGQnw4l0YXQgb250IHNpZ27DqSBsZSA2IGp1aWxsZXQgMjAyNCBsZSB0cmFpdMOpIGluc3RpdHVhbnQgbGEgQ29uZsOpZMOpcmF0aW9uIGRlcyDDiXRhdHMgZHUgU2FoZWwsIGZyYW5jaGlzc2FudCB1bmUgw6l0YXBlIGQnaW50w6lncmF0aW9uIHBvbGl0aXF1ZSBtYWpldXJlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0604",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel chef d'État a été désigné premier président en exercice de la Confédération de l'AES en juillet 2024 ?",
+    "options": [
+      "Général Assimi Goïta",
+      "Capitaine Ibrahim Traoré",
+      "Général Abdourahamane Tiani",
+      "Colonel Sadio Camara"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgR8OpbsOpcmFsIGRlIGNvcnBzIGQnYXJtw6llIEFzc2ltaSBHb8OvdGEsIHByw6lzaWRlbnQgZGUgbGEgVHJhbnNpdGlvbiBkdSBNYWxpLCBhIMOpdMOpIGTDqXNpZ27DqSBwb3VyIHByw6lzaWRlciBsYSBDb25mw6lkw6lyYXRpb24gZGUgbCdBRVMgcG91ciB1biBtYW5kYXQgZCd1biBhbi4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0605",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "À quelle date historique le Burkina Faso, le Mali et le Niger ont-ils annoncé conjointement leur retrait immédiat de la CEDEAO ?",
+    "options": [
+      "28 janvier 2024",
+      "16 septembre 2023",
+      "26 juillet 2023",
+      "1er mars 2024"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgMjggamFudmllciAyMDI0LCBsZXMgdHJvaXMgcGF5cyBkZSBsJ0FFUyBvbnQgcHVibGnDqSB1biBjb21tdW5pcXXDqSBjb25qb2ludCBoaXN0b3JpcXVlIHByb2NsYW1hbnQgbGV1ciByZXRyYWl0IHNhbnMgZMOpbGFpIGRlIGxhIENFREVBTy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0606",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quels sont les trois piliers fondamentaux inscrits dans la vision stratégique de la Confédération de l'AES ?",
+    "options": [
+      "Défense/Sécurité, Diplomatie et Développement",
+      "Commerce, Éducation et Tourisme",
+      "Mines, Énergie et Télécommunications",
+      "Agriculture, Pêche et Forêts"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgQ29uZsOpZMOpcmF0aW9uIGRlIGwnQUVTIHJlcG9zZSBzdXIgdHJvaXMgcGlsaWVycyBzdHJhdMOpZ2lxdWVzIGluZGlzc29jaWFibGVzIDogbGEgZMOpZmVuc2UgZXQgc8OpY3VyaXTDqSwgbGEgZGlwbG9tYXRpZSBjb25jZXJ0w6llIGV0IGxlIGTDqXZlbG9wcGVtZW50IMOpY29ub21pcXVlIGludMOpZ3LDqS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0607",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Que stipule le principe de défense collective au cœur de la Charte du Liptako-Gourma de l'AES ?",
+    "options": [
+      "Toute atteinte à la souveraineté ou à l'intégrité d'un État membre est considérée comme une agression contre tous",
+      "Les armées sont immédiatement fusionnées sous un état-major civil",
+      "Seules les Nations Unies peuvent autoriser le déploiement de troupes",
+      "Les frontières communes sont fermées aux biens et personnes"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgQ2hhcnRlIMOpdGFibGl0IHF1J3VuZSBhdHRhcXVlIGFybcOpZSBvdSB0ZXJyb3Jpc3RlIHZpc2FudCBsJ3VuIGRlcyDDiXRhdHMgbWVtYnJlcyBkZSBsJ0FFUyBlbmdhZ2UgaW1tw6lkaWF0ZW1lbnQgbCdhc3Npc3RhbmNlIGV0IGxhIHNvbGlkYXJpdMOpIG1pbGl0YWlyZSBkZSB0b3VzIGxlcyBhdXRyZXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0608",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle institution financière commune les pays membres de l'AES ont-ils convenu de créer pour financer leurs projets d'intégration ?",
+    "options": [
+      "La Banque d'investissement et de développement de l'AES",
+      "Le Fonds monétaire sahélien",
+      "La Caisse centrale des pays du Liptako",
+      "La Banque ouest-africaine de réserves"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIG1pbmlzdHJlcyBkZXMgRmluYW5jZXMgZGUgbCdBRVMgcsOpdW5pcyDDoCBCYW1ha28gZXQgTmlhbWV5IG9udCB2YWxpZMOpIGxhIG1pc2UgZW4gcGxhY2UgZGUgbGEgQmFucXVlIGQnaW52ZXN0aXNzZW1lbnQgZXQgZGUgc3RhYmlsaXNhdGlvbiBkZSBsJ0FFUy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0609",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel document de voyage commun officiel a été annoncé par la Confédération de l'AES en septembre 2024 ?",
+    "options": [
+      "Le passeport biométrique confédéral de l'AES",
+      "La carte de résident CEDEAO",
+      "Le visa unique de transit sahélien",
+      "Le laissez-passer frontalier de l'UEMOA"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgcHLDqXNpZGVudCBlbiBleGVyY2ljZSBkZSBsJ0FFUyBhIG9mZmljaWVsbGVtZW50IGFubm9uY8OpIGxlIGxhbmNlbWVudCBwcm9jaGFpbiBkZSBwYXNzZXBvcnRzIGJpb23DqXRyaXF1ZXMgaGFybW9uaXPDqXMgcHJvcHJlcyBhdXggY2l0b3llbnMgZGUgbCdBRVMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0610",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle force armée multinationale opérationnelle commune les pays de l'AES ont-ils constitué pour sécuriser leur espace partagé ?",
+    "options": [
+      "La Force conjointe de l'AES",
+      "La Brigade de la CEDEAO",
+      "La Force Takuba",
+      "L'ECOMOG Sahélien"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGNoZWZzIGQnw6l0YXQtbWFqb3IgZ8OpbsOpcmFsIGRlcyBhcm3DqWVzIGRlIGwnQUVTIG9udCBvcMOpcmF0aW9ubmFsaXPDqSBsYSBGb3JjZSBjb25qb2ludGUgZGUgbCdBRVMgcG91ciBtZW5lciBkZXMgb3DDqXJhdGlvbnMgdW5pZmnDqWVzIGNvbnRyZSBsZXMgZ3JvdXBlcyBhcm3DqXMgdGVycm9yaXN0ZXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0611",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel canal de communication télévisuelle commun a été initié entre le Burkina, le Mali et le Niger pour contrer la guerre informationnelle ?",
+    "options": [
+      "La chaîne d'information panafricaine Web/TV de l'AES",
+      "La chaîne UEMOA Info",
+      "Le réseau francophone Sahel TV",
+      "L'ORTM International"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIG1pbmlzdHJlcyBkZSBsYSBDb21tdW5pY2F0aW9uIGRlIGwnQUVTIG9udCBsYW5jw6kgdW5lIHN0cmF0w6lnaWUgZCdpbmZvcm1hdGlvbiBjb25qb2ludGUgZXQgZGVzIHBsYXRlZm9ybWVzIG3DqWRpYXRpcXVlcyBkw6lkacOpZXMgw6AgbGEgc291dmVyYWluZXTDqSBuYXJyYXRpdmUgc2Fow6lsaWVubmUu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0612",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle région transfrontalière géographique forme le berceau d'origine de l'accord initial de l'AES ?",
+    "options": [
+      "La région des trois frontières ou Liptako-Gourma",
+      "Le bassin du lac Tchad",
+      "Le désert du Ténéré",
+      "La vallée du fleuve Sénégal"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgem9uZSBkdSBMaXB0YWtvLUdvdXJtYSwgw6AgbGEgam9uY3Rpb24gZnJvbnRhbGnDqHJlIGR1IEJ1cmtpbmEgRmFzbywgZHUgTWFsaSBldCBkdSBOaWdlciwgYSBkb25uw6kgc29uIG5vbSDDoCBsYSBDaGFydGUgZm9uZGF0cmljZSBkZSBsJ0FsbGlhbmNlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0613",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Dans quel secteur énergétique les pays de l'AES ont-ils conclu un accord pour l'approvisionnement du Burkina Faso en carburant ?",
+    "options": [
+      "L'accord d'approvisionnement en hydrocarbures avec le Niger",
+      "L'accord gazier avec le Nigeria",
+      "L'accord éolien avec la Mauritanie",
+      "L'accord nucléaire avec l'Afrique du Sud"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgTmlnZXIsIHByb2R1Y3RldXIgZXQgcmFmZmluZXVyIGRlIHDDqXRyb2xlLCBhIGNvbmNsdSBkZXMgYWNjb3JkcyBmcmF0ZXJuZWxzIGRlIGZvdXJuaXR1cmUgZCdoeWRyb2NhcmJ1cmVzIGF2ZWMgbGUgQnVya2luYSBGYXNvIGV0IGxlIE1hbGkgw6AgZGVzIGNvbmRpdGlvbnMgcHLDqWbDqXJlbnRpZWxsZXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0614",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel projet minier stratégique commun est promu au sein de l'AES pour maximiser les retombées économiques locales ?",
+    "options": [
+      "Le raffinage et la transformation locale de l'or et des minerais stratégiques",
+      "L'exportation exclusive de minerais bruts",
+      "L'octroi unilatéral de concessions minières sans contrôle d'État",
+      "L'abandon des droits de douane miniers"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdBRVMgcHLDtG5lIGxhIHRyYW5zZm9ybWF0aW9uIHN1ciBwbGFjZSBkZSBsJ29yIGV0IGRlcyByZXNzb3VyY2VzIG1pbmnDqHJlcyAoY3LDqWF0aW9uIGRlIHJhZmZpbmVyaWVzIG5hdGlvbmFsZXMgZCdvciBhdSBCdXJraW5hIGV0IGF1IE1hbGksIHLDqXZpc2lvbiBkZXMgY29kZXMgbWluaWVycyku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0615",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel principe juridique prévaut pour l'adhésion d'un nouvel État à la Confédération de l'Alliance des États du Sahel ?",
+    "options": [
+      "L'accord unanime des chefs d'État des pays fondateurs",
+      "La simple déclaration unilatérale du pays candidat",
+      "Le visa préalable de la Commission de l'Union Africaine",
+      "Un vote à la majorité simple aux Nations Unies"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "QXV4IHRlcm1lcyBkdSB0cmFpdMOpIGRlIGxhIENvbmbDqWTDqXJhdGlvbiBkZSBsJ0FFUywgbCdhZGjDqXNpb24gZGUgdG91dCBub3V2ZWwgw4l0YXQgZXN0IHNvdW1pc2UgYXUgY29uc2VudGVtZW50IHVuYW5pbWUgZGVzIG1lbWJyZXMgZm9uZGF0ZXVycy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0616",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle est la superficie cumulée approximative des trois États composant la Confédération de l'AES (Burkina, Mali, Niger) ?",
+    "options": [
+      "Plus de 2,7 millions de km²",
+      "Moins de 1 million de km²",
+      "Environ 500 000 km²",
+      "Près de 6 millions de km²"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "QXZlYyBlbnZpcm9uIDI3NCAyMDAga23CsiAoQnVya2luYSksIDEgMjQxIDIzOCBrbcKyIChNYWxpKSBldCAxIDI2NyAwMDAga23CsiAoTmlnZXIpLCBsJ2VzcGFjZSBBRVMgY291dnJlIHBsdXMgZGUgMiw3OCBtaWxsaW9ucyBkZSBrbcKyLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0617",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle population globale approximative rassemble l'ensemble des trois pays membres de l'AES en 2024 ?",
+    "options": [
+      "Plus de 72 millions d'habitants",
+      "Environ 25 millions d'habitants",
+      "Moins de 40 millions d'habitants",
+      "Plus de 150 millions d'habitants"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgQ29uZsOpZMOpcmF0aW9uIHJlZ3JvdXBlIGVudmlyb24gMjMgbWlsbGlvbnMgZCdoYWJpdGFudHMgYXUgQnVya2luYSwgMjMgbWlsbGlvbnMgYXUgTWFsaSBldCBwbHVzIGRlIDI2IG1pbGxpb25zIGF1IE5pZ2VyLCBzb2l0IHBsdXMgZGUgNzIgbWlsbGlvbnMgZCdoYWJpdGFudHMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0618",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle mesure conjointe a été adoptée concernant les compagnies aériennes occidentales ayant suspendu leurs vols dans l'espace AES ?",
+    "options": [
+      "L'affirmation de la souveraineté sur l'espace aérien et le développement de liaisons inter-États",
+      "La gratuité des taxes d'atterrissage",
+      "L'abandon des compétences de navigation civile",
+      "La fermeture totale de tous les aéroports"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIHBheXMgZGUgbCdBRVMgb250IHLDqWFmZmlybcOpIGxhIHNvdXZlcmFpbmV0w6kgcGxlaW5lIGV0IGVudGnDqHJlIHN1ciBsZXVyIGVzcGFjZSBhw6lyaWVuIGV0IHJlbmZvcmPDqSBsZXMgZGVzc2VydGVzIGRpcmVjdGVzIGVudHJlIEJhbWFrbywgTmlhbWV5IGV0IE91YWdhZG91Z291Lg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0619",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel organe suprême définit les orientations politiques majeures de la Confédération de l'AES ?",
+    "options": [
+      "Le Collège des chefs d'État de la Confédération",
+      "La Cour de justice confédérale",
+      "Le Parlement des peuples sahéliens",
+      "Le Conseil des gouverneurs des banques"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQ29sbMOoZ2UgZGVzIGNoZWZzIGQnw4l0YXQgZXN0IGwnaW5zdGFuY2Ugc3VwcsOqbWUgZGUgZMOpY2lzaW9uIGV0IGQnb3JpZW50YXRpb24gZGUgbGEgQ29uZsOpZMOpcmF0aW9uIGRlIGwnQWxsaWFuY2UgZGVzIMOJdGF0cyBkdSBTYWhlbC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0620",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle position commune diplomatique les pays de l'AES ont-ils défendue à la tribune de l'Assemblée générale de l'ONU ?",
+    "options": [
+      "Le non-alignement, le respect strict de la souveraineté et le rejet de l'impérialisme",
+      "Le retour inconditionnel sous tutelle coloniale",
+      "L'intervention militaire étrangère unilatérale",
+      "Le transfert de gestion des ressources naturelles à des ONG"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIHJlcHLDqXNlbnRhbnRzIGRlcyB0cm9pcyBwYXlzIG9udCBtYXJ0ZWzDqSDDoCBsJ09OVSBsZSBwcmluY2lwZSBkZSBzb3V2ZXJhaW5ldMOpIG5hdGlvbmFsZSwgbGUgbXVsdGlsYXTDqXJhbGlzbWUgw6lxdWl0YWJsZSBldCBsYSBmaW4gZGUgbCdpbmfDqXJlbmNlIGV4dMOpcmlldXJlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0621",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel corridor commercial et logistique a été privilégié par l'AES pour diversifier les accès portuaires hors des zones de blocus ?",
+    "options": [
+      "Les corridors vers le port de Lomé (Togo) et le port de Conakry (Guinée)",
+      "Le port du Cap en Afrique du Sud",
+      "Le port de Djibouti",
+      "Le port de Mombasa"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQnVya2luYSBGYXNvLCBsZSBNYWxpIGV0IGxlIE5pZ2VyIG9udCBpbnRlbnNpZmnDqSBsZXVycyBmbHV4IGRlIHRyYW5zaXQgdmVycyBkZXMgcGF5cyBmcsOocmVzIG5vbi1ob3N0aWxlcyBjb21tZSBsZSBUb2dvIChwb3J0IGRlIExvbcOpKSBldCBsYSBHdWluw6llIChDb25ha3J5KS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0622",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle initiative agricole concertée les pays de l'AES déploient-ils pour faire face aux sanctions et aléas climatiques ?",
+    "options": [
+      "La souveraineté alimentaire par la production locale et les banques de céréales",
+      "L'importation exclusive de riz étranger subventionné",
+      "La destruction des barrages hydroagricoles",
+      "La privatisation des terres arables au profit d'agrobusiness étrangers"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdvZmZlbnNpdmUgYWdyb3Bhc3RvcmFsZSBldCBsYSBzb3V2ZXJhaW5ldMOpIGFsaW1lbnRhaXJlIHNvbnQgw6lyaWfDqWVzIGVuIHByaW9yaXTDqSBzdHJhdMOpZ2lxdWUgYWJzb2x1ZSBwb3VyIGdhcmFudGlyIGwnYXV0b25vbWllIGRlcyBwb3B1bGF0aW9ucyBkdSBTYWhlbC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0623",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment s'appelle l'exercice militaire conjoint d'envergure organisé par les armées de l'AES au Niger en mai 2024 ?",
+    "options": [
+      "L'exercice Tarhanakite",
+      "L'exercice Flintlock",
+      "L'exercice Serpent de sable",
+      "L'exercice Tempête du désert"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGZvcmNlcyBhcm3DqWVzIGRlIGwnQUVTIG9udCBtZW7DqSBsJ2V4ZXJjaWNlIHRhY3RpcXVlIG11bHRpbmF0aW9uYWwgJ1RhcmhhbmFraXRlJyBkYW5zIGxlIGNlbnRyZSBkdSBOaWdlciBwb3VyIHJlbmZvcmNlciBsJ2ludGVyb3DDqXJhYmlsaXTDqSBkZXMgdHJvdXBlcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0624",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel est le mot d'ordre d'indépendance économique au centre des discours des dirigeants de l'AES ?",
+    "options": [
+      "Compter d'abord sur nos propres forces et valoriser le génie endogène",
+      "Attendre l'aide internationale au développement",
+      "Endetter le pays auprès d'institutions privées spéculatives",
+      "Sous-traiter la défense nationale"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQ2FwaXRhaW5lIElicmFoaW0gVHJhb3LDqSBldCBzZXMgcGFpcnMgbWFydMOobGVudCBjb25zdGFtbWVudCBsZSBwcmluY2lwZSByw6l2b2x1dGlvbm5haXJlIGRlIGNvbXB0ZXIgZCdhYm9yZCBzdXIgbGVzIGZvcmNlcyBpbnTDqXJpZXVyZXMgZXQgbGUgdHJhdmFpbCBkZXMgcGV1cGxlcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0625",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel statut diplomatique les trois pays ont-ils adopté lors des négociations internationales multilatérales ?",
+    "options": [
+      "Une coordination étroite et une parole commune au nom de l'AES",
+      "Des votes contradictoires systématiques",
+      "La représentation déléguée à une puissance tierce",
+      "L'abstention permanente de toute diplomatie"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIG1pbmlzdHJlcyBkZXMgQWZmYWlyZXMgw6l0cmFuZ8OocmVzIGRlIGwnQUVTIG9udCBmb3JtYWxpc8OpIGxhIGNvb3JkaW5hdGlvbiBkaXBsb21hdGlxdWUgc3lzdMOpbWF0aXF1ZSBwb3VyIHBvcnRlciB1bmUgdm9peCB1bmllIGRhbnMgdG91dGVzIGxlcyBhcsOobmVzIG1vbmRpYWxlcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0626",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "En quelle année la colonie de Haute-Volta a-t-elle été créée pour la toute première fois par décret français ?",
+    "options": [
+      "1er mars 1919",
+      "5 août 1960",
+      "4 septembre 1947",
+      "11 décembre 1958"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgY29sb25pZSBkZSBIYXV0ZS1Wb2x0YSBhIMOpdMOpIGNyw6nDqWUgbGUgMWVyIG1hcnMgMTkxOSBwYXIgZMOpY3JldCBkdSBwcsOpc2lkZW50IGZyYW7Dp2FpcyBSYXltb25kIFBvaW5jYXLDqSwgZMOpbWVtYnLDqWUgZHUgSGF1dC1Tw6luw6lnYWwgZXQgTmlnZXIu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0627",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "En quelle année la colonie de Haute-Volta a-t-elle été supprimée et partagée entre ses pays voisins ?",
+    "options": [
+      "1932",
+      "1919",
+      "1947",
+      "1958"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgNSBzZXB0ZW1icmUgMTkzMiwgcG91ciBkZXMgbW90aWZzIMOpY29ub21pcXVlcyBldCBhZG1pbmlzdHJhdGlmcywgbGEgSGF1dGUtVm9sdGEgYSDDqXTDqSBzdXBwcmltw6llIGV0IGRpc2xvcXXDqWUgZW50cmUgbGEgQ8O0dGUgZCdJdm9pcmUsIGxlIE1hbGkgZXQgbGUgTmlnZXIu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0628",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle personnalité politique et coutumière a joué un rôle déterminant dans la reconstitution de la Haute-Volta en 1947 ?",
+    "options": [
+      "Le Mogho Naaba Saagha II",
+      "Daniel Ouezzin Coulibaly",
+      "Philippe Zinda Kaboré",
+      "Maurice Yaméogo"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgTW9naG8gTmFhYmEgU2FhZ2hhIElJLCBlbnRvdXLDqSBkJ8OpbGl0ZXMgY29tbWUgUGhpbGlwcGUgWmluZGEgS2Fib3LDqSwgYSBtZW7DqSB1bmUgYWN0aW9uIGTDqWNpc2l2ZSBwb3VyIG9idGVuaXIgbGEgbG9pIGR1IDQgc2VwdGVtYnJlIDE5NDcgcmVjb25zdGl0dWFudCBsZSB0ZXJyaXRvaXJlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0629",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "À quelle date la République de Haute-Volta a-t-elle accédé à la souveraineté internationale (Indépendance) ?",
+    "options": [
+      "5 août 1960",
+      "11 décembre 1958",
+      "4 août 1983",
+      "3 janvier 1966"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgSGF1dGUtVm9sdGEgYSBwcm9jbGFtw6kgc29uIGluZMOpcGVuZGFuY2UgbGUgNSBhb8O7dCAxOTYwIHNvdXMgbGEgcHLDqXNpZGVuY2UgZGUgTWF1cmljZSBZYW3DqW9nby4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0630",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel événement marquant de l'histoire du Burkina Faso s'est déroulé le 3 janvier 1966 ?",
+    "options": [
+      "Un soulèvement populaire syndical et citoyen provoquant la chute de Maurice Yaméogo",
+      "La proclamation de la Renaissance démocratique",
+      "La signature du traité de la CEDEAO",
+      "L'inauguration de la Maison du Peuple"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgMyBqYW52aWVyIDE5NjYgZXN0IG1hcnF1w6kgcGFyIGxlIGdyYW5kIHNvdWzDqHZlbWVudCBwb3B1bGFpcmUgY29uZHVpdCBwYXIgbGVzIHN5bmRpY2F0cyBjb250cmUgbGVzIG1lc3VyZXMgZCdhdXN0w6lyaXTDqSBkZSBNYXVyaWNlIFlhbcOpb2dvLCBwb3J0YW50IFNhbmdvdWzDqSBMYW1pemFuYSBhdSBwb3V2b2lyLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0631",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "À quelle date Thomas Sankara a-t-il rebaptisé la Haute-Volta en 'Burkina Faso' ?",
+    "options": [
+      "4 août 1984",
+      "4 août 1983",
+      "15 octobre 1987",
+      "11 décembre 1985"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "Qydlc3QgbGUgNCBhb8O7dCAxOTg0LCDDoCBsJ29jY2FzaW9uIGR1IHByZW1pZXIgYW5uaXZlcnNhaXJlIGRlIGxhIFLDqXZvbHV0aW9uIETDqW1vY3JhdGlxdWUgZXQgUG9wdWxhaXJlIChSRFApLCBxdWUgbGUgcGF5cyBhIHByaXMgbGUgbm9tIGdsb3JpZXV4IGRlIEJ1cmtpbmEgRmFzby4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0632",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Que signifie littéralement la dénomination 'Burkina Faso' ?",
+    "options": [
+      "La patrie des hommes intègres",
+      "Le pays des grands fleuves",
+      "La terre du soleil levant",
+      "Le royaume de l'harmonie"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "J0J1cmtpbmEnIHNpZ25pZmllICdpbnTDqGdyZS9ob21tZSBkaWduZScgZW4gbGFuZ3VlIG1vb3LDqSwgZXQgJ0Zhc28nIHNpZ25pZmllICdwYXRyaWUvdGVycmUgcsOpcHVibGljYWluZScgZW4gZGlvdWxhLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0633",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment se compose le drapeau national du Burkina Faso adopté sous la Révolution ?",
+    "options": [
+      "Deux bandes horizontales rouge (haut) et verte (bas) avec une étoile dorée à cinq branches au centre",
+      "Trois bandes verticales rouge, jaune, verte",
+      "Deux bandes bleue et blanche avec un croissant doré",
+      "Trois bandes horizontales noire, blanche, rouge"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgZHJhcGVhdSBidXJraW5hYsOoIGVzdCBjb25zdGl0dcOpIGRlIGRldXggYmFuZGVzIGhvcml6b250YWxlcyA6IHJvdWdlIGVuIGhhdXQgKHNhY3JpZmljZSBkdSBwZXVwbGUpLCB2ZXJ0ZSBlbiBiYXMgKHJpY2hlc3NlIGFncmljb2xlL2VzcG9pcikgYXZlYyBsJ8OpdG9pbGUgamF1bmUgYXUgY2VudHJlIChndWlkZSBkZSBsYSByw6l2b2x1dGlvbiku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0634",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel est le titre officiel de l'hymne national du Burkina Faso composé sous la Révolution ?",
+    "options": [
+      "Le Ditanyè (L'hymne de la victoire)",
+      "La Voltaïque",
+      "L'Abidjanaise",
+      "La Marche des braves"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgRGl0YW55w6ggKHF1aSBzaWduaWZpZSAnSHltbmUgZGUgbGEgdmljdG9pcmUnIGVuIGxhbmd1ZSBsb2JpcmkpIGVzdCBsJ2h5bW5lIG5hdGlvbmFsIMOpY3JpdCBldCBjb21wb3PDqSBzb3VzIGxhIFLDqXZvbHV0aW9uIGRlIFRob21hcyBTYW5rYXJhLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0635",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle est la devise historique réaffirmée et consacrée dans le texte constitutionnel révisé ?",
+    "options": [
+      "La Patrie ou la mort, nous vaincrons !",
+      "Unité - Progrès - Justice",
+      "Travail - Liberté - Patrie",
+      "Solidarité - Paix - Développement"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgZGV2aXNlIHLDqXZvbHV0aW9ubmFpcmUgZXQgcGF0cmlvdGlxdWUgJ0xhIFBhdHJpZSBvdSBsYSBtb3J0LCBub3VzIHZhaW5jcm9ucycgYSDDqXTDqSBvZmZpY2llbGxlbWVudCByw6lpbnRyb2R1aXRlIGV0IHLDqWFmZmlybcOpZSBkYW5zIGxlcyB0ZXh0ZXMgZm9uZGFtZW50YXV4IGRlIGxhIHRyYW5zaXRpb24u",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0636",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle grande figure historique féministe et anticoloniale a résisté aux troupes coloniales dans l'ouest du Burkina (pays Bwaba) ?",
+    "options": [
+      "La princesse Guimbi Ouattara",
+      "Yennenga",
+      "Sarraounia Mangou",
+      "Aoua Kéita"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgcHJpbmNlc3NlIEd1aW1iaSBPdWF0dGFyYSBkZSBCb2JvLURpb3VsYXNzbyBhIG1hcnF1w6kgbCdoaXN0b2lyZSBkaXBsb21hdGlxdWUgZXQgcG9saXRpcXVlIGRlIGxhIHLDqWdpb24gZHUgZ3JhbmQgb3Vlc3QgYnVya2luYWLDqCBhdSBYSVhlIHNpw6hjbGUu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0637",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Qui est considérée comme la mère fondatrice mythique du royaume des Mossé ?",
+    "options": [
+      "La princesse Yennenga",
+      "La reine Pokou",
+      "Guimbi Ouattara",
+      "Dihyia"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgcHJpbmNlc3NlIFllbm5lbmdhLCBjYXZhbGnDqHJlIMOpbcOpcml0ZSBvcmlnaW5haXJlIGRlIEdhbWJhZ2EsIGVzdCBsYSBtw6hyZSBkJ091w6lkcmFvZ28sIGFuY8OqdHJlIGV0IGZvbmRhdGV1ciBkZSBsYSBkeW5hc3RpZSBkZXMgcm95YXVtZXMgbW9zc8OpLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0638",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel grand empereur et résistant a combattu l'invasion coloniale française jusqu'à sa défaite en 1897 ?",
+    "options": [
+      "Le Mogho Naaba Wobgho (Boukary Koutou)",
+      "Le Naaba Sanum",
+      "Le Naaba Kango",
+      "Le Naaba Baongo"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgTW9naG8gTmFhYmEgV29iZ2hvIHMnZXN0IG9wcG9zw6kgYXZlYyBhY2hhcm5lbWVudCDDoCBsYSBww6luw6l0cmF0aW9uIGNvbG9uaWFsZSBmcmFuw6dhaXNlIGV0IGEgcHLDqWbDqXLDqSBsJ2V4aWwgcGx1dMO0dCBxdWUgbGEgY2FwaXR1bGF0aW9uLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0639",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle insurrection populaire a chassé le président Blaise Compaoré après 27 ans de pouvoir en octobre 2014 ?",
+    "options": [
+      "L'Insurrection populaire des 30 et 31 octobre 2014",
+      "La Révolution de janvier 1966",
+      "Le coup d'État du 15 octobre 1987",
+      "La grève générale de 1998"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIDMwIGV0IDMxIG9jdG9icmUgMjAxNCwgbGUgcGV1cGxlIGJ1cmtpbmFiw6ggcydlc3Qgc291bGV2w6kgbWFzc2l2ZW1lbnQgY29udHJlIGxhIG1vZGlmaWNhdGlvbiBkZSBsJ2FydGljbGUgMzcgZGUgbGEgQ29uc3RpdHV0aW9uIHF1aSB2aXNhaXQgw6AgcHJvbG9uZ2VyIGxlIG1hbmRhdCBwcsOpc2lkZW50aWVsLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0640",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel éminent journaliste burkinabè, fondateur du journal 'L'Indépendant', a été assassiné le 13 décembre 1998 à Sapouy ?",
+    "options": [
+      "Norbert Zongo",
+      "Joseph Ki-Zerbo",
+      "Babou Paulin Bamouni",
+      "Valère Somé"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgam91cm5hbGlzdGUgZCdpbnZlc3RpZ2F0aW9uIE5vcmJlcnQgWm9uZ28gZXQgdHJvaXMgZGUgc2VzIGNvbXBhZ25vbnMgb250IMOpdMOpIHRyYWdpcXVlbWVudCBhc3Nhc3NpbsOpcyBsZSAxMyBkw6ljZW1icmUgMTk5OCwgZMOpY2xlbmNoYW50IHVuZSBjcmlzZSBzb2Npb3BvbGl0aXF1ZSBtYWpldXJlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0641",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Qui a été le premier historien africain à diriger l'Histoire générale de l'Afrique de l'UNESCO, originaire du Burkina Faso ?",
+    "options": [
+      "Pr Joseph Ki-Zerbo",
+      "Pr Albert Salfo Balima",
+      "Pr Mahamadou Ouédraogo",
+      "Pr Jean-Baptiste Kiéthéga"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgUHJvZmVzc2V1ciBKb3NlcGggS2ktWmVyYm8gKDE5MjItMjAwNikgZXN0IHVuIHBlbnNldXIgZXQgaGlzdG9yaWVuIGlsbHVzdHJlIGRlIHJlbm9tbcOpZSBtb25kaWFsZSwgYXV0ZXVyIGRlIGxhIGPDqWzDqGJyZSBmb3JtdWxlICdOYW4gbGFyYSBhbiBzYXJhJy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0642",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Que signifie la devise philosophique du Professeur Joseph Ki-Zerbo 'Nan lara an sara' ?",
+    "options": [
+      "Si nous nous couchons, nous sommes morts",
+      "La terre appartient à ceux qui la cultivent",
+      "La vérité finit toujours par triompher",
+      "L'union fait la force durable"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "J05hbiBsYXJhIGFuIHNhcmEnIChlbiBsYW5ndWUgYndhKSBzZSB0cmFkdWl0IHBhciAnU2kgbm91cyBub3VzIGNvdWNob25zLCBub3VzIHNvbW1lcyBtb3J0cycsIGFwcGVsYW50IGF1IHN1cnNhdXQgcGVybWFuZW50IGV0IMOgIGxhIHZpZ2lsYW5jZSBjaXRveWVubmUu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0643",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel dirigeant burkinabè est surnommé le 'Père de la Révolution burkinabè' ?",
+    "options": [
+      "Capitaine Thomas Sankara",
+      "Capitaine Ibrahim Traoré",
+      "Général Sangoulé Lamizana",
+      "Capitaine Blaise Compaoré"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQ2FwaXRhaW5lIFRob21hcyBTYW5rYXJhLCBwcsOpc2lkZW50IGR1IENvbnNlaWwgTmF0aW9uYWwgZGUgbGEgUsOpdm9sdXRpb24gKDE5ODMtMTk4NyksIGVzdCB1bml2ZXJzZWxsZW1lbnQgcmVjb25udSBjb21tZSBsZSBww6hyZSBkZSBsYSByw6l2b2x1dGlvbiBidXJraW5hYsOoLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0644",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "À quelle date le Capitaine Ibrahim Traoré a-t-il accédé à la présidence du MPSR au Burkina Faso ?",
+    "options": [
+      "30 septembre 2022",
+      "24 janvier 2022",
+      "15 octobre 2022",
+      "11 décembre 2022"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgMzAgc2VwdGVtYnJlIDIwMjIsIGxlIENhcGl0YWluZSBJYnJhaGltIFRyYW9yw6kgYSBwcmlzIGxhIHTDqnRlIGR1IE1QU1IgKE1vdXZlbWVudCBQYXRyaW90aXF1ZSBwb3VyIGxhIFNhdXZlZ2FyZGUgZXQgbGEgUmVzdGF1cmF0aW9uKSBwb3VyIHJlZHluYW1pc2VyIGxhIGx1dHRlIGFudGl0ZXJyb3Jpc3RlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0645",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "En mai 2024, quelle décision majeure a été prise lors des Assises nationales sur la durée de la Transition ?",
+    "options": [
+      "Prolongation de la Transition pour une durée de 5 ans à compter du 2 juillet 2024",
+      "Organisation d'élections sous 30 jours",
+      "Dissolution de l'Assemblée législative de Transition",
+      "Rétablissement immédiat de la Constitution de 1991"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIGZvcmNlcyB2aXZlcyBkZSBsYSBuYXRpb24gcsOpdW5pZXMgZW4gQXNzaXNlcyBuYXRpb25hbGVzIMOgIE91YWdhZG91Z291IG9udCBhZG9wdMOpIHVuZSBub3V2ZWxsZSBDaGFydGUgcHJvbG9uZ2VhbnQgbGEgVHJhbnNpdGlvbiBkZSA2MCBtb2lzICg1IGFucyku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0646",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel titre officiel est désormais attribué au chef de l'État burkinabè selon la Charte révisée de la Transition de 2024 ?",
+    "options": [
+      "Président du Faso, Chef de l'État, Chef suprême des Armées",
+      "Haut Commissaire de la République",
+      "Délégué général du Conseil de salut public",
+      "Gouverneur de la Nation"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgQ2hhcnRlIGRlIGxhIFRyYW5zaXRpb24gY29uc2FjcmUgbGUgQ2FwaXRhaW5lIElicmFoaW0gVHJhb3LDqSBhdmVjIGxlIHRpdHJlIGRlIFByw6lzaWRlbnQgZHUgRmFzbywgQ2hlZiBkZSBsJ8OJdGF0IGV0IENoZWYgc3VwcsOqbWUgZGVzIGZvcmNlcyBhcm3DqWVzIG5hdGlvbmFsZXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0647",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle force patriotique civile d'appui aux forces armées nationales a été instituée pour défendre les villages ?",
+    "options": [
+      "Les Volontaires pour la Défense de la Patrie (VDP)",
+      "La Garde prétorienne communale",
+      "Les Milices de quartier",
+      "Les Sentinelles de la paix"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "Q3LDqcOpcyBwYXIgbGEgbG9pIGV0IHByb2ZvbmTDqW1lbnQgcsOpb3JnYW5pc8OpcyBldCDDqXF1aXDDqXMgcGFyIGxhIFRyYW5zaXRpb24sIGxlcyBWRFAgc29udCBkZXMgY2l0b3llbnMgZW5nYWfDqXMgYXV4IGPDtHTDqXMgZGVzIEZEUyBwb3VyIGxpYsOpcmVyIGxlIHRlcnJpdG9pcmUgbmF0aW9uYWwu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0648",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel fonds d'épargne populaire et de solidarité a été institué en 2023 pour financer l'équipement des combattants FDS et VDP ?",
+    "options": [
+      "Le Fonds de Soutien Patriotique (FSP)",
+      "Le Compte spécial d'urgence UEMOA",
+      "Le Fonds monétaire de secours",
+      "La Banque des réservistes civils"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgRm9uZHMgZGUgU291dGllbiBQYXRyaW90aXF1ZSAoRlNQKSwgYWxpbWVudMOpIHBhciBsZXMgcHLDqWzDqHZlbWVudHMgdm9sb250YWlyZXMgZXQgY29udHJpYnV0aW9ucyBkZXMgdHJhdmFpbGxldXJzIGV0IGNpdG95ZW5zLCBmaW5hbmNlIGxhIGxvZ2lzdGlxdWUgZGVzIFZEUCBldCBvcMOpcmF0aW9ucy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0649",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle fête nationale annuelle célèbre la commémoration de la fête nationale du Burkina Faso ?",
+    "options": [
+      "Le 11 décembre",
+      "Le 5 août",
+      "Le 4 août",
+      "Le 15 octobre"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgMTEgZMOpY2VtYnJlIGNvbW3DqW1vcmUgbGEgcHJvY2xhbWF0aW9uIGRlIGxhIFLDqXB1YmxpcXVlIGRlIEhhdXRlLVZvbHRhIGVuIDE5NTggZXQgY29uc3RpdHVlIGxhIGbDqnRlIG5hdGlvbmFsZSBvZmZpY2llbGxlIGPDqWzDqWJyw6llIGNoYXF1ZSBhbm7DqWUgYXZlYyBkZXMgZmVzdGl2aXTDqXMgcsOpZ2lvbmFsZXMgdG91cm5hbnRlcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0650",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel tissu traditionnel artisanal d'identité nationale est vigoureusement promu comme tenue scolaire et officielle au Burkina Faso ?",
+    "options": [
+      "Le Faso Danfani et le Koko Dunda",
+      "Le Bazin riche teinté",
+      "Le Wax hollandais",
+      "Le Bogolan malien"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgRmFzbyBEYW5mYW5pICh0aXNzdSB0aXNzw6kgw6AgbGEgbWFpbikgZXQgbGUgS29rbyBEdW5kYSAodGlzc3UgdGVpbnTDqSB0eXBpcXVlIGRlIEJvYm8tRGlvdWxhc3NvKSBpbmNhcm5lbnQgbCdpbmTDqXBlbmRhbmNlIGN1bHR1cmVsbGUgZXQgdmVzdGltZW50YWlyZSBwcm9tdWUgcGFyIGwnw4l0YXQu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0651",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Combien de régions administratives et de provinces compte le Burkina Faso ?",
+    "options": [
+      "13 régions et 45 provinces",
+      "10 régions et 50 provinces",
+      "15 régions et 40 provinces",
+      "12 régions et 42 provinces"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgZMOpY291cGFnZSB0ZXJyaXRvcmlhbCBkdSBCdXJraW5hIEZhc28gcydvcmdhbmlzZSBlbiAxMyByw6lnaW9ucyBhZG1pbmlzdHJhdGl2ZXMgZXQgNDUgcHJvdmluY2VzIChkaXZpc8OpZXMgZW4gcGx1cyBkZSAzNTAgZMOpcGFydGVtZW50cy9jb21tdW5lcyku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0652",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel est le point culminant du Burkina Faso et son altitude ?",
+    "options": [
+      "Le mont Ténakourou (749 m ou 747 m)",
+      "Le mont Pic de Sindou (920 m)",
+      "La colline de Dori (600 m)",
+      "Le mont Nahouri (850 m)"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgVGVuYWtvdXJvdSwgc2l0dcOpIGRhbnMgbGEgcHJvdmluY2UgZGUgbGEgS8OpbsOpZG91Z291IChyw6lnaW9uIGRlcyBDYXNjYWRlcykgw6AgbGEgZnJvbnRpw6hyZSBhdmVjIGxlIE1hbGksIGN1bG1pbmUgw6AgZW52aXJvbiA3NDcgw6AgNzQ5IG3DqHRyZXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0653",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Avec combien de pays le Burkina Faso partage-t-il ses frontières terrestres ?",
+    "options": [
+      "6 pays",
+      "5 pays",
+      "7 pays",
+      "8 pays"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQnVya2luYSBGYXNvIGVzdCB1biBwYXlzIGVuY2xhdsOpIGZyb250YWxpZXIgZGUgNiDDiXRhdHMgOiBsZSBNYWxpIGF1IG5vcmQgZXQgw6AgbCdvdWVzdCwgbGUgTmlnZXIgw6AgbCdlc3QsIGxlIELDqW5pbiwgbGUgVG9nbywgbGUgR2hhbmEgZXQgbGEgQ8O0dGUgZCdJdm9pcmUgYXUgc3VkLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0654",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quels sont les trois principaux cours d'eau qui composaient historiquement les trois 'Volta' traversant le pays ?",
+    "options": [
+      "Le Mouhoun (Volta Noire), le Nazinon (Volta Rouge) et le Nakambé (Volta Blanche)",
+      "Le Niger, la Comoé et le Bafing",
+      "La Pendjari, la Tapoa et le Sirba",
+      "Le Sissili, le Bougouriba et le Kou"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIHRyb2lzIGJhc3NpbnMgdmVyc2FudHMgaGlzdG9yaXF1ZXMgc29udCBsZSBNb3Vob3VuIChWb2x0YSBOb2lyZSksIGxlIE5hemlub24gKFZvbHRhIFJvdWdlKSBldCBsZSBOYWthbWLDqSAoVm9sdGEgQmxhbmNoZSksIHF1aSBjb252ZXJnZW50IHZlcnMgbGUgZmxldXZlIFZvbHRhIGF1IEdoYW5hLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0655",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel est le seul cours d'eau pérenne (coulant toute l'année) du Burkina Faso ?",
+    "options": [
+      "Le fleuve Mouhoun (Volta Noire)",
+      "Le Nakambé (Volta Blanche)",
+      "Le Nazinon",
+      "Le Massili"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgTW91aG91biBlc3QgbGUgc2V1bCBjb3VycyBkJ2VhdSBidXJraW5hYsOoIGRvbnQgbCfDqWNvdWxlbWVudCBzZSBtYWludGllbnQgc2FucyBpbnRlcnJ1cHRpb24gdG91dGUgbCdhbm7DqWUgc3VyIGwnZXNzZW50aWVsIGRlIHNvbiBjb3Vycy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0656",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle est la superficie totale du territoire burkinabè ?",
+    "options": [
+      "274 200 km²",
+      "322 000 km²",
+      "215 500 km²",
+      "180 000 km²"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQnVya2luYSBGYXNvIHMnw6l0ZW5kIHN1ciB1bmUgc3VwZXJmaWNpZSBvZmZpY2llbGxlIGRlIDI3NCAyMDAga2lsb23DqHRyZXMgY2FycsOpcyBhdSBjxZN1ciBkZSBsYSBib3VjbGUgZHUgZmxldXZlIE5pZ2VyLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0657",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Dans quelle région administrative se trouvent les célèbres Cascades de Karfiguéla et les Dômes de Fabédougou ?",
+    "options": [
+      "La région des Cascades (chef-lieu Banfora)",
+      "La région des Hauts-Bassins",
+      "La région du Sud-Ouest",
+      "La région du Centre-Ouest"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIENhc2NhZGVzIGRlIEthcmZpZ3XDqWxhIGV0IGxlcyBkw7RtZXMgcm9jaGV1eCBkZSBGYWLDqWRvdWdvdSBzb250IHNpdHXDqXMgcHLDqHMgZGUgQmFuZm9yYSwgZGFucyBsYSByw6lnaW9uIGRlcyBDYXNjYWRlcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0658",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel site archéologique burkinabè, constitué de murailles de pierre imposantes, a été classé au patrimoine mondial de l'UNESCO en 2009 ?",
+    "options": [
+      "Les ruines de Loropéni",
+      "La cour royale de Tiébélé",
+      "La grande mosquée de Dioulassoba",
+      "Les gravures rupestres de Pobé-Mengao"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGVzIHJ1aW5lcyBmb3J0aWZpw6llcyBkZSBMb3JvcMOpbmksIHNpdHXDqWVzIGRhbnMgbGEgcHJvdmluY2UgZHUgUG9uaSAocsOpZ2lvbiBkdSBTdWQtT3Vlc3QpLCBjb25zdGl0dWVudCBsZSBwcmVtaWVyIHNpdGUgY3VsdHVyZWwgYnVya2luYWLDqCBpbnNjcml0IMOgIGwnVU5FU0NPLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0659",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel bien culturel traditionnel remarquable du sud du pays a été inscrit au patrimoine mondial de l'UNESCO en 2024 ?",
+    "options": [
+      "La Cour royale de Tiébélé (architecture Kasséna peinte)",
+      "Le palais impérial du Mogho Naaba",
+      "Le musée communal de Gaoua",
+      "Le barrage de Samendeni"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "RW4ganVpbGxldCAyMDI0LCBsYSBDb3VyIHJveWFsZSBkZSBUacOpYsOpbMOpLCBjw6lsw6hicmUgcG91ciBzZXMgY29uY2Vzc2lvbnMgZm9ydGlmacOpZXMgYXV4IG1vdGlmcyBnw6lvbcOpdHJpcXVlcyBwZWludHMgcGFyIGxlcyBmZW1tZXMga2Fzc8OpbmEsIGEgw6l0w6kgY29uc2FjcsOpZSDDoCBsJ1VORVNDTy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0660",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle est la capitale économique du Burkina Faso, chef-lieu de la région des Hauts-Bassins ?",
+    "options": [
+      "Bobo-Dioulasso",
+      "Koudougou",
+      "Ouahigouya",
+      "Fada N'Gourma"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "Qm9iby1EaW91bGFzc28gZXN0IGxhIGRldXhpw6htZSB2aWxsZSBkdSBwYXlzIGV0IGxlIHBvdW1vbiDDqWNvbm9taXF1ZSBldCBhZ3JvLWluZHVzdHJpZWwgaGlzdG9yaXF1ZSBkZSBsYSBuYXRpb24u",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0661",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel climat prédomine sur le territoire burkinabè du nord au sud ?",
+    "options": [
+      "Climat tropical soudano-sahélien à deux saisons contrastées",
+      "Climat équatorial humide sans saison sèche",
+      "Climat méditerranéen tempéré",
+      "Climat désertique froid de montagne"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQnVya2luYSBwcsOpc2VudGUgdW4gY2xpbWF0IHRyb3BpY2FsIHNvdWRhbm8tc2Fow6lsaWVuIGNhcmFjdMOpcmlzw6kgcGFyIHVuZSBzYWlzb24gZGVzIHBsdWllcyAoaGl2ZXJuYWdlKSBldCB1bmUgbG9uZ3VlIHNhaXNvbiBzw6hjaGUgcnl0aG3DqWUgcGFyIGwnaGFybWF0dGFuLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0662",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel vent sec et chaud, chargé de poussières désertiques, souffle sur le Burkina Faso pendant la saison sèche ?",
+    "options": [
+      "L'Harmattan",
+      "La Mousson",
+      "Le Sirocco",
+      "Le Mistral"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdoYXJtYXR0YW4gZXN0IHVuIGFsaXrDqSBjb250aW5lbnRhbCBkdSBub3JkLWVzdCBxdWkgYXBwb3J0ZSBzw6ljaGVyZXNzZSBldCBwb3Vzc2nDqHJlIHNhaGFyaWVubmUgZW50cmUgbm92ZW1icmUgZXQgbWFycy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0663",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel vent océanique humide venant du sud-ouest apporte les pluies (l'hivernage) au Burkina Faso ?",
+    "options": [
+      "La Mousson",
+      "L'Harmattan",
+      "L'Alizé maritime boréal",
+      "Le Fœhn"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgbW91c3NvbiwgaXNzdWUgZGUgbCdhbnRpY3ljbG9uZSBkZSBTYWludGUtSMOpbMOobmUgZGFucyBsJ0F0bGFudGlxdWUgc3VkLCB0cmF2ZXJzZSBsZSBnb2xmZSBkZSBHdWluw6llIGV0IGFwcG9ydGUgbGVzIHByw6ljaXBpdGF0aW9ucyBhdSBTYWhlbC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0664",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel est le plus grand barrage hydroagricole et hydroélectrique du Burkina Faso inauguré récemment à l'ouest du pays ?",
+    "options": [
+      "Le barrage de Samendéni",
+      "Le barrage de Bagré",
+      "Le barrage de Kompienga",
+      "Le barrage de Ziga"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgYmFycmFnZSBkZSBTYW1lbmTDqW5pIChkYW5zIGxlIGJhc3NpbiBkdSBmbGV1dmUgTW91aG91bikgYXZlYyBwbHVzIGQndW4gbWlsbGlhcmQgZGUgbcOodHJlcyBjdWJlcyBkJ2VhdSBlc3QgdW5lIGluZnJhc3RydWN0dXJlIG1vdHJpY2UgcG91ciBsJ2lycmlnYXRpb24gZXQgbGEgcMOqY2hlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0665",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel barrage fournit la majorité de l'eau potable à la ville de Ouagadougou ?",
+    "options": [
+      "Le barrage de Ziga",
+      "Le barrage de Loumbila",
+      "Le barrage de Tanghin",
+      "Le barrage de Yimdi"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgY29tcGxleGUgaHlkcmF1bGlxdWUgZGUgWmlnYSAoc2l0dcOpIHN1ciBsZSBOYWthbWLDqSBkYW5zIGxhIHByb3ZpbmNlIGQnT3Vicml0ZW5nYSkgZXN0IGxlIHByaW5jaXBhbCBmb3Vybmlzc2V1ciBkJ2VhdSBwb3RhYmxlIGRlIGxhIGNhcGl0YWxlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0666",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel pôle de croissance agro-industriel modèle est situé dans la région du Centre-Est sur le Nakambé ?",
+    "options": [
+      "Le Pôle de croissance de Bagré (Bagrépôle)",
+      "Le Pôle de Samendéni",
+      "Le Pôle de Sourou",
+      "Le Pôle de la Vallée du Kou"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "QmFncsOpcMO0bGUgZXN0IHVuIHZhc3RlIHDDtGxlIGRlIGTDqXZlbG9wcGVtZW50IGFncmljb2xlLCBwaXNjaWNvbGUgZXQgYWdyby1pbmR1c3RyaWVsIGFtw6luYWfDqSBlbiBhdmFsIGR1IGJhcnJhZ2UgZGUgQmFncsOpLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0667",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle est la principale culture de rente agricole d'exportation historique du Burkina Faso ?",
+    "options": [
+      "Le coton",
+      "Le café",
+      "Le cacao",
+      "Le thé"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgY290b24gKMKrIGwnb3IgYmxhbmMgwrspIGVzdCBsYSBwcmluY2lwYWxlIGN1bHR1cmUgaW5kdXN0cmllbGxlIGV0IGRlIHJlbnRlIGQnZXhwb3J0YXRpb24gYWdyaWNvbGUgdHJhZGl0aW9ubmVsbGUgZHUgQnVya2luYSBGYXNvLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0668",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle ressource minière est devenue depuis 2009 le premier produit d'exportation et pourvoyeur de devises du pays ?",
+    "options": [
+      "L'or brut",
+      "Le manganèse",
+      "Le zinc",
+      "Le phosphate"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdvciBhIGTDqXBhc3PDqSBsZSBjb3RvbiBwb3VyIGRldmVuaXIgbGUgdG91dCBwcmVtaWVyIHByb2R1aXQgZCdleHBvcnRhdGlvbiBlbiB2YWxldXIgZHUgQnVya2luYSBGYXNvLCBnw6luw6lyYW50IGRlcyByZWNldHRlcyBtaW5pw6hyZXMgbWFqZXVyZXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0669",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel arbre providentiel typique des savanes sahéliennes fournit des noix dont l'amande produit un beurre très prisé ?",
+    "options": [
+      "Le karité (Vitellaria paradoxa)",
+      "Le néré",
+      "Le baobab",
+      "Le tamarinier"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUga2FyaXTDqSBlc3QgdW4gYXJicmUgZW1ibMOpbWF0aXF1ZSBkZSBsJ8OpY29ub21pZSBydXJhbGUgZXQgZsOpbWluaW5lIGF1IEJ1cmtpbmEgRmFzbywgcsOpcHV0w6kgcG91ciBzb24gYmV1cnJlIGF1eCB2ZXJ0dXMgY29zbcOpdGlxdWVzIGV0IG51dHJpdGl2ZXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0670",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel condiment traditionnel très riche en protéines est obtenu par la fermentation des graines du néré (Parkia biglobosa) ?",
+    "options": [
+      "Le Soumbala",
+      "Le Piment rouge",
+      "L'Attiéké",
+      "Le Gombo sec"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgc291bWJhbGEgZXN0IHVuIGFzc2Fpc29ubmVtZW50IGN1bGluYWlyZSB0cmFkaXRpb25uZWwgcHJvZHVpdCBwYXIgbGEgY3Vpc3NvbiBldCBmZXJtZW50YXRpb24gZGVzIGdyYWluZXMgZHUgbsOpcsOpLCBlc3NlbnRpZWwgZGFucyBsYSBjdWlzaW5lIHNhaMOpbGllbm5lLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0671",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle grande réserve transfrontalière de biosphère du Burkina Faso est partagée avec le Bénin et le Niger ?",
+    "options": [
+      "Le complexe du Parc W",
+      "Le parc d'Arly",
+      "La forêt classée de Nazinga",
+      "Le parc des Deux Balé"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgUGFyYyBOYXRpb25hbCBkdSBXIChiYXB0aXPDqSBhaW5zaSBlbiByYWlzb24gZGUgbGEgZm9ybWUgZW4gVyBkZXMgbcOpYW5kcmVzIGR1IGZsZXV2ZSBOaWdlcikgZXN0IHVuIMOpY29zeXN0w6htZSBwYXJ0YWfDqSBlbnRyZSBsZSBCdXJraW5hIEZhc28sIGxlIELDqW5pbiBldCBsZSBOaWdlci4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0672",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel ranch giboyeux aménagé dans le sud du Burkina Faso est réputé pour sa population d'éléphants ?",
+    "options": [
+      "Le ranch de Nazinga",
+      "La réserve de Bontioli",
+      "La mare d'Oursi",
+      "La mare aux hippopotames de Bala"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgcmFuY2ggZGUgZ2liaWVyIGRlIE5hemluZ2EgKHByb3ZpbmNlIGR1IE5haG91cmkpIGVzdCB1biBoYXV0IGxpZXUgZGUgcHJvdGVjdGlvbiBkZSBsYSBmYXVuZSBldCBkZSB2aXNpb24gdG91cmlzdGlxdWUgZGVzIMOpbMOpcGhhbnRzIGQnQWZyaXF1ZSBkZSBsJ091ZXN0Lg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0673",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quelle grande mare sahélienne classée site Ramsar est située dans le nord du pays (province de l'Oudalan) ?",
+    "options": [
+      "La mare d'Oursi",
+      "Le lac Tengréla",
+      "Le lac Bam",
+      "Le lac Dem"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgbWFyZSBkJ091cnNpIGVzdCB1bmUgem9uZSBodW1pZGUgZCdpbXBvcnRhbmNlIGludGVybmF0aW9uYWxlIChjb252ZW50aW9uIGRlIFJhbXNhcikgc2VydmFudCBkZSBoYWx0ZSBtYWpldXJlIGF1eCBvaXNlYXV4IG1pZ3JhdGV1cnMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0674",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Quel lac naturel, le plus vaste plan d'eau naturel fermé du Burkina Faso, est situé près de Kongoussi ?",
+    "options": [
+      "Le lac Bam",
+      "Le lac Tengréla",
+      "Le lac Dem",
+      "La mare aux crocodiles de Sabou"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgbGFjIEJhbSwgc2l0dcOpIGRhbnMgbGEgcHJvdmluY2UgZHUgQmFtIChDZW50cmUtTm9yZCksIGVzdCBsZSBwbHVzIGdyYW5kIGxhYyBuYXR1cmVsIGR1IHBheXMsIGVudG91csOpIGRlIHDDqXJpbcOodHJlcyBtYXJhw65jaGVycyByw6lwdXTDqXMu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0675",
+    "matiere": "burkinafaso",
+    "categorie": "specialite",
+    "type": "single",
+    "question": "Dans quelle ville burkinabè est célébré tous les deux ans le Festival Panafricain du Cinéma et de la Télévision (FESPACO) ?",
+    "options": [
+      "Ouagadougou",
+      "Bobo-Dioulasso",
+      "Koudougou",
+      "Banfora"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "T3VhZ2Fkb3Vnb3UgZXN0IGxhIGNhcGl0YWxlIGluY29udGVzdMOpZSBkdSBjaW7DqW1hIGFmcmljYWluLCBow7R0ZSBkdSBGRVNQQUNPIGZvbmTDqSBlbiAxOTY5IGRvbnQgbGUgdHJvcGjDqWUgc3VwcsOqbWUgZXN0IGwnw4l0YWxvbiBkJ29yIGRlIFllbm5lbmdhLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0676",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment s'appelle l'organe parlementaire législatif unique exerçant le pouvoir législatif durant la période de Transition actuelle ?",
+    "options": [
+      "L'Assemblée Législative de Transition (ALT)",
+      "Le Conseil Économique et Social",
+      "Le Sénat de la République",
+      "La Chambre des Représentants"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdBc3NlbWJsw6llIEzDqWdpc2xhdGl2ZSBkZSBUcmFuc2l0aW9uIChBTFQpIHZvdGUgbGVzIGxvaXMgZXQgY29udHLDtGxlIGwnYWN0aW9uIGR1IGdvdXZlcm5lbWVudCBkZSBsYSBUcmFuc2l0aW9uIGF1IEJ1cmtpbmEgRmFzby4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0677",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle est la plus haute juridiction en matière constitutionnelle au Burkina Faso ?",
+    "options": [
+      "Le Conseil Constitutionnel",
+      "La Cour de Cassation",
+      "Le Conseil d'État",
+      "La Cour des Comptes"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQ29uc2VpbCBDb25zdGl0dXRpb25uZWwgZXN0IGwnaW5zdGl0dXRpb24gcsOpZ3VsYXRyaWNlIGR1IGZvbmN0aW9ubmVtZW50IGRlcyBpbnN0aXR1dGlvbnMgZXQgZ2FyYW50IGRlIGxhIGNvbmZvcm1pdMOpIGRlcyBsb2lzIMOgIGxhIENvbnN0aXR1dGlvbi4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0678",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle est la juridiction suprême de l'ordre judiciaire au Burkina Faso ?",
+    "options": [
+      "La Cour de Cassation",
+      "Le Conseil d'État",
+      "Le tribunal de grande instance",
+      "La Haute Cour de Justice"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgQ291ciBkZSBDYXNzYXRpb24gZXN0IGxhIGp1cmlkaWN0aW9uIHN1cHLDqm1lIGRlIGwnb3JkcmUganVkaWNpYWlyZSAobWF0acOocmVzIGNpdmlsZSwgY29tbWVyY2lhbGUsIHNvY2lhbGUgZXQgcMOpbmFsZSku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0679",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle est la juridiction suprême de l'ordre administratif au Burkina Faso ?",
+    "options": [
+      "Le Conseil d'État",
+      "La Cour de Cassation",
+      "La Cour des Comptes",
+      "La Commission électorale"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQ29uc2VpbCBkJ8OJdGF0IGVzdCBsYSBwbHVzIGhhdXRlIGp1cmlkaWN0aW9uIGRlIGwnb3JkcmUgYWRtaW5pc3RyYXRpZiwganVnZWFudCBlbiBkZXJuaWVyIHJlc3NvcnQgbGVzIGxpdGlnZXMgZW50cmUgbGVzIGNpdG95ZW5zIGV0IGwnYWRtaW5pc3RyYXRpb24u",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0680",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle institution supérieure de contrôle financier vérifie la régularité des comptes publics et l'exécution du budget de l'État ?",
+    "options": [
+      "La Cour des Comptes",
+      "L'Inspection générale des services",
+      "La Brigade douanière",
+      "Le Trésor public"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgQ291ciBkZXMgQ29tcHRlcyBlc3QgbCdpbnN0aXR1dGlvbiBzdXDDqXJpZXVyZSBkZSBjb250csO0bGUgZGVzIGZpbmFuY2VzIHB1YmxpcXVlcyBldCBkZSBqdWdlbWVudCBkZXMgY29tcHRlcyBkZXMgY29tcHRhYmxlcyBwdWJsaWNzLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0681",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment s'appelle l'autorité administrative indépendante chargée de la régulation de l'information et des médias au Burkina Faso ?",
+    "options": [
+      "Le Conseil Supérieur de la Communication (CSC)",
+      "L'Autorité de Régulation des Médias Électroniques",
+      "L'Agence d'Information du Burkina (AIB)",
+      "La Haute Autorité de Presse"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgQ29uc2VpbCBTdXDDqXJpZXVyIGRlIGxhIENvbW11bmljYXRpb24gKENTQykgdmVpbGxlIGF1IHJlc3BlY3QgZGUgbGEgZMOpb250b2xvZ2llLCBkZSBsYSBsaWJlcnTDqSBkJ2V4cHJlc3Npb24gZXQgZGUgbGEgY29ow6lzaW9uIHNvY2lhbGUgZGFucyBsZXMgbcOpZGlhcy4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0682",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle institution publique est chargée de la médiation entre les citoyens et l'administration publique en cas de dysfonctionnement ?",
+    "options": [
+      "Le Médiateur du Faso",
+      "Le Conseil d'État",
+      "Le Haut Conseil pour la Réconciliation",
+      "La Commission des Droits Humains"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgTcOpZGlhdGV1ciBkdSBGYXNvIGVzdCB1bmUgYXV0b3JpdMOpIGluZMOpcGVuZGFudGUgcXVpIHJlw6dvaXQgbGVzIHLDqWNsYW1hdGlvbnMgZGVzIGFkbWluaXN0csOpcyByZWxhdGl2ZXMgYXUgZm9uY3Rpb25uZW1lbnQgZGVzIGFkbWluaXN0cmF0aW9ucyBkJ8OJdGF0IGV0IGNvbGxlY3Rpdml0w6lzLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0683",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment appelle-t-on le regroupement des forces armées nationales, de la gendarmerie et de la police engagées dans la sécurité intérieure ?",
+    "options": [
+      "Les Forces de Défense et de Sécurité (FDS)",
+      "Les Sentinelles républicaines",
+      "La Garde nationale",
+      "Le corps d'intervention rapide"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdhY3JvbnltZSBGRFMgZMOpc2lnbmUgbCdlbnNlbWJsZSBkZXMgRm9yY2VzIGRlIETDqWZlbnNlIGV0IGRlIFPDqWN1cml0w6kgxZN1dnJhbnQgcG91ciBsJ2ludMOpZ3JpdMOpIGR1IHRlcnJpdG9pcmUgYnVya2luYWLDqC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0684",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel programme présidentiel d'action communautaire a été lancé pour le développement autonome à la base au Burkina Faso ?",
+    "options": [
+      "L'Initiative présidentielle pour le développement communautaire",
+      "Le programme d'ajustement structurel",
+      "Le projet décennal d'aide étrangère",
+      "Le plan triennal d'emprunt extérieur"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdJbml0aWF0aXZlIHByw6lzaWRlbnRpZWxsZSB2aXNlIMOgIGRvdGVyIHJhcGlkZW1lbnQgbGVzIGNvbW11bmF1dMOpcyBsb2NhbGVzIGQnaW5mcmFzdHJ1Y3R1cmVzIGRlIGJhc2UgKGZvcmFnZXMsIHNhbnTDqSwgw6ljb2xlcywgdm9pcmllcykgcGFyIGwnZW5nYWdlbWVudCBkaXJlY3Qu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0685",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle grande usine de transformation de tomate a été réhabilitée et relancée par l'actionnariat populaire à Loumbila ?",
+    "options": [
+      "L'usine de transformation de tomate de Loumbila",
+      "L'usine textile de Koudougou",
+      "La savonnerie de Bobo",
+      "La filature de Banfora"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCd1c2luZSBkZSBjb25jZW50csOpIGRlIHRvbWF0ZSBkZSBMb3VtYmlsYSBzJ2luc2NyaXQgZGFucyBsYSBwb2xpdGlxdWUgZGUgc291dmVyYWluZXTDqSBhZ3JvLWluZHVzdHJpZWxsZSBwYXIgbCdBZ2VuY2UgcG91ciBsYSBQcm9tb3Rpb24gZGUgbCdFbnRyZXByZW5ldXJpYXQgQ29tbXVuYXV0YWlyZSAoQVBFQyku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0686",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment s'appelle l'agence d'État chargée de promouvoir l'actionnariat populaire et les entreprises communautaires au Burkina Faso ?",
+    "options": [
+      "L'APEC (Agence pour la Promotion de l'Entrepreneuriat Communautaire)",
+      "La Maison de l'Entreprise",
+      "Le Conseil Patronal du Faso",
+      "Le Fonds Burkinabè d'Investissement"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdBUEVDIHBlcm1ldCDDoCB0b3VzIGxlcyBjaXRveWVucyBkZSBzb3VzY3JpcmUgZGVzIHBhcnRzIHBvdXIgZmluYW5jZXIgY29sbGVjdGl2ZW1lbnQgZGVzIHVuaXTDqXMgaW5kdXN0cmllbGxlcyBuYXRpb25hbGVzICh0b21hdGUsIG9yLCB0ZXh0aWxlKS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0687",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle grande biennale culturelle se tient à Bobo-Dioulasso pour célébrer le patrimoine vivant, les danses et chants traditionnels ?",
+    "options": [
+      "La Semaine Nationale de la Culture (SNC)",
+      "Le SIAO",
+      "Les Nuits Atypiques de Koudougou (NAK)",
+      "Le festival Jazz à Ouaga"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgU2VtYWluZSBOYXRpb25hbGUgZGUgbGEgQ3VsdHVyZSAoU05DKSByYXNzZW1ibGUgw6AgQm9iby1EaW91bGFzc28gdG91cyBsZXMgZGV1eCBhbnMgZGVzIG1pbGxpZXJzIGQnYXJ0aXN0ZXMgdmVudXMgZGVzIDEzIHLDqWdpb25zIGR1IEJ1cmtpbmEgRmFzby4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0688",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel salon international réputé consacre Ouagadougou comme la capitale de l'artisanat africain ?",
+    "options": [
+      "Le Salon International de l'Artisanat de Ouagadougou (SIAO)",
+      "Le Salon de l'Habitat",
+      "Le Forum des Métiers d'Art",
+      "Le Salon International du Textile"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgU0lBTywgY3LDqcOpIGVuIDE5ODgsIGVzdCBsYSBwbHVzIGdyYW5kZSB2aXRyaW5lIGRlIHByb21vdGlvbiBkZXMgYXJ0aXNhbnMgZXQgZGVzIGNyw6lhdGV1cnMgZCdhcnQgZGUgdG91dCBsZSBjb250aW5lbnQgYWZyaWNhaW4u",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0689",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle est la monnaie ayant cours légal au Burkina Faso partagée au sein de l'UEMOA ?",
+    "options": [
+      "Le Franc CFA de l'Afrique de l'Ouest (FCFA)",
+      "Le Franc guinéen",
+      "Le Naira",
+      "Le Cedi"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgRnJhbmMgQ0ZBICjDqW1pcyBwYXIgbGEgQkNFQU8gcG91ciBsZXMgaHVpdCDDiXRhdHMgZGUgbCdVRU1PQSkgZXN0IGxhIGRldmlzZSBlbiBjb3VycywgYmllbiBxdWUgZGVzIHLDqWZsZXhpb25zIG1vbsOpdGFpcmVzIHNvdXZlcmFpbmVzIHNvaWVudCBjb25kdWl0ZXMgcGFyIGwnQUVTLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0690",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle est la langue de travail et d'administration au Burkina Faso selon les textes constitutionnels révisés en 2023 ?",
+    "options": [
+      "Le français a le statut de langue de travail, les langues nationales étant consacrées langues officielles",
+      "Le français reste l'unique langue officielle",
+      "L'anglais remplace le français",
+      "L'arabe est la langue d'État"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgcsOpdmlzaW9uIGNvbnN0aXR1dGlvbm5lbGxlIGFkb3B0w6llIGZpbiAyMDIzIMOpcmlnZSBsZXMgbGFuZ3VlcyBuYXRpb25hbGVzIGVuIGxhbmd1ZXMgb2ZmaWNpZWxsZXMgZXQgY29uZsOocmUgYXUgZnJhbsOnYWlzIGxlIHN0YXR1dCBkZSBsYW5ndWUgZGUgdHJhdmFpbC4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0691",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle grande université publique porte le nom du premier chef de l'État voltaïque ayant proclamé l'indépendance ?",
+    "options": [
+      "L'Université Norbert Zongo de Koudougou (auparavant Maurice Yaméogo)",
+      "L'Université Joseph Ki-Zerbo (Ouaga 1)",
+      "L'Université Thomas Sankara (Ouaga 2)",
+      "L'Université Nazi Boni (Bobo-Dioulasso)"
+    ],
+    "reponses_correctes": "WzFd",
+    "explication": "TCd1bml2ZXJzaXTDqSBwcmluY2lwYWxlIGRlIE91YWdhZG91Z291IChleC1PdWFnYSAxKSBhIMOpdMOpIGJhcHRpc8OpZSBVbml2ZXJzaXTDqSBKb3NlcGggS2ktWmVyYm8gOyBsJ2V4LU91YWdhIDIgcG9ydGUgbGUgbm9tIHByZXN0aWdpZXV4IGQnVW5pdmVyc2l0w6kgVGhvbWFzIFNhbmthcmEu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0692",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle institution universitaire de l'ouest du Burkina Faso (Bobo-Dioulasso) porte le nom d'un célèbre écrivain et homme politique burkinabè ?",
+    "options": [
+      "L'Université Nazi Boni",
+      "L'Université Thomas Sankara",
+      "L'Université Lédéa Bernard Ouédraogo",
+      "L'Université Daniel Ouezzin Coulibaly"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCd1bml2ZXJzaXTDqSBwdWJsaXF1ZSBkZSBCb2JvLURpb3VsYXNzbyBlc3QgZMOpZGnDqWUgw6AgbGEgbcOpbW9pcmUgZGUgTmF6aSBCb25pICgxOTA5LTE5NjkpLCBob21tZSBwb2xpdGlxdWUgZXQgYXV0ZXVyIGR1IGPDqWzDqGJyZSByb21hbiBoaXN0b3JpcXVlICdDcsOpcHVzY3VsZSBkZXMgdGVtcHMgYW5jaWVucycu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0693",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel célèbre roman fondateur de la littérature burkinabè a été rédigé par Nazi Boni en 1962 ?",
+    "options": [
+      "Crépuscule des temps anciens",
+      "Les Soleils des indépendances",
+      "L'Enfant noir",
+      "Une si longue lettre"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "J0Nyw6lwdXNjdWxlIGRlcyB0ZW1wcyBhbmNpZW5zJyBlc3QgdW5lIGNocm9uaXF1ZSByb21hbmVzcXVlIG1hamV1cmUgcmV0cmHDp2FudCBsZXMgY291dHVtZXMsIGJyYXZvdXJlcyBldCB0cmFkaXRpb25zIGRlIGxhIHNvY2nDqXTDqSBCd2FtdSBhdmFudCBsYSBjb25xdcOqdGUgY29sb25pYWxlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0694",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel système ancestral de semis en poquets avec rétention d'eau et fumure organique a été mondialement vulgarisé par le paysan burkinabè Yacouba Sawadogo ?",
+    "options": [
+      "La technique du Zaï",
+      "Le paillage simple",
+      "L'irrigation au goutte-à-goutte",
+      "Le labour mécanisé profond"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "WWFjb3ViYSBTYXdhZG9nbywgJ2wnaG9tbWUgcXVpIGEgYXJyw6p0w6kgbGUgZMOpc2VydCcsIGEgcsOpaGFiaWxpdMOpIGxhIHRlY2huaXF1ZSB0cmFkaXRpb25uZWxsZSBkdSBaYcOvLCBjZSBxdWkgbHVpIGEgdmFsdSBsZSBwcml4IE5vYmVsIGFsdGVybmF0aWYgKFJpZ2h0IExpdmVsaWhvb2QgQXdhcmQpIGVuIDIwMTgu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0695",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment s'appelle l'institution de formation des cadres de l'administration publique, magistrats et régies financières du Burkina Faso ?",
+    "options": [
+      "L'ENAM (École Nationale d'Administration et de Magistrature)",
+      "L'Institut des Hautes Études Internationales",
+      "Le Collège Militaire de Tsévié",
+      "L'École Normale d'Administration Douanière"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdFTkFNICjDoCBPdWFnYWRvdWdvdSkgZXN0IGwnw6ljb2xlIHN1cMOpcmlldXJlIGhpc3RvcmlxdWUgZCdleGNlbGxlbmNlIHByw6lwYXJhbnQgbGVzIGhhdXRzIGZvbmN0aW9ubmFpcmVzIGNpdmlscyBkZSBsJ8OJdGF0IGJ1cmtpbmFiw6gu",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0696",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Comment s'appelle l'école chargée de former les régies financières (impôts, douanes, trésor) au Burkina Faso ?",
+    "options": [
+      "L'ENAREF (École Nationale des Régies Financières)",
+      "L'ENA",
+      "L'école polytechnique de Bobo",
+      "L'Institut National des Statistiques"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TCdFTkFSRUYgZm9ybWUgbGVzIGNhZHJlcyBzdXDDqXJpZXVycyBldCBzcMOpY2lhbGlzdGVzIGRlIGwnw6ljb25vbWllLCBkZXMgaW1ww7R0cywgZGVzIGRvdWFuZXMsIGRlIGxhIGNvbXB0YWJpbGl0w6kgcHVibGlxdWUgZXQgZHUgdHLDqXNvci4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0697",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel rituel de paix et mécanisme traditionnel de régulation des conflits et de cohésion sociale existe entre différentes ethnies au Burkina Faso ?",
+    "options": [
+      "La parenté à plaisanterie (Rakiré en mooré, Sinankounya en dioula)",
+      "Le duel coutumier",
+      "L'ostracisme lignager",
+      "Le bannissement saisonnier"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGEgcGFyZW50w6kgw6AgcGxhaXNhbnRlcmllIGVzdCB1biB0csOpc29yIGN1bHR1cmVsIGltbWF0w6lyaWVsIHBhcnRhZ8OpIHBlcm1ldHRhbnQgbGEgZMOpdGVudGUgc29jaWFsZSwgbGUgZMOpc2Ftb3LDp2FnZSBkZXMgY29uZmxpdHMgZXQgbGEgc29saWRhcml0w6kgaW50ZXJjb21tdW5hdXRhaXJlLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0698",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quelle fête traditionnelle de grande renommée chez les Mossé célèbre la fin des récoltes et l'offrande des prémices aux ancêtres par le Mogho Naaba ?",
+    "options": [
+      "La fête de l'Uem-Koglgon (ou fête des prémices / Naaba Koom)",
+      "La fête de la forge",
+      "Le festival des masques",
+      "La fête du dodo"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "Q2V0dGUgY8OpbMOpYnJhdGlvbiBhbm51ZWxsZSBjb3V0dW1pw6hyZSByb3lhbGUgY2hleiBsZSBNb2dobyBOYWFiYSBwZXJtZXQgZGUgcmVuZHJlIGhvbW1hZ2UgYXV4IG3Dom5lcyBkZXMgYW5jw6p0cmVzIGV0IGRlIHByaWVyIHBvdXIgbGEgcGFpeCBldCBsYSBwcm9zcMOpcml0w6ku",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0699",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel festival biennal des masques et des traditions se déroule dans la ville de Dédougou ?",
+    "options": [
+      "Le FESTIMA (Festival International des Masques et des Arts)",
+      "Le FESPACO",
+      "Le FESTICO",
+      "Le Festival Waga Hip Hop"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgRkVTVElNQSwgb3JnYW5pc8OpIMOgIETDqWRvdWdvdSAoQm91Y2xlIGR1IE1vdWhvdW4pLCBlc3QgbGUgcGx1cyBncmFuZCByYXNzZW1ibGVtZW50IGFmcmljYWluIGTDqWRpw6kgYXV4IHNvY2nDqXTDqXMgZGUgbWFzcXVlcyB0cmFkaXRpb25uZWxzIChmZXVpbGxlcywgcGFpbGxlLCBib2lzKS4=",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
+  },
+  {
+    "id": "NEW_BUR_0700",
+    "matiere": "burkinafaso",
+    "categorie": "culture_generale",
+    "type": "single",
+    "question": "Quel projet minier industriel d'envergure a débuté pour doter le Burkina Faso de sa toute première raffinerie nationale d'or ?",
+    "options": [
+      "La raffinerie nationale d'or de Ouagadougou",
+      "La raffinerie de cuivre de Gaoua",
+      "Le complexe sidérurgique de Kaya",
+      "La cimenterie de Dori"
+    ],
+    "reponses_correctes": "WzBd",
+    "explication": "TGUgZ291dmVybmVtZW50IGRlIFRyYW5zaXRpb24gYSBwb3PDqSBsYSBwcmVtacOocmUgcGllcnJlIGRlIGxhIHByZW1pw6hyZSByYWZmaW5lcmllIG5hdGlvbmFsZSBkJ29yIGR1IHBheXMgw6AgT3VhZ2Fkb3Vnb3UgYWZpbiBkZSByYWZmaW5lciBsJ29yIGJ1cmtpbmFiw6ggc3VyIHNvbiBwcm9wcmUgc29sLg==",
+    "version": 1,
+    "date_creation": "2026-11-22",
+    "date_derniere_modification": "2026-11-22"
   }
 ]
