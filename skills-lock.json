@@ -12,6 +12,12 @@
       "sourceType": "github",
       "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
       "computedHash": "128fac78002d916c8ca908245d398e634f540d8bcf20915b2b2359aeb18eba59"
+    },
+    "security-review": {
+      "source": "affaan-m/ECC",
+      "sourceType": "github",
+      "skillPath": "skills/security-review/SKILL.md",
+      "computedHash": "58fe0f172e73c3f870cb2e65b9dc171316643808e95e8c1a2b6ea59fc3291760"
     }
   }
 }
